@@ -3,7 +3,7 @@
 
 Copyright Notice and Terms of Service for SEssentials
 
-Copyright © 2025 Katy Tyi. All rights reserved.
+Copyright © 2025 Katy Tye. All rights reserved.
 
 SEssentials is a free Minecraft plugin developed to enhance the gaming experience for all users.
 By using this plugin, you agree to the following terms and conditions:
