@@ -1,0 +1,31 @@
+# =====================================================
+#                 SEssentials Configuration
+# =====================================================
+# This file controls the core behavior of SEssentials.
+# Reload with: /sessentials reload
+# =====================================================
+
+# Master enable switch for the plugin
+enabled: true
+
+# Check for updates on startup
+check-updates: true
+
+# Global feature toggles
+features:
+  enabled: true        # Enable all plugin features
+  commands: true       # Enable all plugin commands
+  debug-mode: false    # Show detailed debug messages in console
+
+# Message prefix (set prefix to "" for default)
+prefix: ""
+
+# General plugin settings
+settings:
+  default-gamemode: "survival"
+
+# Default messages
+messages:
+  join: "&8[&a+&8] &f%player%"
+  reloaded: "&aSEssentials has been reloaded."
+  no-permission: "&cYou don't have the required permission to use this command."

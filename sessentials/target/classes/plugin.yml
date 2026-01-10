@@ -1,0 +1,23 @@
+name: SEssentials
+version: 0.1.1
+main: me.daivdmajholt.sessentials.Main
+api-version: 1.19
+commands:
+  gamemode:
+    description: This command sets a player's gamemode.
+    usage: /gamemode
+  gm:
+    description: This command sets a player's gamemode.
+    usage: /gm
+  gmc:
+    description: This command sets a player's gamemode to creative.
+    usage: /gm
+  gma:
+    description: This command sets a player's gamemode to adventure.
+    usage: /gm
+  gms:
+    description: This command sets a player's gamemode to survivel.
+    usage: /gm
+  gmsp:
+    description: This command sets a player's gamemode to spectator.
+    usage: /gm
