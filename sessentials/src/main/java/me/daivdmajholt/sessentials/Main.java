@@ -1,13 +1,6 @@
 package me.daivdmajholt.sessentials;
+import me.daivdmajholt.sessentials.managers.Commands;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import me.daivdmajholt.sessentials.commands.gamemode.GamemodeACommand;
-import me.daivdmajholt.sessentials.commands.gamemode.GamemodeCCommand;
-import me.daivdmajholt.sessentials.commands.gamemode.GamemodeCommand;
-import me.daivdmajholt.sessentials.commands.gamemode.GamemodeMiniTab;
-import me.daivdmajholt.sessentials.commands.gamemode.GamemodeSCommand;
-import me.daivdmajholt.sessentials.commands.gamemode.GamemodeSPCommand;
-import me.daivdmajholt.sessentials.commands.gamemode.GamemodeTab;
 
 public class Main extends JavaPlugin {
 
@@ -36,6 +29,8 @@ public class Main extends JavaPlugin {
 		getCommand("gm").setTabCompleter(new GamemodeTab());
 		getCommand("gamemode").setExecutor(new GamemodeCommand());
 		getCommand("gamemode").setTabCompleter(new GamemodeTab());
+		// MANAGERS
+		new Commands(this).registerCommands();
 	}
 
 	@Override

@@ -5,19 +5,19 @@ api-version: 1.19
 commands:
   gamemode:
     description: This command sets a player's gamemode.
-    usage: /gamemode
+    usage: /gamemode (survival/creative/adventure/spectator) (player)
   gm:
     description: This command sets a player's gamemode.
-    usage: /gm
+    usage: /gm (survival/creative/adventure/spectator) (player)
   gmc:
     description: This command sets a player's gamemode to creative.
-    usage: /gm
+    usage: /gmc
   gma:
     description: This command sets a player's gamemode to adventure.
-    usage: /gm
+    usage: /gma
   gms:
     description: This command sets a player's gamemode to survivel.
-    usage: /gm
+    usage: /gms
   gmsp:
     description: This command sets a player's gamemode to spectator.
     usage: /gm
