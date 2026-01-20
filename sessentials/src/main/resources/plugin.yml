@@ -20,4 +20,6 @@ commands:
     usage: /gms
   gmsp:
     description: This command sets a player's gamemode to spectator.
-    usage: /gm
+    usage: /gmsp
+  give:
+      description: This command gives a player a spefic item.

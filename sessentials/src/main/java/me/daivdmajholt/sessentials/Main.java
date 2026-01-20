@@ -1,5 +1,6 @@
 package me.daivdmajholt.sessentials;
 import me.daivdmajholt.sessentials.managers.Commands;
+import me.daivdmajholt.sessentials.managers.Events;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -31,6 +32,7 @@ public class Main extends JavaPlugin {
 		getCommand("gamemode").setTabCompleter(new GamemodeTab());
 		// MANAGERS
 		new Commands(this).registerCommands();
+		new Events(this).reqiesterEvents();
 	}
 
 	@Override
