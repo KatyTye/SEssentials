@@ -13,7 +13,7 @@ public class Events {
     }
 
     public void reqiesterEvents() {
-        plugin.getServer().getPluginManager().registerEvents(new JoinMessage(), plugin);
-        plugin.getServer().getPluginManager().registerEvents(new LeaveMessage(), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new JoinMessage(plugin), plugin);
+        plugin.getServer().getPluginManager().registerEvents(new LeaveMessage(plugin), plugin);
     }
 }
