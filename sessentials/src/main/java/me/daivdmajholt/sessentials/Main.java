@@ -23,6 +23,7 @@ public class Main extends JavaPlugin {
 
 			// UPDATE CHECKER
 			if (getConfig().getBoolean("check-updates")) {
+				getLogger().info("Checking for updates...");
 				new UpdateChecker(this).check();
 			}
 		} else {

@@ -12,7 +12,7 @@ public class UpdateChecker {
 
     public UpdateChecker(JavaPlugin plugin) {
         this.plugin = plugin;
-        this.apiUrl = "apiUrl";
+        this.apiUrl = "https://raw.githubusercontent.com/KatyTye/SEssentials/main/version.txt";
     }
 
      public void check() {
