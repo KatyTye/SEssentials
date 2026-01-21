@@ -12,6 +12,7 @@ import me.daivdmajholt.sessentials.commands.gamemode.GamemodeMiniTab;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeSCommand;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeSPCommand;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeTab;
+import static me.daivdmajholt.sessentials.Utils.reqNN;
 
 
 public class Commands {
@@ -23,18 +24,23 @@ public class Commands {
     }
 
     public void registerCommands() {
-        // GAMEMODES
-        plugin.getCommand("gmc").setExecutor(new GamemodeCCommand());
-        plugin.getCommand("gma").setExecutor(new GamemodeACommand());
-        plugin.getCommand("gms").setExecutor(new GamemodeSCommand());
-        plugin.getCommand("gmsp").setExecutor(new GamemodeSPCommand());
-        plugin.getCommand("gmc").setTabCompleter(new GamemodeMiniTab());
-        plugin.getCommand("gma").setTabCompleter(new GamemodeMiniTab());
-        plugin.getCommand("gms").setTabCompleter(new GamemodeMiniTab());
-        plugin.getCommand("gmsp").setTabCompleter(new GamemodeMiniTab());
-        plugin.getCommand("gm").setExecutor(new GamemodeCommand());
-        plugin.getCommand("gm").setTabCompleter(new GamemodeTab());
-        plugin.getCommand("gamemode").setExecutor(new GamemodeCommand());
-        plugin.getCommand("gamemode").setTabCompleter(new GamemodeTab());
+
+        if (plugin.getConfig().getBoolean("features.commands")) {
+            // GAMEMODES
+            reqNN(plugin.getCommand("gmc")).setExecutor(new GamemodeCCommand());
+            reqNN(plugin.getCommand("gma")).setExecutor(new GamemodeACommand());
+            reqNN(plugin.getCommand("gms")).setExecutor(new GamemodeSCommand());
+            reqNN(plugin.getCommand("gmsp")).setExecutor(new GamemodeSPCommand());
+            reqNN(plugin.getCommand("gmc")).setTabCompleter(new GamemodeMiniTab());
+            reqNN(plugin.getCommand("gma")).setTabCompleter(new GamemodeMiniTab());
+            reqNN(plugin.getCommand("gms")).setTabCompleter(new GamemodeMiniTab());
+            reqNN(plugin.getCommand("gmsp")).setTabCompleter(new GamemodeMiniTab());
+            reqNN(plugin.getCommand("gm")).setExecutor(new GamemodeCommand());
+            reqNN(plugin.getCommand("gm")).setTabCompleter(new GamemodeTab());
+            reqNN(plugin.getCommand("gamemode")).setExecutor(new GamemodeCommand());
+            reqNN(plugin.getCommand("gamemode")).setTabCompleter(new GamemodeTab());
+        } else {
+            plugin.getLogger().info("Commands are disabled!");
+        }
     }
 }
