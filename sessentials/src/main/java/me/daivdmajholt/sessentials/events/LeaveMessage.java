@@ -1,20 +1,16 @@
 package me.daivdmajholt.sessentials.events;
 
+import me.daivdmajholt.sessentials.Main;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import static me.daivdmajholt.sessentials.Utils.cc;
 
 public class LeaveMessage implements Listener {
 
-    private final JavaPlugin plugin;
-
-    public LeaveMessage(JavaPlugin plugin) {
-        this.plugin = plugin;
-    }
+    private final Main plugin = Main.plugin;
 
     @EventHandler
     public void onPlayerJoinEvent(PlayerQuitEvent event){

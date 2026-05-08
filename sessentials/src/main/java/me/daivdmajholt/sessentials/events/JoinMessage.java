@@ -1,5 +1,6 @@
 package me.daivdmajholt.sessentials.events;
 
+import me.daivdmajholt.sessentials.Main;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
@@ -10,11 +11,7 @@ import static me.daivdmajholt.sessentials.Utils.cc;
 
 public class JoinMessage implements Listener {
 
-    private final JavaPlugin plugin;
-
-    public JoinMessage(JavaPlugin plugin) {
-        this.plugin = plugin;
-    }
+    private final Main plugin = Main.plugin;
 
     @EventHandler
     public void onPlayerJoinEvent(PlayerJoinEvent event){

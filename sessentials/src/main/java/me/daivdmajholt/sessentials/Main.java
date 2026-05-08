@@ -5,10 +5,12 @@ import me.daivdmajholt.sessentials.managers.Events;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
+	public static Main plugin;
 
 	@Override
 	public void onEnable() {
 		saveDefaultConfig();
+		plugin = this;
 
 		if (getConfig().getBoolean("enabled")) {
 			getLogger().info("----------------------------------");
@@ -18,13 +20,13 @@ public class Main extends JavaPlugin {
 			getLogger().info("----------------------------------");
 
 			// MANAGERS
-			new Commands(this).registerCommands();
-			new Events(this).reqiesterEvents();
+			new Commands().registerCommands();
+			new Events().reqiesterEvents();
 
 			// UPDATE CHECKER
 			if (getConfig().getBoolean("check-updates")) {
 				getLogger().info("Checking for updates...");
-				new UpdateChecker(this).check();
+				new UpdateChecker().check();
 			}
 		} else {
 			getLogger().info("----------------------------------");

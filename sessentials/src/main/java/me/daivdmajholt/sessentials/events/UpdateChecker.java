@@ -1,5 +1,6 @@
 package me.daivdmajholt.sessentials.events;
 
+import me.daivdmajholt.sessentials.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.net.URL;
@@ -7,11 +8,10 @@ import java.util.Scanner;
 
 public class UpdateChecker {
 
-    private final JavaPlugin plugin;
+    private final Main plugin = Main.plugin;
     private final String apiUrl;
 
-    public UpdateChecker(JavaPlugin plugin) {
-        this.plugin = plugin;
+    public UpdateChecker() {
         this.apiUrl = "https://raw.githubusercontent.com/KatyTye/SEssentials/main/version.txt";
     }
 
