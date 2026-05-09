@@ -7,6 +7,8 @@ import me.daivdmajholt.sessentials.commands.sessentials.MainCommand;
 import me.daivdmajholt.sessentials.commands.sessentials.MainTab;
 import me.daivdmajholt.sessentials.commands.spawn.SetSpawnCommand;
 import me.daivdmajholt.sessentials.commands.spawn.SpawnCommand;
+import me.daivdmajholt.sessentials.commands.spawn.SpawnTab;
+import me.daivdmajholt.sessentials.commands.NothingTab;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeACommand;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeCCommand;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeCommand;
@@ -45,7 +47,9 @@ public class Commands {
 
             // SPAWN
             plugin.getCommand("spawn").setExecutor(new SpawnCommand());
+            plugin.getCommand("spawn").setTabCompleter(new SpawnTab());
             plugin.getCommand("setspawn").setExecutor(new SetSpawnCommand());
+            plugin.getCommand("setspawn").setTabCompleter(new NothingTab());
         } else {
             plugin.getLogger().info("Commands are disabled!");
         }
