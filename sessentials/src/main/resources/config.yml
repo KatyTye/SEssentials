@@ -13,20 +13,20 @@ check-updates: true
 
 # Global feature toggles
 features:
-  enabled: true        # Enable all plugin features
-  commands: true       # Enable all plugin commands
-  debug-mode: false    # Show detailed debug messages in console
-
-# Message prefix (set prefix to "" for default)
-prefix: ""
+  enabled: true			  # Enable all plugin features
+  events: true			  # Enable all plugin events
+  commands: true			# Enable all plugin commands
 
 # General plugin settings
 settings:
+  debug-mode: false
+  force-gamemode: true
   default-gamemode: "survival"
 
 # Default messages
 messages:
+  prefix: ""
   join: "&8[&a+&8] &f"
   quit: "&8[&c-&8] &f"
   reloaded: "&aSEssentials has been reloaded."
-  no-permission: "&cYou don't have the required permission to use this command."
+  permission-denied: "&cYou don't have the required permission to use this command."
