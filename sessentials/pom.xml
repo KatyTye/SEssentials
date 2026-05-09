@@ -38,6 +38,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.build.timestamp.format>yyyy/MM/dd' 'HH:mm</maven.build.timestamp.format>
     </properties>
 
     <build>
@@ -96,6 +97,50 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                    <id>generate-build-info</id>
+                    <phase>generate-sources</phase>
+                    <goals><goal>run</goal></goals>
+                    <configuration>
+                        <target>
+                        <mkdir dir="${project.build.directory}/generated-sources/buildinfo/me/daivdmajholt"/>
+                        <echo file="${project.build.directory}/generated-sources/buildinfo/me/daivdmajholt/BuildInfo.java" append="false"><![CDATA[
+                package me.daivdmajholt;
+                public final class BuildInfo {
+                    public static final String BUILD_TIMESTAMP = "${maven.build.timestamp}";
+                    private BuildInfo() {}
+                }
+                ]]>
+                        </echo>
+                        </target>
+                    </configuration>
+                    </execution>
+                </executions>
+                </plugin>
+
+                <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.4.0</version>
+                <executions>
+                    <execution>
+                    <id>add-generated-source</id>
+                    <phase>generate-sources</phase>
+                    <goals><goal>add-source</goal></goals>
+                    <configuration>
+                        <sources>
+                        <source>${project.build.directory}/generated-sources/buildinfo</source>
+                        </sources>
+                    </configuration>
+                    </execution>
+                </executions>
+                </plugin>
         </plugins>
     </build>
 </project>

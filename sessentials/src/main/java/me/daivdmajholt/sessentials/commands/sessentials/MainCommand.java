@@ -4,6 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import me.daivdmajholt.BuildInfo;
 
 import me.daivdmajholt.sessentials.Main;
 import me.daivdmajholt.sessentials.events.UpdateChecker;
@@ -31,6 +32,7 @@ public class MainCommand implements CommandExecutor {
 			sender.sendMessage("");
 			sender.sendMessage(cc(" &f&m                                  &f"));
 			sender.sendMessage("");
+			sender.sendMessage(cc(" &6/sessentials build &7- View plugin build time."));
 			sender.sendMessage(cc(" &6/sessentials help &7- View plugin commands."));
 			// sender.sendMessage(cc(" &6/sessentials edit &7- Edit plugin features."));
 			sender.sendMessage(cc(" &6/sessentials reload &7- Reload plugin features."));
@@ -83,6 +85,11 @@ public class MainCommand implements CommandExecutor {
 				sender.sendMessage(cc(" &f&m                                  &f"));
 				sender.sendMessage("");
 			});
+			return true;
+		}
+
+		if (args[0].equalsIgnoreCase("build")) {
+			sender.sendMessage(cc(" &aYour build was made " + BuildInfo.BUILD_TIMESTAMP + "."));
 			return true;
 		}
 
