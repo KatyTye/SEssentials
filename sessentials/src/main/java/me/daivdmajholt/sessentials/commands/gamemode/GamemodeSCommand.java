@@ -6,16 +6,24 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import me.daivdmajholt.sessentials.Main;
+
 import static me.daivdmajholt.sessentials.Utils.cc;
 
 
 public class GamemodeSCommand implements CommandExecutor {
+
+	private final Main plugin = Main.plugin;
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-		if (!(sender instanceof Player player)) {
+		if (!sender.hasPermission("sessentials.gamemode")) {
+			sender.sendMessage(cc(plugin.getConfig().getString("messages.permission-denied")));
+			return true;
+		}
 
+		if (!(sender instanceof Player player)) {
 			if (args.length == 0) {
 				sender.sendMessage(cc(" &cUsage: /gamemode (survival/creative/adventure/spectator) (player)"));
 				return true;
@@ -40,11 +48,6 @@ public class GamemodeSCommand implements CommandExecutor {
 			sender.sendMessage(cc(" &a" + target.getName() + "'s gamemode is now " + gm.name().toLowerCase()));
 			target.sendMessage(cc(" &aYour gamemode has changed to " + gm.name().toLowerCase()));
 
-			return true;
-		}
-
-		if (!sender.hasPermission("sessentials.gamemode")) {
-			sender.sendMessage(cc(" &cYou don't have the required permission to use this command."));
 			return true;
 		}
 

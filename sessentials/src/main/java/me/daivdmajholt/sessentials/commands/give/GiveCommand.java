@@ -2,18 +2,28 @@ package me.daivdmajholt.sessentials.commands.give;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.command.Command;
 import org.bukkit.inventory.ItemStack;
+
+import me.daivdmajholt.sessentials.Main;
+
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.CommandExecutor;
 
 import static me.daivdmajholt.sessentials.Utils.cc;
 
 public class GiveCommand implements CommandExecutor {
 
+    private final Main plugin = Main.plugin;
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+
+		if (!sender.hasPermission("sessentials.give")) {
+			sender.sendMessage(cc(plugin.getConfig().getString("messages.permission-denied")));
+			return true;
+		}
 
         if (args.length < 2) {
             sender.sendMessage(cc(" &cPlease use the command correctly /give (player) (material) [amount]"));
@@ -46,10 +56,10 @@ public class GiveCommand implements CommandExecutor {
         target.getInventory().addItem(item);
 
         if (!sender.equals(target)) {
-            target.sendMessage(cc(" &aYou have received " + (amount >= 2 ? amount + " of " : "a ") + material.name() + " from " + sender.getName()));
-            sender.sendMessage(cc(" &aYou just gave " + (amount >= 2 ? amount + " of " : "a ") + material.name() + " to " + target.getName()));
+            target.sendMessage(cc(" &aYou have received " + (amount >= 2 ? amount + " of " : "a ") + material.name().toLowerCase() + " from " + sender.getName() + "."));
+            sender.sendMessage(cc(" &aYou just gave " + (amount >= 2 ? amount + " of " : "a ") + material.name().toLowerCase() + " to " + target.getName() + "."));
         } else {
-            target.sendMessage(cc(" &aYou have received " + (amount >= 2 ? amount + " of " : "a ") + material.name()));
+            target.sendMessage(cc(" &aYou have received " + (amount >= 2 ? amount + " of " : "a ") + material.name().toLowerCase() + "."));
         }
 
         return true;
