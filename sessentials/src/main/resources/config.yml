@@ -1,5 +1,5 @@
 # =====================================================
-#                 SEssentials Configuration
+#               SEssentials Configuration
 # =====================================================
 # This file controls the core behavior of SEssentials.
 # Reload with: /sessentials reload
@@ -20,7 +20,10 @@ features:
 # General plugin settings
 settings:
   debug-mode: false
+  spawn-on-join: true
+  force-respawn: false
   force-gamemode: true
+  spawn-permission: false
   default-gamemode: "survival"
 
 # Default messages
