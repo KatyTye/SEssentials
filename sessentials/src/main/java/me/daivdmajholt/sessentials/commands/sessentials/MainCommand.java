@@ -3,6 +3,7 @@ package me.daivdmajholt.sessentials.commands.sessentials;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import me.daivdmajholt.sessentials.Main;
 import me.daivdmajholt.sessentials.events.UpdateChecker;
@@ -32,7 +33,7 @@ public class MainCommand implements CommandExecutor {
 			sender.sendMessage("");
 			sender.sendMessage(cc(" &6/sessentials help &7- View plugin commands."));
 			// sender.sendMessage(cc(" &6/sessentials edit &7- Edit plugin features."));
-			// sender.sendMessage(cc(" &6/sessentials reload &7- Reload plugin features."));
+			sender.sendMessage(cc(" &6/sessentials reload &7- Reload plugin features."));
 			// sender.sendMessage(cc(" &6/sessentials toggle &7- Toggle plugin masterswitch."));
 			sender.sendMessage(cc(" &6/sessentials status &7- View status of plugin and config."));
 			sender.sendMessage("");
@@ -82,6 +83,11 @@ public class MainCommand implements CommandExecutor {
 				sender.sendMessage(cc(" &f&m                                  &f"));
 				sender.sendMessage("");
 			});
+			return true;
+		}
+
+		if (args[0].equalsIgnoreCase("reload")) {
+			plugin.reloadPlugin((Player) sender);
 			return true;
 		}
 
