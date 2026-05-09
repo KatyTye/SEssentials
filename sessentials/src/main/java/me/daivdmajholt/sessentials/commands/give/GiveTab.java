@@ -19,7 +19,6 @@ public class GiveTab implements TabCompleter {
         if (args.length == 3) {
             List<String> options = List.of("01","02","04","08","16","32","64");
             for (String s : options) if (s.startsWith(prefix)) suggestions.add(s);
-            return suggestions;
         }
 
         if (args.length == 2) {
@@ -27,7 +26,6 @@ public class GiveTab implements TabCompleter {
                 String name = material.name().toLowerCase();
                 if (name.startsWith(prefix)) suggestions.add(name);
             }
-            return suggestions;
         }
 
         if (args.length == 1) {
