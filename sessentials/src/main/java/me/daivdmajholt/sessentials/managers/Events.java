@@ -3,7 +3,6 @@ package me.daivdmajholt.sessentials.managers;
 import me.daivdmajholt.sessentials.Main;
 import me.daivdmajholt.sessentials.events.JoinMessage;
 import me.daivdmajholt.sessentials.events.LeaveMessage;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class Events {
 
