@@ -9,7 +9,12 @@ public class Events {
     private final Main plugin = Main.plugin;
 
     public void reqiesterEvents() {
-        plugin.getServer().getPluginManager().registerEvents(new JoinMessage(), plugin);
-        plugin.getServer().getPluginManager().registerEvents(new LeaveMessage(), plugin);
+
+        if (plugin.getConfig().getBoolean("features.events")) {
+            plugin.getServer().getPluginManager().registerEvents(new JoinMessage(), plugin);
+            plugin.getServer().getPluginManager().registerEvents(new LeaveMessage(), plugin);
+        } else {
+            plugin.getLogger().info("Events are disabled!");
+        }
     }
 }
