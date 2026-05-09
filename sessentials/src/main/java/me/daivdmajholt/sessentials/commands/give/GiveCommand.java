@@ -36,10 +36,6 @@ public class GiveCommand implements CommandExecutor {
         if (args.length >= 3) {
             try {
                 amount = Integer.parseInt(args[2]);
-                if (amount <= 0 || amount > material.getMaxStackSize()) {
-                    sender.sendMessage(cc(" &cThe amount of materials/items must be between 1 and " + material.getMaxStackSize()));
-                    return true;
-                }
             } catch (NumberFormatException e) {
                 sender.sendMessage(cc(" &cThe entered number is not valid."));
                 return true;
@@ -49,14 +45,11 @@ public class GiveCommand implements CommandExecutor {
         ItemStack item = new ItemStack(material, amount);
         target.getInventory().addItem(item);
 
-        if (!(sender instanceof Player player)) {
-            target.sendMessage(cc(" &aYou have received " + (amount >= 2 ? amount + " of " : "a ") + material.name()));
-        } else {
-            target.sendMessage(cc(" &aYou have received " + (amount >= 2 ? amount + " of " : "a ") + material.name() + " from " + sender.getName()));
-        }
-
         if (!sender.equals(target)) {
+            target.sendMessage(cc(" &aYou have received " + (amount >= 2 ? amount + " of " : "a ") + material.name() + " from " + sender.getName()));
             sender.sendMessage(cc(" &aYou just gave " + (amount >= 2 ? amount + " of " : "a ") + material.name() + " to " + target.getName()));
+        } else {
+            target.sendMessage(cc(" &aYou have received " + (amount >= 2 ? amount + " of " : "a ") + material.name()));
         }
 
         return true;

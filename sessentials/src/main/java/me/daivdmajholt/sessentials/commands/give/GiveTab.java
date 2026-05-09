@@ -14,21 +14,18 @@ public class GiveTab implements TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 
         List<String> suggestions = new ArrayList<>();
+        String prefix = args.length > 0 ? args[args.length - 1].toLowerCase() : "";
 
         if (args.length == 3) {
-            suggestions.add("01");
-            suggestions.add("02");
-            suggestions.add("04");
-            suggestions.add("08");
-            suggestions.add("16");
-            suggestions.add("32");
-            suggestions.add("64");
+            List<String> options = List.of("01","02","04","08","16","32","64");
+            for (String s : options) if (s.startsWith(prefix)) suggestions.add(s);
             return suggestions;
         }
 
         if (args.length == 2) {
             for (Material material : Material.values()) {
-                suggestions.add(material.name());
+                String name = material.name().toLowerCase();
+                if (name.startsWith(prefix)) suggestions.add(name);
             }
             return suggestions;
         }
