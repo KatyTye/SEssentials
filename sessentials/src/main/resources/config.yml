@@ -20,7 +20,7 @@ features:
 # General plugin settings
 settings:
   debug-mode: false
-  spawn-on-join: true
+  spawn-on-join: false
   force-respawn: false
   force-gamemode: true
   spawn-permission: false
