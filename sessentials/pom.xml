@@ -10,6 +10,24 @@
     <version>0.1.1</version>
     <name>sessentials</name>
 
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>2.10</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>31.1-jre</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>org.spigotmc</groupId>
@@ -72,27 +90,25 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.5.0</version>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.1.0</version>
+
                 <executions>
                     <execution>
                         <id>copy-plugin-jar</id>
                         <phase>package</phase>
+
                         <goals>
-                            <goal>copy</goal>
+                            <goal>run</goal>
                         </goals>
+
                         <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>${project.groupId}</groupId>
-                                    <artifactId>${project.artifactId}</artifactId>
-                                    <version>${project.version}</version>
-                                    <type>jar</type>
-                                    <outputDirectory>/home/squirrel/Documents/Projects/Minecraft/PluginTester/plugins</outputDirectory>
-                                    <destFileName>${project.build.finalName}.jar</destFileName>
-                                    <overWrite>true</overWrite>
-                                </artifactItem>
-                            </artifactItems>
+                            <target>
+                                <copy
+                                    file="${project.build.directory}/${project.build.finalName}.jar"
+                                    todir="/home/squirrel/Documents/Projects/Minecraft/PluginTester/plugins"
+                                    overwrite="true"/>
+                            </target>
                         </configuration>
                     </execution>
                 </executions>
