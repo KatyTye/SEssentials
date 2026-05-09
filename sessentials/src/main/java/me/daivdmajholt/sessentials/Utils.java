@@ -8,8 +8,6 @@ import org.bukkit.World;
 import com.google.gson.JsonObject;
 
 public class Utils {
-
-	private final Main plugin = Main.plugin;
 	
 	public static String cc(String message) {
 		return ChatColor.translateAlternateColorCodes('&', message);
