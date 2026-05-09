@@ -5,6 +5,8 @@ import me.daivdmajholt.sessentials.commands.give.GiveCommand;
 import me.daivdmajholt.sessentials.commands.give.GiveTab;
 import me.daivdmajholt.sessentials.commands.sessentials.MainCommand;
 import me.daivdmajholt.sessentials.commands.sessentials.MainTab;
+import me.daivdmajholt.sessentials.commands.spawn.SetSpawnCommand;
+import me.daivdmajholt.sessentials.commands.spawn.SpawnCommand;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeACommand;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeCCommand;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeCommand;
@@ -40,6 +42,10 @@ public class Commands {
             // GIVE
             plugin.getCommand("give").setExecutor(new GiveCommand());
             plugin.getCommand("give").setTabCompleter(new GiveTab());
+
+            // SPAWN
+            plugin.getCommand("spawn").setExecutor(new SpawnCommand());
+            plugin.getCommand("setspawn").setExecutor(new SetSpawnCommand());
         } else {
             plugin.getLogger().info("Commands are disabled!");
         }

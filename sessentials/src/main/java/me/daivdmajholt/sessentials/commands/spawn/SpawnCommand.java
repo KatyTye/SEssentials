@@ -1,0 +1,84 @@
+package me.daivdmajholt.sessentials.commands.spawn;
+
+import static me.daivdmajholt.sessentials.Utils.cc;
+
+import java.io.File;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
+
+import org.bukkit.command.CommandExecutor;
+
+import me.daivdmajholt.sessentials.Main;
+
+public class SpawnCommand implements CommandExecutor {
+	
+	private final Main plugin = Main.plugin;
+
+	@Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+		
+		if (plugin.getConfig().getBoolean("settings.spawn-permission") && !sender.hasPermission("sessentials.spawn")) {
+			sender.sendMessage(cc(plugin.getConfig().getString("messages.permission-denied")));
+			return true;
+		}
+
+		Player player = (Player) sender;
+
+		try {
+			File dataFolder = plugin.getDataFolder();
+			File file = new File(dataFolder, "data/spawn.yml");
+
+			FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
+
+			String worldName = cfg.getString("world", "world");
+			World world = Bukkit.getWorld(worldName);
+			if (world == null) {
+				plugin.getLogger().warning("World not found: " + worldName);
+				return false; // or handle fallback
+			}
+
+			double x = cfg.getDouble("x", 0.0);
+			double y = cfg.getDouble("y", 0.0);
+			double z = cfg.getDouble("z", 0.0);
+			float yaw = (float) cfg.getDouble("yaw", 0.0);
+			float pitch = (float) cfg.getDouble("pitch", 0.0);
+
+			Location loc = new Location(world, x, y, z, yaw, pitch);
+
+			if (args.length == 1) {
+				if (!player.hasPermission("sessentials.spawn.others")) {
+					sender.sendMessage(cc(plugin.getConfig().getString("messages.permission-denied")));
+					return true;
+				}
+
+				Player target = Bukkit.getPlayerExact(args[0]);
+
+				target.teleport(loc);
+				target.sendMessage(cc(" &aYou have been teleported to spawn."));
+				player.sendMessage(cc(" &aYou have teleported " + target.getName() + " to spawn."));
+
+				return true;
+			}
+
+			if (!(sender instanceof Player)) {
+				sender.sendMessage(cc(" &cThis command can only be run by a player."));
+				return true;
+			}
+
+			player.teleport(loc);
+			player.sendMessage(cc(" &aYou have been teleported to spawn."));
+		} catch (NumberFormatException e) {
+			plugin.getLogger().severe("Failed to teleport player to spawn.");
+			sender.sendMessage(cc(" &cFailed to teleport to spawn."));
+		}
+
+		return true;
+	}
+}
