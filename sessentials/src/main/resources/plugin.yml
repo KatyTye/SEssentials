@@ -6,6 +6,12 @@ commands:
   sessentials:
     description: This command is for plugin support.
     usage: /sessentials help
+  spawn:
+    description: This command teleports you to spawn.
+    usage: /spawn
+  setspawn:
+    description: This command sets the spawn location.
+    usage: /setspawn
   gamemode:
     description: This command sets a player's gamemode.
     usage: /gamemode (survival/creative/adventure/spectator) (player)

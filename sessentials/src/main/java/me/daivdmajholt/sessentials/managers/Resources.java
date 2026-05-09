@@ -14,8 +14,8 @@ public class Resources {
 		if (!plugin.getDataFolder().exists()) plugin.getDataFolder().mkdirs(); 
 
 		// Spawn Data File
-		File spawnDataFile = new File(plugin.getDataFolder(), "data/spawn.json");
-		if (!spawnDataFile.exists()) plugin.saveResource("data/spawn.json", false);
+		File spawnDataFile = new File(plugin.getDataFolder(), "data/spawn.yml");
+		if (!spawnDataFile.exists()) plugin.saveResource("data/spawn.yml", false);
 	}
 
 }
