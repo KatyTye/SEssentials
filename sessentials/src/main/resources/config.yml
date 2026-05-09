@@ -29,4 +29,5 @@ messages:
   join: "&8[&a+&8] &f"
   quit: "&8[&c-&8] &f"
   reloaded: "&aSEssentials has been reloaded."
+  subcommand-unknown: " &cUnknown subcommand. Try "
   permission-denied: "&cYou don't have the required permission to use this command."
