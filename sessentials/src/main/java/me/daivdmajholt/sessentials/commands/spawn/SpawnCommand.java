@@ -18,12 +18,12 @@ import org.bukkit.command.CommandExecutor;
 import me.daivdmajholt.sessentials.Main;
 
 public class SpawnCommand implements CommandExecutor {
-	
+
 	private final Main plugin = Main.plugin;
 
 	@Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		
+	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+
 		if (plugin.getConfig().getBoolean("settings.spawn-permission") && !sender.hasPermission("sessentials.spawn")) {
 			sender.sendMessage(cc(plugin.getConfig().getString("messages.permission-denied")));
 			return true;
@@ -37,18 +37,18 @@ public class SpawnCommand implements CommandExecutor {
 
 			FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
 
-			String worldName = cfg.getString("world", "world");
+			String worldName = cfg.getString("default.world", "world");
 			World world = Bukkit.getWorld(worldName);
 			if (world == null) {
 				plugin.getLogger().warning("World not found: " + worldName);
-				return false; // or handle fallback
+				return false;
 			}
 
-			double x = cfg.getDouble("x", 0.0);
-			double y = cfg.getDouble("y", 0.0);
-			double z = cfg.getDouble("z", 0.0);
-			float yaw = (float) cfg.getDouble("yaw", 0.0);
-			float pitch = (float) cfg.getDouble("pitch", 0.0);
+			double x = cfg.getDouble("default.x", 0.0);
+			double y = cfg.getDouble("default.y", 0.0);
+			double z = cfg.getDouble("default.z", 0.0);
+			float yaw = (float) cfg.getDouble("default.yaw", 0.0);
+			float pitch = (float) cfg.getDouble("default.pitch", 0.0);
 
 			Location loc = new Location(world, x, y, z, yaw, pitch);
 

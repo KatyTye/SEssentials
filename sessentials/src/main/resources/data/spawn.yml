@@ -1,8 +1,12 @@
-x: 0
-y: 0
-z: 0
-yaw: 0
-pitch: 0
-price: 0
-cooldown: 0
-world: world
+spawns:
+- "default"
+
+default:
+  x: 0
+  y: 0
+  z: 0
+  yaw: 0
+  pitch: 0
+  price: 0
+  cooldown: 0
+  world: world
