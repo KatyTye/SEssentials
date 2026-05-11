@@ -1,0 +1,87 @@
+ranks:
+- 0
+- 1
+- 2
+- 3
+- 4
+
+0:
+  name: "Default"
+  color: "&f"
+  prefix: ""
+  suffix: ""
+  members: 0
+  priority: 0
+  # permissions:
+
+1:
+  name: "Moderator"
+  color: "&5"
+  prefix: "Mod"
+  suffix: ""
+  members: 0
+  priority: 70
+  permissions:
+  - "fly"
+  - "god"
+  - "kick.others"
+  - "mute.others"
+  - "chat.bypass"
+  - "chat.colored"
+
+2:
+  name: "Administrator"
+  color: "&c"
+  prefix: "Admin"
+  suffix: ""
+  members: 0
+  priority: 80
+  permissions:
+  - "fly"
+  - "god"
+  - "fly.others"
+  - "kick.others"
+  - "mute.others"
+  - "chat.bypass"
+  - "chat.colored"
+  - "tempban.others"
+
+3:
+  name: "Head-Administrator"
+  color: "&c"
+  prefix: "H-Admin"
+  suffix: ""
+  members: 0
+  priority: 90
+  permissions:
+  - "fly"
+  - "god"
+  - "fly.others"
+  - "ban.others"
+  - "kick.others"
+  - "mute.others"
+  - "chat.bypass"
+  - "chat.colored"
+  - "tempban.others"
+
+4:
+  name: "Owner"
+  color: "&4"
+  prefix: "Owner"
+  suffix: ""
+  members: 0
+  priority: 100
+  permissions:
+  - "*"
+  - "help"
+  - "fly"
+  - "god"
+  - "give"
+  - "gamemode"
+  - "fly.others"
+  - "ban.others"
+  - "kick.others"
+  - "mute.others"
+  - "chat.bypass"
+  - "chat.colored"
+  - "tempban.others"

@@ -90,6 +90,7 @@
                     <include>plugin.yml</include>
                     <include>config.yml</include>
                     <include>data/spawn.yml</include>
+                    <include>data/ranks.yml</include>
                 </includes>
             </resource>
         </resources>
