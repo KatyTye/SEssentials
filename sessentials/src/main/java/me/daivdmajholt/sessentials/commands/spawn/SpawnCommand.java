@@ -29,7 +29,23 @@ public class SpawnCommand implements CommandExecutor {
 			return true;
 		}
 
-		Player player = (Player) sender;
+		Player player;
+
+		if (!(sender instanceof Player)) {
+			if (args.length == 0) {
+				sender.sendMessage(cc(" &cThe console can only teleport players to spawn!"));
+				return true;
+			}
+
+			player = (Player) Bukkit.getPlayer(args[0]);
+		} else {
+			player = (Player) sender;
+		}
+
+		if (player == null) {
+			sender.sendMessage(cc(" &cThe player your trying to teleport is currently not online."));
+			return true;
+		}
 
 		try {
 			File dataFolder = plugin.getDataFolder();
