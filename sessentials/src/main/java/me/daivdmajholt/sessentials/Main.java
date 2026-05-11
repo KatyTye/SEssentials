@@ -1,4 +1,5 @@
 package me.daivdmajholt.sessentials;
+import me.daivdmajholt.database.DatabaseManager;
 import me.daivdmajholt.sessentials.events.UpdateChecker;
 import me.daivdmajholt.sessentials.managers.Commands;
 import me.daivdmajholt.sessentials.managers.Events;
@@ -13,14 +14,20 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Main extends JavaPlugin {
 	public static Main plugin;
 
+	private DatabaseManager databaseManager;
+
 	@Override
 	public void onEnable() {
 		plugin = this;
 
 		saveDefaultConfig();
 		new Resources().registerResources();
+		databaseManager = new DatabaseManager(plugin);
 
 		if (getConfig().getBoolean("enabled")) {
+
+			databaseManager.connect();
+
 			getLogger().info("----------------------------------");
 			getLogger().info("");
 			getLogger().info("SEssentials has been enabled!");
@@ -45,6 +52,11 @@ public class Main extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
+
+		if (databaseManager != null) {
+			databaseManager.close();
+		}
+
 		getLogger().info("----------------------------------");
 		getLogger().info("");
 		getLogger().info("SEssentials has been disabled!");
