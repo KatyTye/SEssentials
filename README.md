@@ -1,9 +1,9 @@
 # SEssentials
- SEssentials is a personal plugin project, that will replace EssentialsX and other small plugins. Its in the making, but when its completed it should replace almost anything a server needs. This will only be released for 1.19.4 and above.
+ SEssentials is a personal plugin project, that will replace EssentialsX and other small plugins. Its in the making, but when its completed it should replace almost anything a server needs. This will only be released for 1.19.X, 1.20.X and 1.21.11.
 
 Copyright Notice and Terms of Service for SEssentials
 
-Copyright © 2025 Katy Tye. All rights reserved.
+Copyright © 2026 Katy Tye. All rights reserved.
 
 SEssentials is a free Minecraft plugin developed to enhance the gaming experience for all users.
 By using this plugin, you agree to the following terms and conditions:
