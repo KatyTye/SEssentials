@@ -39,7 +39,7 @@ public class SetSpawnCommand implements CommandExecutor {
 			Location playerLocation = player.getLocation();
 
 			File dataFolder = plugin.getDataFolder();
-			File file = new File(dataFolder, "data/spawn.yml");
+			File file = new File(dataFolder, "spawn.yml");
 
 			FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
 

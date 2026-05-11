@@ -44,10 +44,10 @@ public class GamemodeCommand implements CommandExecutor {
 
 			GameMode gm;
 			switch (args[0].toLowerCase()) {
-				case "s", "survival" -> gm = GameMode.SURVIVAL;
-				case "c", "creative" -> gm = GameMode.CREATIVE;
-				case "a", "adventure" -> gm = GameMode.ADVENTURE;
-				case "sp", "spectator" -> gm = GameMode.SPECTATOR;
+				case "s", "survival", "0" -> gm = GameMode.SURVIVAL;
+				case "c", "creative", "1" -> gm = GameMode.CREATIVE;
+				case "a", "adventure", "2" -> gm = GameMode.ADVENTURE;
+				case "sp", "spectator", "3" -> gm = GameMode.SPECTATOR;
 				default -> {
 					sender.sendMessage(cc(" &cUnknown gamemode."));
 					return true;
@@ -68,10 +68,10 @@ public class GamemodeCommand implements CommandExecutor {
 
 		GameMode gm;
 		switch (args[0].toLowerCase()) {
-			case "s", "survival" -> gm = GameMode.SURVIVAL;
-			case "c", "creative" -> gm = GameMode.CREATIVE;
-			case "a", "adventure" -> gm = GameMode.ADVENTURE;
-			case "sp", "spectator" -> gm = GameMode.SPECTATOR;
+			case "s", "survival", "0" -> gm = GameMode.SURVIVAL;
+			case "c", "creative", "1" -> gm = GameMode.CREATIVE;
+			case "a", "adventure", "2" -> gm = GameMode.ADVENTURE;
+			case "sp", "spectator", "3" -> gm = GameMode.SPECTATOR;
 			default -> {
 				player.sendMessage(cc(" &cUnknown gamemode."));
 				return true;

@@ -30,10 +30,10 @@ public class JoinMessage implements Listener {
             try {
                 GameMode gm;
                 switch (plugin.getConfig().getString("settings.default-gamemode").toLowerCase()) {
-                    case "s", "survival" -> gm = GameMode.SURVIVAL;
-                    case "c", "creative" -> gm = GameMode.CREATIVE;
-                    case "a", "adventure" -> gm = GameMode.ADVENTURE;
-                    case "sp", "spectator" -> gm = GameMode.SPECTATOR;
+                    case "s", "survival", "0" -> gm = GameMode.SURVIVAL;
+                    case "c", "creative", "1" -> gm = GameMode.CREATIVE;
+                    case "a", "adventure", "2" -> gm = GameMode.ADVENTURE;
+                    case "sp", "spectator", "3" -> gm = GameMode.SPECTATOR;
                     default -> {
                         gm = GameMode.SURVIVAL;
                     }
@@ -46,7 +46,7 @@ public class JoinMessage implements Listener {
 
         if (plugin.getConfig().getBoolean("settings.spawn-on-join")) {
             File dataFolder = plugin.getDataFolder();
-			File file = new File(dataFolder, "data/spawn.yml");
+			File file = new File(dataFolder, "spawn.yml");
 
 			FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
 
