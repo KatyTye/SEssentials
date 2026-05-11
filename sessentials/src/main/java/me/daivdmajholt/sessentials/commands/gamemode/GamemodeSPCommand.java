@@ -46,8 +46,8 @@ public class GamemodeSPCommand implements CommandExecutor {
 			gm = GameMode.SPECTATOR;
 
 			target.setGameMode(gm);
-			sender.sendMessage(cc(" &a" + target.getName() + "'s gamemode is now " + gm.name().toLowerCase()));
-			target.sendMessage(cc(" &aYour gamemode has changed to " + gm.name().toLowerCase()));
+			sender.sendMessage(cc(" &a" + target.getName() + "'s gamemode is now " + gm.name().toLowerCase() + "."));
+			target.sendMessage(cc(" &aYour gamemode has changed to " + gm.name().toLowerCase() + "."));
 
 			return true;
 		}
@@ -64,14 +64,14 @@ public class GamemodeSPCommand implements CommandExecutor {
 			}
 
 			target.setGameMode(gm);
-			player.sendMessage(cc(" &a" + target.getName() + "'s gamemode is now " + gm.name().toLowerCase()));
-			target.sendMessage(cc(" &aYour gamemode has changed to " + gm.name().toLowerCase()));
+			player.sendMessage(cc(" &a" + target.getName() + "'s gamemode is now " + gm.name().toLowerCase() + "."));
+			target.sendMessage(cc(" &aYour gamemode has changed to " + gm.name().toLowerCase() + "."));
 
 			return true;
 		}
 
 		player.setGameMode(gm);
-		player.sendMessage(cc(" &aYour gamemode has changed to " + gm.name().toLowerCase()));
+		player.sendMessage(cc(" &aYour gamemode has changed to " + gm.name().toLowerCase() + "."));
 
 		return true;
 	}

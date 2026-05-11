@@ -32,7 +32,7 @@ public class GiveCommand implements CommandExecutor {
 
         Player target = Bukkit.getPlayerExact(args[0]);
         if (target == null) {
-            sender.sendMessage(cc(" &cThe player named " + args[0] + " was not found: "));
+            sender.sendMessage(cc(" &cThe player named " + args[0] + " was not found. "));
             return true;
         }
 
