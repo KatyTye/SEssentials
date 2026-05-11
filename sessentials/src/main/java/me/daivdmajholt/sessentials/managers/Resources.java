@@ -15,14 +15,14 @@ public class Resources {
 			plugin.getDataFolder().mkdirs();
 
 		// Ranks Data File
-		File ranksDataFile = new File(plugin.getDataFolder(), "data/ranks.yml");
+		File ranksDataFile = new File(plugin.getDataFolder(), "ranks.yml");
 		if (!ranksDataFile.exists())
-			plugin.saveResource("data/ranks.yml", false);
+			plugin.saveResource("ranks.yml", false);
 
 		// Spawn Data File
-		File spawnDataFile = new File(plugin.getDataFolder(), "data/spawn.yml");
+		File spawnDataFile = new File(plugin.getDataFolder(), "spawn.yml");
 		if (!spawnDataFile.exists())
-			plugin.saveResource("data/spawn.yml", false);
+			plugin.saveResource("spawn.yml", false);
 	}
 
 }

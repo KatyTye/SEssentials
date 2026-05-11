@@ -8,10 +8,10 @@ commands:
     usage: /sessentials help
   spawn:
     description: This command teleports you to spawn.
-    usage: /spawn
+    usage: /spawn (player)
   setspawn:
     description: This command sets the spawn location.
-    usage: /setspawn
+    usage: /setspawn (rank id)
   gamemode:
     description: This command sets a player's gamemode.
     usage: /gamemode (survival/creative/adventure/spectator) (player)
@@ -31,4 +31,5 @@ commands:
     description: This command sets a player's gamemode to spectator.
     usage: /gmsp
   give:
-      description: This command gives a player a spefic item.
+    description: This command gives a player a spefic item.
+    usage: /give (player) (item) (amount)
