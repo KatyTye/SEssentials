@@ -7,11 +7,17 @@ commands:
     description: This command is for plugin support.
     usage: /sessentials help
   bal:
-    description: This commands shows yours and other players balance
+    description: This commands shows yours and other players' balance.
     usage: /bal (player)
   balance:
-    description: This commands shows yours and other players balance
+    description: This commands shows yours and other players' balance.
     usage: /balance (player)
+  eco:
+    description: This command changes the players' balance.
+    usage: /eco (give/remove/set) (player) (amount)
+  economy:
+    description: This command changes the players' balance.
+    usage: /economy (give/remove/set) (player) (amount)
   spawn:
     description: This command teleports you to spawn.
     usage: /spawn (player)
@@ -37,5 +43,5 @@ commands:
     description: This command sets a player's gamemode to spectator.
     usage: /gmsp
   give:
-    description: This command gives a player a spefic item.
+    description: This command gives a player a specific  item.
     usage: /give (player) (item) (amount)

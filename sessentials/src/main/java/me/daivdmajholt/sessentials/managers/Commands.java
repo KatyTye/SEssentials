@@ -11,6 +11,8 @@ import me.daivdmajholt.sessentials.commands.spawn.SpawnTab;
 import me.daivdmajholt.sessentials.commands.NothingTab;
 import me.daivdmajholt.sessentials.commands.economy.BalanceCommand;
 import me.daivdmajholt.sessentials.commands.economy.BalanceTab;
+import me.daivdmajholt.sessentials.commands.economy.EconomyCommand;
+import me.daivdmajholt.sessentials.commands.economy.EconomyTab;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeACommand;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeCCommand;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeCommand;
@@ -52,6 +54,11 @@ public class Commands {
             plugin.getCommand("bal").setTabCompleter(new BalanceTab());
             plugin.getCommand("balance").setExecutor(new BalanceCommand());
             plugin.getCommand("balance").setTabCompleter(new BalanceTab());
+
+            plugin.getCommand("eco").setExecutor(new EconomyCommand());
+            plugin.getCommand("eco").setTabCompleter(new EconomyTab());
+            plugin.getCommand("economy").setExecutor(new EconomyCommand());
+            plugin.getCommand("economy").setTabCompleter(new EconomyTab());
 
             // SPAWN
             plugin.getCommand("spawn").setExecutor(new SpawnCommand());
