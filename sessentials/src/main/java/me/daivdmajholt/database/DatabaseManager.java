@@ -142,7 +142,7 @@ public class DatabaseManager {
 
     }
 
-    public double getBalance(Player player) {
+    public double getBalance(Player player, String uuid) {
 
         String sql = """
             SELECT balance FROM players WHERE uuid = ?
@@ -150,7 +150,11 @@ public class DatabaseManager {
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setString(1, player.getUniqueId().toString());
+            if (player == null) {
+                statement.setString(1, uuid);
+            } else {
+                statement.setString(1, player.getUniqueId().toString());
+            }
 
             ResultSet result = statement.executeQuery();
 
