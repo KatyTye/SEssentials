@@ -23,7 +23,7 @@ public class BalanceCommand implements CommandExecutor  {
 				return true;
 			}
 
-			sender.sendMessage(cc(" &aYou currently have " + Main.databaseManager.getBalance((Player) sender, null) + "$ in your balance."));
+			sender.sendMessage(cc(" &aYou currently have " + String.format("%.2f", Main.databaseManager.getBalance((Player) sender, null)) + "$ in your balance."));
 		} else {
 			Player player = Bukkit.getPlayer(args[0]);
 
@@ -34,7 +34,7 @@ public class BalanceCommand implements CommandExecutor  {
 				for (OfflinePlayer p : Bukkit.getOfflinePlayers()) {
 					if (p.getName() != null && p.getName().equalsIgnoreCase(args[0])) {
 						found = true;
-						sender.sendMessage(cc(" &aThe balance of " + p.getName() + " is currently " + Main.databaseManager.getBalance(null, p.getUniqueId().toString()) + "$."));
+						sender.sendMessage(cc(" &aThe balance of " + p.getName() + " is currently " + String.format("%.2f", Main.databaseManager.getBalance(null, p.getUniqueId().toString())) + "$."));
 						break;
 					}
 				}
@@ -43,7 +43,7 @@ public class BalanceCommand implements CommandExecutor  {
 				return true;
 			}
 
-			sender.sendMessage(cc(" &aThe balance of " + player.getName() + " is currently " + Main.databaseManager.getBalance(player, null) + "$."));
+			sender.sendMessage(cc(" &aThe balance of " + player.getName() + " is currently " + String.format("%.2f", Main.databaseManager.getBalance(player, null)) + "$."));
 		}
 
 		return true;
