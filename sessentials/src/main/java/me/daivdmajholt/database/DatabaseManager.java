@@ -1,16 +1,22 @@
 package me.daivdmajholt.database;
 
-import org.bukkit.plugin.java.JavaPlugin;
+import me.daivdmajholt.sessentials.Main;
 
 import java.io.File;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.bukkit.Bukkit;
 
 public class DatabaseManager {
 
-    private final JavaPlugin plugin;
+    private final Main plugin;
     private Connection connection;
 
-    public DatabaseManager(JavaPlugin plugin) {
+    public DatabaseManager(Main plugin) {
         this.plugin = plugin;
     }
 
@@ -28,7 +34,9 @@ public class DatabaseManager {
 
             connection = DriverManager.getConnection(url);
 
-            plugin.getLogger().info("Connected to SQLite database.");
+            if (plugin.getConfig().getBoolean("settings.debug-mode")) {
+                plugin.getLogger().info("Connected to SQLite database.");
+            }
 
             createTables();
 
@@ -41,18 +49,67 @@ public class DatabaseManager {
     private void createTables() {
 
         String sql = """
-                CREATE TABLE IF NOT EXISTS players (
-                    uuid TEXT PRIMARY KEY,
-                    username TEXT,
-                    balance DOUBLE,
-                    rank INT
-                );
-                """;
+            CREATE TABLE IF NOT EXISTS players (
+                uuid TEXT PRIMARY KEY,
+                balance DOUBLE,
+                rank INT
+            );
+        """;
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.execute();
 
+            if (plugin.getConfig().getBoolean("settings.debug-mode")) {
+                plugin.getLogger().info("Players database table created/loaded.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void registerPlayer(String uuid, int rank, double balance) {
+
+        String checkSQL = """
+            SELECT uuid FROM players WHERE uuid = ?
+        """;
+
+        try (PreparedStatement statement = connection.prepareStatement(checkSQL)) {
+
+            statement.setString(1, uuid);
+
+            ResultSet result = statement.executeQuery();
+
+            if (result.next()) {
+                if (plugin.getConfig().getBoolean("settings.debug-mode")) {
+                    plugin.getLogger().info("Could not register player into the database: Already exists.");
+                }
+                return;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        String insertSQL = """
+            INSERT INTO players(uuid, rank, balance)
+            VALUES (?, ?, ?)
+        """;
+
+        try (PreparedStatement statement = connection.prepareStatement(insertSQL)) {
+
+            statement.setString(1, uuid);
+            statement.setInt(2, rank);
+            statement.setDouble(3, balance);
+
+            statement.executeUpdate();
+
+            if (plugin.getConfig().getBoolean("settings.debug-mode")) {
+                plugin.getLogger().info("Registered player in database: "+ Bukkit.getPlayer(uuid).getName() + " (" + uuid + ")");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -62,11 +119,11 @@ public class DatabaseManager {
     public void setBalance(String uuid, double balance) {
 
         String sql = """
-                INSERT INTO players(uuid, balance)
-                VALUES(?, ?)
-                ON CONFLICT(uuid)
-                DO UPDATE SET balance = excluded.balance;
-                """;
+            INSERT INTO players(uuid, balance)
+            VALUES(?, ?)
+            ON CONFLICT(uuid)
+            DO UPDATE SET balance = excluded.balance;
+        """;
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
 
@@ -74,6 +131,10 @@ public class DatabaseManager {
             statement.setDouble(2, balance);
 
             statement.executeUpdate();
+
+            if (plugin.getConfig().getBoolean("settings.debug-mode")) {
+                plugin.getLogger().info("Changed balance for " + Bukkit.getPlayer(uuid).getName() + " to: " + balance + "$");
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -83,13 +144,19 @@ public class DatabaseManager {
 
     public double getBalance(String uuid) {
 
-        String sql = "SELECT balance FROM players WHERE uuid = ?";
+        String sql = """
+            SELECT balance FROM players WHERE uuid = ?
+        """;
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setString(1, uuid);
 
             ResultSet result = statement.executeQuery();
+
+            if (plugin.getConfig().getBoolean("settings.debug-mode")) {
+                plugin.getLogger().info("Player checked balance from database.");
+            }
 
             if (result.next()) {
                 return result.getDouble("balance");
@@ -108,7 +175,12 @@ public class DatabaseManager {
         try {
 
             if (connection != null && !connection.isClosed()) {
+
                 connection.close();
+
+                if (plugin.getConfig().getBoolean("settings.debug-mode")) {
+                    plugin.getLogger().info("Database connection closed.");
+                }
             }
 
         } catch (SQLException e) {
