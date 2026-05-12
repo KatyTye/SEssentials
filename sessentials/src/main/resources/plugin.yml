@@ -6,6 +6,12 @@ commands:
   sessentials:
     description: This command is for plugin support.
     usage: /sessentials help
+  bal:
+    description: This commands shows yours and other players balance
+    usage: /bal (player)
+  balance:
+    description: This commands shows yours and other players balance
+    usage: /balance (player)
   spawn:
     description: This command teleports you to spawn.
     usage: /spawn (player)
