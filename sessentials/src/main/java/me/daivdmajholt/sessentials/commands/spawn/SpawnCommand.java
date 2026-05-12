@@ -34,6 +34,7 @@ public class SpawnCommand implements CommandExecutor {
 		if (!(sender instanceof Player)) {
 			if (args.length == 0) {
 				sender.sendMessage(cc(" &cThe console can only teleport players to spawn!"));
+				sender.sendMessage(cc(" &cPlease use the command correctly: /spawn (player)"));
 				return true;
 			}
 
