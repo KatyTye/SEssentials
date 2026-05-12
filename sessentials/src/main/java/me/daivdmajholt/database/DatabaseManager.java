@@ -116,7 +116,7 @@ public class DatabaseManager {
 
     }
 
-    public void setBalance(Player player, double balance) {
+    public void setBalance(Player player, String uuid, double balance) {
 
         String sql = """
             INSERT INTO players(uuid, balance)
@@ -127,13 +127,18 @@ public class DatabaseManager {
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setString(1, player.getUniqueId().toString());
+            if (player == null) {
+                statement.setString(1, uuid);
+            } else {
+                statement.setString(1, player.getUniqueId().toString());
+            }
+
             statement.setDouble(2, balance);
 
             statement.executeUpdate();
 
             if (plugin.getConfig().getBoolean("settings.debug-mode")) {
-                plugin.getLogger().info("Changed balance for " + player.getName() + " to: " + balance + "$");
+                plugin.getLogger().info("Changed balance for a player to: " + balance + "$");
             }
 
         } catch (SQLException e) {
