@@ -9,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 public class DatabaseManager {
 
@@ -70,7 +70,7 @@ public class DatabaseManager {
 
     }
 
-    public void registerPlayer(String uuid, int rank, double balance) {
+    public void registerPlayer(Player player, int rank, double balance) {
 
         String checkSQL = """
             SELECT uuid FROM players WHERE uuid = ?
@@ -78,13 +78,13 @@ public class DatabaseManager {
 
         try (PreparedStatement statement = connection.prepareStatement(checkSQL)) {
 
-            statement.setString(1, uuid);
+            statement.setString(1, player.getUniqueId().toString());
 
             ResultSet result = statement.executeQuery();
 
             if (result.next()) {
                 if (plugin.getConfig().getBoolean("settings.debug-mode")) {
-                    plugin.getLogger().info("Could not register player into the database: Already exists.");
+                    plugin.getLogger().info("Could not register " + player.getName() + " into the database: Already exists.");
                 }
                 return;
             }
@@ -101,14 +101,14 @@ public class DatabaseManager {
 
         try (PreparedStatement statement = connection.prepareStatement(insertSQL)) {
 
-            statement.setString(1, uuid);
+            statement.setString(1, player.getUniqueId().toString());
             statement.setInt(2, rank);
             statement.setDouble(3, balance);
 
             statement.executeUpdate();
 
             if (plugin.getConfig().getBoolean("settings.debug-mode")) {
-                plugin.getLogger().info("Registered player in database: "+ Bukkit.getPlayer(uuid).getName() + " (" + uuid + ")");
+                plugin.getLogger().info("Registered player in database: "+ player.getName() + " (" + player.getUniqueId().toString() + ")");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -116,7 +116,7 @@ public class DatabaseManager {
 
     }
 
-    public void setBalance(String uuid, double balance) {
+    public void setBalance(Player player, double balance) {
 
         String sql = """
             INSERT INTO players(uuid, balance)
@@ -127,13 +127,13 @@ public class DatabaseManager {
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setString(1, uuid);
+            statement.setString(1, player.getUniqueId().toString());
             statement.setDouble(2, balance);
 
             statement.executeUpdate();
 
             if (plugin.getConfig().getBoolean("settings.debug-mode")) {
-                plugin.getLogger().info("Changed balance for " + Bukkit.getPlayer(uuid).getName() + " to: " + balance + "$");
+                plugin.getLogger().info("Changed balance for " + player.getName() + " to: " + balance + "$");
             }
 
         } catch (SQLException e) {
@@ -142,7 +142,7 @@ public class DatabaseManager {
 
     }
 
-    public double getBalance(String uuid) {
+    public double getBalance(Player player) {
 
         String sql = """
             SELECT balance FROM players WHERE uuid = ?
@@ -150,7 +150,7 @@ public class DatabaseManager {
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.setString(1, uuid);
+            statement.setString(1, player.getUniqueId().toString());
 
             ResultSet result = statement.executeQuery();
 
