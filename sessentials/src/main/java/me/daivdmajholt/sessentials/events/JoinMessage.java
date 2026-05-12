@@ -26,6 +26,8 @@ public class JoinMessage implements Listener {
         Player player = event.getPlayer();
         event.setJoinMessage(cc(plugin.getConfig().getString("messages.join") + player.getName()));
 
+        Main.databaseManager.registerPlayer(player.getUniqueId().toString(), 0, 0);
+        
         if (plugin.getConfig().getBoolean("settings.force-gamemode")) {
             try {
                 GameMode gm;
