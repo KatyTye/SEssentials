@@ -52,11 +52,6 @@ public class Main extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
-
-		if (databaseManager != null) {
-			databaseManager.close();
-		}
-
 		getLogger().info("----------------------------------");
 		getLogger().info("");
 		getLogger().info("SEssentials has been disabled!");

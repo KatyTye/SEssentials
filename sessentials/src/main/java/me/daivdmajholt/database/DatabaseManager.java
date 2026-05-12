@@ -14,36 +14,31 @@ import org.bukkit.entity.Player;
 public class DatabaseManager {
 
     private final Main plugin;
-    private Connection connection;
+    private String url;
 
     public DatabaseManager(Main plugin) {
         this.plugin = plugin;
     }
 
+    private Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(url);
+    }
+
     public void connect() {
 
-        try {
-
-            if (!plugin.getDataFolder().exists()) {
-                plugin.getDataFolder().mkdirs();
-            }
-
-            File databaseFile = new File(plugin.getDataFolder(), "database.db");
-
-            String url = "jdbc:sqlite:" + databaseFile.getAbsolutePath();
-
-            connection = DriverManager.getConnection(url);
-
-            if (plugin.getConfig().getBoolean("settings.debug-mode")) {
-                plugin.getLogger().info("Connected to SQLite database.");
-            }
-
-            createTables();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (!plugin.getDataFolder().exists()) {
+            plugin.getDataFolder().mkdirs();
         }
 
+        File databaseFile = new File(plugin.getDataFolder(), "database.db");
+
+        url = "jdbc:sqlite:" + databaseFile.getAbsolutePath();
+
+        if (plugin.getConfig().getBoolean("settings.debug-mode")) {
+            plugin.getLogger().info("Connected to SQLite database.");
+        }
+
+        createTables();
     }
 
     private void createTables() {
@@ -56,7 +51,7 @@ public class DatabaseManager {
             );
         """;
 
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.execute();
 
@@ -76,7 +71,7 @@ public class DatabaseManager {
             SELECT uuid FROM players WHERE uuid = ?
         """;
 
-        try (PreparedStatement statement = connection.prepareStatement(checkSQL)) {
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(checkSQL)) {
 
             statement.setString(1, player.getUniqueId().toString());
 
@@ -99,7 +94,7 @@ public class DatabaseManager {
             VALUES (?, ?, ?)
         """;
 
-        try (PreparedStatement statement = connection.prepareStatement(insertSQL)) {
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(insertSQL)) {
 
             statement.setString(1, player.getUniqueId().toString());
             statement.setInt(2, rank);
@@ -125,7 +120,7 @@ public class DatabaseManager {
             DO UPDATE SET balance = excluded.balance;
         """;
 
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
 
             if (player == null) {
                 statement.setString(1, uuid);
@@ -153,7 +148,7 @@ public class DatabaseManager {
             SELECT balance FROM players WHERE uuid = ?
         """;
 
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
 
             if (player == null) {
                 statement.setString(1, uuid);
@@ -178,24 +173,4 @@ public class DatabaseManager {
         return 0.0;
 
     }
-
-    public void close() {
-
-        try {
-
-            if (connection != null && !connection.isClosed()) {
-
-                connection.close();
-
-                if (plugin.getConfig().getBoolean("settings.debug-mode")) {
-                    plugin.getLogger().info("Database connection closed.");
-                }
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
-
 }
