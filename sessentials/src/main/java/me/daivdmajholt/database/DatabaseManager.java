@@ -65,6 +65,34 @@ public class DatabaseManager {
 
     }
 
+    public String findPlayerRank(Player player) {
+
+        String sql = """
+            SELECT rank FROM players WHERE uuid = ?
+        """;
+
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, player.getUniqueId().toString());
+
+            ResultSet result = statement.executeQuery();
+
+            if (result.next()) {
+                
+                if (plugin.getConfig().getBoolean("settings.debug-mode")) {
+                    plugin.getLogger().info("Could not find rank from " + player.getName() + " in the database.");
+                }
+
+                String returnValue = String.valueOf(result.getInt("rank"));
+
+                return returnValue;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return "0";
+    }
+
     public void registerPlayer(Player player, int rank, double balance) {
 
         String checkSQL = """
