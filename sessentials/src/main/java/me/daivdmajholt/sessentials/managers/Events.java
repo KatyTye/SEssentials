@@ -2,8 +2,10 @@ package me.daivdmajholt.sessentials.managers;
 
 import me.daivdmajholt.sessentials.Main;
 import me.daivdmajholt.sessentials.events.ChatManager;
+import me.daivdmajholt.sessentials.events.ForceRespawn;
 import me.daivdmajholt.sessentials.events.JoinMessage;
 import me.daivdmajholt.sessentials.events.LeaveMessage;
+import me.daivdmajholt.sessentials.events.SpawnPlayer;
 
 public class Events {
 
@@ -15,6 +17,8 @@ public class Events {
             plugin.getServer().getPluginManager().registerEvents(new JoinMessage(), plugin);
             plugin.getServer().getPluginManager().registerEvents(new LeaveMessage(), plugin);
             plugin.getServer().getPluginManager().registerEvents(new ChatManager(), plugin);
+            plugin.getServer().getPluginManager().registerEvents(new ForceRespawn(), plugin);
+            plugin.getServer().getPluginManager().registerEvents(new SpawnPlayer(), plugin);
         } else {
             plugin.getLogger().info("Events are disabled!");
         }
