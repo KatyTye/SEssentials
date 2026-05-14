@@ -1,6 +1,7 @@
 package me.daivdmajholt.sessentials.managers;
 
 import me.daivdmajholt.sessentials.Main;
+import me.daivdmajholt.sessentials.events.ChatManager;
 import me.daivdmajholt.sessentials.events.JoinMessage;
 import me.daivdmajholt.sessentials.events.LeaveMessage;
 
@@ -13,6 +14,7 @@ public class Events {
         if (plugin.getConfig().getBoolean("features.events")) {
             plugin.getServer().getPluginManager().registerEvents(new JoinMessage(), plugin);
             plugin.getServer().getPluginManager().registerEvents(new LeaveMessage(), plugin);
+            plugin.getServer().getPluginManager().registerEvents(new ChatManager(), plugin);
         } else {
             plugin.getLogger().info("Events are disabled!");
         }
