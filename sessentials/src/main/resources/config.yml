@@ -11,26 +11,33 @@ enabled: true
 # Check for updates on startup
 check-updates: true
 
+# Plugin advertisements in chat/console
+do-plugin-advertisements: false
+
 # Global feature toggles
 features:
   enabled: true			  # Enable all plugin features
   events: true			  # Enable all plugin events
   commands: true			# Enable all plugin commands
+  community: false    # Enable all community features (Upcoming Feature)
 
 # General plugin settings
 settings:
-  debug-mode: false
-  spawn-on-join: false
-  force-respawn: false
-  force-gamemode: true
-  spawn-permission: false
-  default-gamemode: "survival"
+  debug-mode: false                 # Send console messages on database changes
+  allow-urls: false                 # Controls links in chat is clickable
+  spawn-on-join: false              # Force player's to teleport to spawn on server join
+  force-respawn: false              # Force player's to respawn on death
+  force-gamemode: true              # Force player's gamemode on server join
+  spawn-permission: false           # Require special permission to use spawn
+  default-gamemode: "survival"      # Sets the gamemode for force-gamemode setting
 
 # Default messages
 messages:
   join: " &8[&a+&8] &f"
   quit: " &8[&c-&8] &f"
   reloaded: "&aSEssentials has been reloaded."
-  subcommand-unknown: " &cUnknown subcommand. Try "
+  online-shop: "https://shop.website.com"
+  discord-link: "https://discord.gg/xxxxxxxx"
   sender-message: " &8[%color%%prefix%&8] &f%name% &8≫"
   permission-denied: "&cYou don't have the required permission to use this command."
+  subcommand-unknown: " &cUnknown subcommand. Try "
