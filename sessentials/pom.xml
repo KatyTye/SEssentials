@@ -113,10 +113,11 @@
                 <directory>src/main/resources</directory>
 
                 <includes>
+                    <include>ranks.yml</include>
+                    <include>spawn.yml</include>
                     <include>plugin.yml</include>
                     <include>config.yml</include>
-                    <include>spawn.yml</include>
-                    <include>ranks.yml</include>
+                    <include>license.md</include>
                     <include>database.db</include>
                 </includes>
 
