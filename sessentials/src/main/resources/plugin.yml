@@ -12,6 +12,12 @@ commands:
   balance:
     description: This commands shows yours and other players' balance.
     usage: /balance (player)
+  rm:
+    description: This commands handles ranks and permissions.
+    usage: /rm help
+  rankmanager:
+    description: This commands handles ranks and permissions.
+    usage: /rankmanager help
   eco:
     description: This command changes the players' balance.
     usage: /eco (give/remove/set) (player) (amount)

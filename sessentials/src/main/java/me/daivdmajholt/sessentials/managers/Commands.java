@@ -3,6 +3,8 @@ package me.daivdmajholt.sessentials.managers;
 import me.daivdmajholt.sessentials.Main;
 import me.daivdmajholt.sessentials.commands.give.GiveCommand;
 import me.daivdmajholt.sessentials.commands.give.GiveTab;
+import me.daivdmajholt.sessentials.commands.rank.RankCommand;
+import me.daivdmajholt.sessentials.commands.rank.RankTab;
 import me.daivdmajholt.sessentials.commands.sessentials.MainCommand;
 import me.daivdmajholt.sessentials.commands.sessentials.MainTab;
 import me.daivdmajholt.sessentials.commands.spawn.SetSpawnCommand;
@@ -59,6 +61,12 @@ public class Commands {
             plugin.getCommand("eco").setTabCompleter(new EconomyTab());
             plugin.getCommand("economy").setExecutor(new EconomyCommand());
             plugin.getCommand("economy").setTabCompleter(new EconomyTab());
+
+            // RANK
+            plugin.getCommand("rm").setExecutor(new RankCommand());
+            plugin.getCommand("rm").setTabCompleter(new RankTab());
+            plugin.getCommand("rankmanager").setExecutor(new RankCommand());
+            plugin.getCommand("rankmanager").setTabCompleter(new RankTab());
 
             // SPAWN
             plugin.getCommand("spawn").setExecutor(new SpawnCommand());
