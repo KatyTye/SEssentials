@@ -16,10 +16,10 @@ do-plugin-advertisements: false
 
 # Global feature toggles
 features:
-  enabled: true			  # Enable all plugin features
-  events: true			  # Enable all plugin events
-  commands: true			# Enable all plugin commands
-  community: false    # Enable all community features (Upcoming Feature)
+  enabled: true                     # Enable all plugin features
+  events: true                      # Enable all plugin events
+  commands: true                    # Enable all plugin commands
+  community: false                  # Enable all community features (Upcoming Feature)
 
 # General plugin settings
 settings:
