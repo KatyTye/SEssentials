@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -23,26 +23,30 @@ public class RankTab implements TabCompleter {
 
 	List<Integer> ranks = cfg.getIntegerList("ranks");
 
-    @Override
+	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 
 		List<String> suggestions = new ArrayList<>();
 		String prefix = args.length > 0 ? args[args.length - 1].toLowerCase() : "";
 
 		if (args.length == 1) {
-			List<String> options = List.of("help","list","permissions","rename","prefix","suffix","color","priority","permission");
-			for (String s : options) if (s.startsWith(prefix)) suggestions.add(s);
+			List<String> options = List.of("help", "list", "permissions", "rename", "prefix", "suffix", "color",
+					"priority", "permission", "details", "info", "change");
+			for (String s : options)
+				if (s.startsWith(prefix))
+					suggestions.add(s);
 			return suggestions;
 		}
 
 		if (args.length == 2 && !args[0].equalsIgnoreCase("help")
-			&& !args[0].equalsIgnoreCase("list") && !args[0].equalsIgnoreCase("")) {
-			for (int s : ranks) suggestions.add(String.valueOf(s));
+				&& !args[0].equalsIgnoreCase("list") && !args[0].equalsIgnoreCase("")) {
+			for (int s : ranks)
+				suggestions.add(String.valueOf(s));
 			return suggestions;
 		}
 
 		if (args.length == 3 && args[0].equalsIgnoreCase("permission")) {
-			return List.of("add","remove");
+			return List.of("add", "remove");
 		}
 
 		if (args.length == 4 && !args[0].equalsIgnoreCase("add") && args[0].equalsIgnoreCase("permission")) {
@@ -75,7 +79,11 @@ public class RankTab implements TabCompleter {
 			return suggestions;
 		}
 
+		if (args.length == 3 && args[0].equalsIgnoreCase("change")) {
+			return null;
+		}
+
 		return new ArrayList<>();
 	}
-	
+
 }
