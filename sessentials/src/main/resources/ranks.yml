@@ -37,14 +37,14 @@ ranks:
   members: 0
   priority: 80
   permissions:
-  - "fly"
-  - "god"
-  - "fly.others"
-  - "kick.others"
-  - "mute.others"
-  - "chat.bypass"
-  - "chat.colored"
-  - "tempban.others"
+  - "sessentials.fly"
+  - "sessentials.god"
+  - "sessentials.fly.others"
+  - "sessentials.kick.others"
+  - "sessentials.mute.others"
+  - "sessentials.chat.bypass"
+  - "sessentials.chat.colored"
+  - "sessentials.tempban.others"
 
 3:
   name: "Head-Administrator"
@@ -54,15 +54,15 @@ ranks:
   members: 0
   priority: 90
   permissions:
-  - "fly"
-  - "god"
-  - "fly.others"
-  - "ban.others"
-  - "kick.others"
-  - "mute.others"
-  - "chat.bypass"
-  - "chat.colored"
-  - "tempban.others"
+  - "sessentials.fly"
+  - "sessentials.god"
+  - "sessentials.fly.others"
+  - "sessentials.ban.others"
+  - "sessentials.kick.others"
+  - "sessentials.mute.others"
+  - "sessentials.chat.bypass"
+  - "sessentials.chat.colored"
+  - "sessentials.tempban.others"
 
 4:
   name: "Owner"
@@ -72,16 +72,16 @@ ranks:
   members: 0
   priority: 100
   permissions:
-  - "*"
   - "help"
-  - "fly"
-  - "god"
-  - "give"
-  - "gamemode"
-  - "fly.others"
-  - "ban.others"
-  - "kick.others"
-  - "mute.others"
-  - "chat.bypass"
-  - "chat.colored"
-  - "tempban.others"
+  - "sessentials.*"
+  - "sessentials.fly"
+  - "sessentials.god"
+  - "sessentials.give"
+  - "sessentials.gamemode"
+  - "sessentials.fly.others"
+  - "sessentials.ban.others"
+  - "sessentials.kick.others"
+  - "sessentials.mute.others"
+  - "sessentials.chat.bypass"
+  - "sessentials.chat.colored"
+  - "sessentials.tempban.others"
