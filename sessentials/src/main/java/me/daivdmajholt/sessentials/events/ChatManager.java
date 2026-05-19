@@ -30,7 +30,7 @@ public class ChatManager implements Listener {
 
 		FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
 
-		String rank = Main.databaseManager.findPlayerRank(player);
+		String rank = Main.databaseManager.findPlayerRank(player, null);
 		String message = plugin.getConfig().getString("messages.sender-message");
 		
 		message = message.replace("%name%", player.getName());

@@ -65,21 +65,58 @@ public class DatabaseManager {
 
     }
 
-    public String findPlayerRank(Player player) {
+    public Boolean setPlayerRank(String uuid, Integer rank) {
+
+        String sql = """
+            UPDATE players SET rank = ? WHERE uuid = ?    
+        """;
+
+        if (rank == null) rank = 0;
+
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, rank);
+            statement.setString(2, uuid);
+
+            int rows = statement.executeUpdate();
+
+            if (rows > 0) {
+                if (plugin.getConfig().getBoolean("settings.debug-mode")) {
+                    plugin.getLogger().info("Changed the rank of the player to rank id " + rank + ".");
+                }
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public String findPlayerRank(Player player, String uuid) {
 
         String sql = """
             SELECT rank FROM players WHERE uuid = ?
         """;
 
         try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, player.getUniqueId().toString());
+
+            if (player == null) {
+                statement.setString(1, uuid);
+            } else {
+                statement.setString(1, player.getUniqueId().toString());
+            }
 
             ResultSet result = statement.executeQuery();
 
             if (result.next()) {
                 
                 if (plugin.getConfig().getBoolean("settings.debug-mode")) {
-                    plugin.getLogger().info("Could not find rank from " + player.getName() + " in the database.");
+
+                    if (player == null) {
+                        plugin.getLogger().info("Could not find rank from " + uuid + " in the database.");
+                    } else {
+                        plugin.getLogger().info("Could not find rank from " + player.getName() + " in the database.");
+                    }
                 }
 
                 String returnValue = String.valueOf(result.getInt("rank"));
