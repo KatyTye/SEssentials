@@ -12,7 +12,7 @@ ranks:
   suffix: ""
   members: 0
   priority: 0
-  # permissions:
+  permissions:
 
 1:
   name: "Moderator"
@@ -22,12 +22,12 @@ ranks:
   members: 0
   priority: 70
   permissions:
-  - "fly"
-  - "god"
-  - "kick.others"
-  - "mute.others"
-  - "chat.bypass"
-  - "chat.colored"
+  - "sessentials.fly"
+  - "sessentials.god"
+  - "sessentials.kick.others"
+  - "sessentials.mute.others"
+  - "sessentials.chat.bypass"
+  - "sessentials.chat.colored"
 
 2:
   name: "Administrator"
