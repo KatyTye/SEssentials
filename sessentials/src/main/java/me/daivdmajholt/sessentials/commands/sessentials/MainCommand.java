@@ -94,6 +94,12 @@ public class MainCommand implements CommandExecutor {
 		}
 
 		if (args[0].equalsIgnoreCase("reload")) {
+
+			if (!(sender instanceof Player)) {
+				sender.sendMessage(cc(" &cThis command can only be run by a player."));
+				return true;
+			}
+
 			plugin.reloadPlugin((Player) sender);
 			return true;
 		}
