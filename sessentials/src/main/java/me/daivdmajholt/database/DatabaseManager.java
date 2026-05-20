@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 public class DatabaseManager {
@@ -44,12 +46,12 @@ public class DatabaseManager {
     private void createTables() {
 
         String sql = """
-            CREATE TABLE IF NOT EXISTS players (
-                uuid TEXT PRIMARY KEY,
-                balance DOUBLE,
-                rank INT
-            );
-        """;
+                    CREATE TABLE IF NOT EXISTS players (
+                        uuid TEXT PRIMARY KEY,
+                        balance DOUBLE,
+                        rank INT
+                    );
+                """;
 
         try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
 
@@ -68,10 +70,11 @@ public class DatabaseManager {
     public Boolean setPlayerRank(String uuid, Integer rank) {
 
         String sql = """
-            UPDATE players SET rank = ? WHERE uuid = ?    
-        """;
+                    UPDATE players SET rank = ? WHERE uuid = ?
+                """;
 
-        if (rank == null) rank = 0;
+        if (rank == null)
+            rank = 0;
 
         try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, rank);
@@ -95,8 +98,8 @@ public class DatabaseManager {
     public String findPlayerRank(Player player, String uuid) {
 
         String sql = """
-            SELECT rank FROM players WHERE uuid = ?
-        """;
+                    SELECT rank FROM players WHERE uuid = ?
+                """;
 
         try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
 
@@ -109,7 +112,7 @@ public class DatabaseManager {
             ResultSet result = statement.executeQuery();
 
             if (result.next()) {
-                
+
                 if (plugin.getConfig().getBoolean("settings.debug-mode")) {
 
                     if (player == null) {
@@ -133,10 +136,11 @@ public class DatabaseManager {
     public void registerPlayer(Player player, int rank, double balance) {
 
         String checkSQL = """
-            SELECT uuid FROM players WHERE uuid = ?
-        """;
+                    SELECT uuid FROM players WHERE uuid = ?
+                """;
 
-        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(checkSQL)) {
+        try (Connection connection = getConnection();
+                PreparedStatement statement = connection.prepareStatement(checkSQL)) {
 
             statement.setString(1, player.getUniqueId().toString());
 
@@ -144,7 +148,8 @@ public class DatabaseManager {
 
             if (result.next()) {
                 if (plugin.getConfig().getBoolean("settings.debug-mode")) {
-                    plugin.getLogger().info("Could not register " + player.getName() + " into the database: Already exists.");
+                    plugin.getLogger()
+                            .info("Could not register " + player.getName() + " into the database: Already exists.");
                 }
                 return;
             }
@@ -155,11 +160,12 @@ public class DatabaseManager {
         }
 
         String insertSQL = """
-            INSERT INTO players(uuid, rank, balance)
-            VALUES (?, ?, ?)
-        """;
+                    INSERT INTO players(uuid, rank, balance)
+                    VALUES (?, ?, ?)
+                """;
 
-        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(insertSQL)) {
+        try (Connection connection = getConnection();
+                PreparedStatement statement = connection.prepareStatement(insertSQL)) {
 
             statement.setString(1, player.getUniqueId().toString());
             statement.setInt(2, rank);
@@ -168,8 +174,17 @@ public class DatabaseManager {
             statement.executeUpdate();
 
             if (plugin.getConfig().getBoolean("settings.debug-mode")) {
-                plugin.getLogger().info("Registered player in database: "+ player.getName() + " (" + player.getUniqueId().toString() + ")");
+                plugin.getLogger().info("Registered player in database: " + player.getName() + " ("
+                        + player.getUniqueId().toString() + ")");
             }
+
+            File dataFolder = plugin.getDataFolder();
+            File file = new File(dataFolder, "ranks.yml");
+
+            FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
+
+            Integer Amount = cfg.getInt("0.members");
+            cfg.set("0.members", Amount + 1);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -179,11 +194,11 @@ public class DatabaseManager {
     public void setBalance(Player player, String uuid, double balance) {
 
         String sql = """
-            INSERT INTO players(uuid, balance)
-            VALUES(?, ?)
-            ON CONFLICT(uuid)
-            DO UPDATE SET balance = excluded.balance;
-        """;
+                    INSERT INTO players(uuid, balance)
+                    VALUES(?, ?)
+                    ON CONFLICT(uuid)
+                    DO UPDATE SET balance = excluded.balance;
+                """;
 
         try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
 
@@ -210,8 +225,8 @@ public class DatabaseManager {
     public double getBalance(Player player, String uuid) {
 
         String sql = """
-            SELECT balance FROM players WHERE uuid = ?
-        """;
+                    SELECT balance FROM players WHERE uuid = ?
+                """;
 
         try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
 
