@@ -15,6 +15,8 @@ import me.daivdmajholt.sessentials.commands.economy.BalanceCommand;
 import me.daivdmajholt.sessentials.commands.economy.BalanceTab;
 import me.daivdmajholt.sessentials.commands.economy.EconomyCommand;
 import me.daivdmajholt.sessentials.commands.economy.EconomyTab;
+import me.daivdmajholt.sessentials.commands.fly.FlyCommand;
+import me.daivdmajholt.sessentials.commands.fly.FlyTab;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeACommand;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeCCommand;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeCommand;
@@ -50,7 +52,7 @@ public class Commands {
             // GIVE
             plugin.getCommand("give").setExecutor(new GiveCommand());
             plugin.getCommand("give").setTabCompleter(new GiveTab());
-            
+
             // ECONOMY
             plugin.getCommand("bal").setExecutor(new BalanceCommand());
             plugin.getCommand("bal").setTabCompleter(new BalanceTab());
@@ -67,6 +69,10 @@ public class Commands {
             plugin.getCommand("rm").setTabCompleter(new RankTab());
             plugin.getCommand("rankmanager").setExecutor(new RankCommand());
             plugin.getCommand("rankmanager").setTabCompleter(new RankTab());
+
+            // FLY
+            plugin.getCommand("fly").setExecutor(new FlyCommand());
+            plugin.getCommand("fly").setTabCompleter(new FlyTab());
 
             // SPAWN
             plugin.getCommand("spawn").setExecutor(new SpawnCommand());

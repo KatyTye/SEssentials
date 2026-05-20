@@ -11,7 +11,10 @@ commands:
     usage: /bal (player)
   balance:
     description: This commands shows yours and other players' balance.
-    usage: /balance (player)
+    usage: /balance (player)¨
+  fly:
+    description: This command toggles flight mode for a player.
+    usage: /fly (player)
   rm:
     description: This commands handles ranks and permissions.
     usage: /rm help
