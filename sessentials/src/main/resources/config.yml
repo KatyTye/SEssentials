@@ -19,7 +19,7 @@ features:
   enabled: true                     # Enable all plugin features
   events: true                      # Enable all plugin events
   commands: true                    # Enable all plugin commands
-  community: false                  # Enable all community features (Upcoming Feature)
+  community: true                   # Enable all community features
 
 # General plugin settings
 settings:
