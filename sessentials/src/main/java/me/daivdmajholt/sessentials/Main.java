@@ -2,6 +2,7 @@ package me.daivdmajholt.sessentials;
 import me.daivdmajholt.database.DatabaseManager;
 import me.daivdmajholt.sessentials.events.UpdateChecker;
 import me.daivdmajholt.sessentials.managers.Commands;
+import me.daivdmajholt.sessentials.managers.Community;
 import me.daivdmajholt.sessentials.managers.Events;
 import me.daivdmajholt.sessentials.managers.Resources;
 
@@ -67,8 +68,9 @@ public class Main extends JavaPlugin {
 
 		if (getConfig().getBoolean("enabled")) {
 			// MANAGERS
-			new Commands().registerCommands();
 			new Events().reqiesterEvents();
+			new Commands().registerCommands();
+			new Community().registerCommunity();
 		}
 	}
 
