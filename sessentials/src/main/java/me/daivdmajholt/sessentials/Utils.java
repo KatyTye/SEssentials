@@ -1,7 +1,5 @@
 package me.daivdmajholt.sessentials;
 
-import java.util.List;
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.lang.reflect.Method;
