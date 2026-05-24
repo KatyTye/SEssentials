@@ -39,6 +39,11 @@ public class ChatManager implements Listener {
 		message = message.replace("%color%", cfg.getString(rank + ".color"));
 		message = message.replace("%prefix%", cfg.getString(rank + ".prefix"));
 
+		if (cfg.getString(rank + ".prefix").equals("")) {
+			message = message.replace("[", "");
+			message = message.replace("] ", "");
+		}
+
 		if (player.hasPermission("sessentials.chat.colored")) {
 			Bukkit.broadcastMessage(cc(message + " &f" + event.getMessage()));
 		} else {
