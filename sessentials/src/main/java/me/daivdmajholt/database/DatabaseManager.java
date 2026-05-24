@@ -15,317 +15,341 @@ import org.bukkit.entity.Player;
 
 public class DatabaseManager {
 
-    private final Main plugin;
-    private String url;
+	private final Main plugin;
+	private String url;
 
-    public DatabaseManager(Main plugin) {
-        this.plugin = plugin;
-    }
+	public DatabaseManager(Main plugin) {
+		this.plugin = plugin;
+	}
 
-    private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(url);
-    }
+	private Connection getConnection() throws SQLException {
+		return DriverManager.getConnection(url);
+	}
 
-    public void connect() {
+	public void connect() {
 
-        if (!plugin.getDataFolder().exists()) {
-            plugin.getDataFolder().mkdirs();
-        }
+		if (!plugin.getDataFolder().exists()) {
+			plugin.getDataFolder().mkdirs();
+		}
 
-        File databaseFile = new File(plugin.getDataFolder(), "database.db");
+		File databaseFile = new File(plugin.getDataFolder(), "database.db");
 
-        url = "jdbc:sqlite:" + databaseFile.getAbsolutePath();
+		url = "jdbc:sqlite:" + databaseFile.getAbsolutePath();
 
-        if (plugin.getConfig().getBoolean("settings.debug-mode")) {
-            plugin.getLogger().info("Connected to SQLite database.");
-        }
+		if (plugin.getConfig().getBoolean("settings.debug-mode")) {
+			plugin.getLogger().info("Connected to SQLite database.");
+		}
 
-        createTables();
-    }
+		createTables();
+	}
 
-    private void createTables() {
+	private void createTables() {
 
-        String sql = """
-                    CREATE TABLE IF NOT EXISTS players (
-                        uuid TEXT PRIMARY KEY,
-                        balance DOUBLE,
-                        rank INT
-                    );
-                """;
+		String sql = """
+					CREATE TABLE IF NOT EXISTS players (
+						uuid TEXT PRIMARY KEY,
+						balance DOUBLE,
+						rank INT
+					);
+				""";
 
-        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
+		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
 
-            statement.execute();
+			statement.execute();
 
-            if (plugin.getConfig().getBoolean("settings.debug-mode")) {
-                plugin.getLogger().info("Players database table created/loaded.");
-            }
+			if (plugin.getConfig().getBoolean("settings.debug-mode")) {
+				plugin.getLogger().info("Players database table created/loaded.");
+			}
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-        String sqlgodmode = """
-                    CREATE TABLE IF NOT EXISTS godmode (
-                        uuid TEXT PRIMARY KEY,
-                        enabled BOOLEAN DEFAULT false
-                    );
-                """;
+		String sqlgodmode = """
+					CREATE TABLE IF NOT EXISTS godmode (
+						uuid TEXT PRIMARY KEY,
+						enabled BOOLEAN DEFAULT false
+					);
+				""";
 
-        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sqlgodmode)) {
+		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sqlgodmode)) {
 
-            statement.execute();
+			statement.execute();
 
-            if (plugin.getConfig().getBoolean("settings.debug-mode")) {
-                plugin.getLogger().info("God mode database table created/loaded.");
-            }
+			if (plugin.getConfig().getBoolean("settings.debug-mode")) {
+				plugin.getLogger().info("God mode database table created/loaded.");
+			}
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-    }
+		String sqlwarp = """
+					CREATE TABLE IF NOT EXISTS warps (
+						name TEXT PRIMARY KEY,
+						x REAL DEFAULT 0.0,
+						y REAL DEFAULT 0.0,
+						z REAL DEFAULT 0.0,
+						yaw REAL DEFAULT 0.0,
+						pitch REAL DEFAULT 0.0,
+						world TEXT DEFAULT 'world'
+					);
+				""";
 
-    public Boolean setPlayerRank(String uuid, Integer rank) {
+		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sqlwarp)) {
 
-        String sql = """
-                    UPDATE players SET rank = ? WHERE uuid = ?
-                """;
+			statement.execute();
 
-        if (rank == null)
-            rank = 0;
+			if (plugin.getConfig().getBoolean("settings.debug-mode")) {
+				plugin.getLogger().info("Warps database table created/loaded.");
+			}
 
-        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, rank);
-            statement.setString(2, uuid);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-            int rows = statement.executeUpdate();
+	}
 
-            if (rows > 0) {
-                if (plugin.getConfig().getBoolean("settings.debug-mode")) {
-                    plugin.getLogger().info("Changed the rank of the player to rank id " + rank + ".");
-                }
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+	public Boolean setPlayerRank(String uuid, Integer rank) {
 
-        return false;
-    }
+		String sql = """
+					UPDATE players SET rank = ? WHERE uuid = ?
+				""";
 
-    public String findPlayerRank(Player player, String uuid) {
+		if (rank == null)
+			rank = 0;
 
-        String sql = """
-                    SELECT rank FROM players WHERE uuid = ?
-                """;
+		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
+			statement.setInt(1, rank);
+			statement.setString(2, uuid);
 
-        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
+			int rows = statement.executeUpdate();
 
-            if (player == null) {
-                statement.setString(1, uuid);
-            } else {
-                statement.setString(1, player.getUniqueId().toString());
-            }
+			if (rows > 0) {
+				if (plugin.getConfig().getBoolean("settings.debug-mode")) {
+					plugin.getLogger().info("Changed the rank of the player to rank id " + rank + ".");
+				}
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-            ResultSet result = statement.executeQuery();
+		return false;
+	}
 
-            if (result.next()) {
+	public String findPlayerRank(Player player, String uuid) {
 
-                if (plugin.getConfig().getBoolean("settings.debug-mode")) {
+		String sql = """
+					SELECT rank FROM players WHERE uuid = ?
+				""";
 
-                    if (player == null) {
-                        plugin.getLogger().info("Could not find rank from " + uuid + " in the database.");
-                    } else {
-                        plugin.getLogger().info("Could not find rank from " + player.getName() + " in the database.");
-                    }
-                }
+		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
 
-                String returnValue = String.valueOf(result.getInt("rank"));
+			if (player == null) {
+				statement.setString(1, uuid);
+			} else {
+				statement.setString(1, player.getUniqueId().toString());
+			}
 
-                return returnValue;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+			ResultSet result = statement.executeQuery();
 
-        return "0";
-    }
+			if (result.next()) {
 
-    public Boolean findGodMode(Player player) {
+				if (plugin.getConfig().getBoolean("settings.debug-mode")) {
 
-        String sql = """
-                    SELECT enabled FROM godmode WHERE uuid = ?
-                """;
+					if (player == null) {
+						plugin.getLogger().info("Could not find rank from " + uuid + " in the database.");
+					} else {
+						plugin.getLogger().info("Could not find rank from " + player.getName() + " in the database.");
+					}
+				}
 
-        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
+				String returnValue = String.valueOf(result.getInt("rank"));
 
-            statement.setString(1, player.getUniqueId().toString());
-            
-            ResultSet result = statement.executeQuery();
+				return returnValue;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-            if (result.next()) {
+		return "0";
+	}
 
-                if (plugin.getConfig().getBoolean("settings.debug-mode")) {
-                    plugin.getLogger().info("Found a player named " + player.getName() + " from the database.");
-                }
+	public Boolean findGodMode(Player player) {
 
-                Boolean returnValue = result.getBoolean("enabled");
+		String sql = """
+					SELECT enabled FROM godmode WHERE uuid = ?
+				""";
 
-                return returnValue;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
 
-        return false;
-    }
+			statement.setString(1, player.getUniqueId().toString());
+			
+			ResultSet result = statement.executeQuery();
 
-    public void registerPlayer(Player player, int rank, double balance) {
+			if (result.next()) {
 
-        String checkSQL = """
-                    SELECT uuid FROM players WHERE uuid = ?
-                """;
+				if (plugin.getConfig().getBoolean("settings.debug-mode")) {
+					plugin.getLogger().info("Found a player named " + player.getName() + " from the database.");
+				}
 
-        try (Connection connection = getConnection();
-                PreparedStatement statement = connection.prepareStatement(checkSQL)) {
+				Boolean returnValue = result.getBoolean("enabled");
 
-            statement.setString(1, player.getUniqueId().toString());
+				return returnValue;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-            ResultSet result = statement.executeQuery();
+		return false;
+	}
 
-            if (result.next()) {
-                if (plugin.getConfig().getBoolean("settings.debug-mode")) {
-                    plugin.getLogger()
-                            .info("Could not register " + player.getName() + " into the database: Already exists.");
-                }
-                return;
-            }
+	public void registerPlayer(Player player, int rank, double balance) {
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return;
-        }
+		String checkSQL = """
+					SELECT uuid FROM players WHERE uuid = ?
+				""";
 
-        String insertSQL = """
-                    INSERT INTO players(uuid, rank, balance)
-                    VALUES (?, ?, ?)
-                """;
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(checkSQL)) {
 
-        try (Connection connection = getConnection();
-                PreparedStatement statement = connection.prepareStatement(insertSQL)) {
+			statement.setString(1, player.getUniqueId().toString());
 
-            statement.setString(1, player.getUniqueId().toString());
-            statement.setInt(2, rank);
-            statement.setDouble(3, balance);
+			ResultSet result = statement.executeQuery();
 
-            statement.executeUpdate();
+			if (result.next()) {
+				if (plugin.getConfig().getBoolean("settings.debug-mode")) {
+					plugin.getLogger()
+							.info("Could not register " + player.getName() + " into the database: Already exists.");
+				}
+				return;
+			}
 
-            if (plugin.getConfig().getBoolean("settings.debug-mode")) {
-                plugin.getLogger().info("Registered player in database: " + player.getName() + " ("
-                        + player.getUniqueId().toString() + ")");
-            }
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return;
+		}
 
-            File dataFolder = plugin.getDataFolder();
-            File file = new File(dataFolder, "ranks.yml");
+		String insertSQL = """
+					INSERT INTO players(uuid, rank, balance)
+					VALUES (?, ?, ?)
+				""";
 
-            FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(insertSQL)) {
 
-            Integer Amount = cfg.getInt("0.members");
-            cfg.set("0.members", Amount + 1);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+			statement.setString(1, player.getUniqueId().toString());
+			statement.setInt(2, rank);
+			statement.setDouble(3, balance);
 
-    }
+			statement.executeUpdate();
 
-    public void setGodMode(Player player, boolean mode) {
+			if (plugin.getConfig().getBoolean("settings.debug-mode")) {
+				plugin.getLogger().info("Registered player in database: " + player.getName() + " ("
+						+ player.getUniqueId().toString() + ")");
+			}
 
-        String sql = """
-                    INSERT INTO godmode(uuid, enabled)
-                    VALUES(?, ?)
-                    ON CONFLICT(uuid)
-                    DO UPDATE SET enabled = excluded.enabled;
-                """;
+			File dataFolder = plugin.getDataFolder();
+			File file = new File(dataFolder, "ranks.yml");
 
-        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
+			FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
 
-            statement.setString(1, player.getUniqueId().toString());
+			Integer Amount = cfg.getInt("0.members");
+			cfg.set("0.members", Amount + 1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-            statement.setBoolean(2, mode);
+	}
 
-            statement.executeUpdate();
+	public void setGodMode(Player player, boolean mode) {
 
-            if (plugin.getConfig().getBoolean("settings.debug-mode")) {
-                plugin.getLogger().info("Changed god mode for a player to: " + mode);
-            }
+		String sql = """
+					INSERT INTO godmode(uuid, enabled)
+					VALUES(?, ?)
+					ON CONFLICT(uuid)
+					DO UPDATE SET enabled = excluded.enabled;
+				""";
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
 
-    }
+			statement.setString(1, player.getUniqueId().toString());
 
-    public void setBalance(Player player, String uuid, double balance) {
+			statement.setBoolean(2, mode);
 
-        String sql = """
-                    INSERT INTO players(uuid, balance)
-                    VALUES(?, ?)
-                    ON CONFLICT(uuid)
-                    DO UPDATE SET balance = excluded.balance;
-                """;
+			statement.executeUpdate();
 
-        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
+			if (plugin.getConfig().getBoolean("settings.debug-mode")) {
+				plugin.getLogger().info("Changed god mode for a player to: " + mode);
+			}
 
-            if (player == null) {
-                statement.setString(1, uuid);
-            } else {
-                statement.setString(1, player.getUniqueId().toString());
-            }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-            statement.setDouble(2, balance);
+	}
 
-            statement.executeUpdate();
+	public void setBalance(Player player, String uuid, double balance) {
 
-            if (plugin.getConfig().getBoolean("settings.debug-mode")) {
-                plugin.getLogger().info("Changed balance for a player to: " + balance + "$");
-            }
+		String sql = """
+					INSERT INTO players(uuid, balance)
+					VALUES(?, ?)
+					ON CONFLICT(uuid)
+					DO UPDATE SET balance = excluded.balance;
+				""";
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
 
-    }
+			if (player == null) {
+				statement.setString(1, uuid);
+			} else {
+				statement.setString(1, player.getUniqueId().toString());
+			}
 
-    public double getBalance(Player player, String uuid) {
+			statement.setDouble(2, balance);
 
-        String sql = """
-                    SELECT balance FROM players WHERE uuid = ?
-                """;
+			statement.executeUpdate();
 
-        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
+			if (plugin.getConfig().getBoolean("settings.debug-mode")) {
+				plugin.getLogger().info("Changed balance for a player to: " + balance + "$");
+			}
 
-            if (player == null) {
-                statement.setString(1, uuid);
-            } else {
-                statement.setString(1, player.getUniqueId().toString());
-            }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-            ResultSet result = statement.executeQuery();
+	}
 
-            if (plugin.getConfig().getBoolean("settings.debug-mode")) {
-                plugin.getLogger().info("Player checked balance from database.");
-            }
+	public double getBalance(Player player, String uuid) {
 
-            if (result.next()) {
-                return result.getDouble("balance");
-            }
+		String sql = """
+					SELECT balance FROM players WHERE uuid = ?
+				""";
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
 
-        return 0.0;
+			if (player == null) {
+				statement.setString(1, uuid);
+			} else {
+				statement.setString(1, player.getUniqueId().toString());
+			}
 
-    }
+			ResultSet result = statement.executeQuery();
+
+			if (plugin.getConfig().getBoolean("settings.debug-mode")) {
+				plugin.getLogger().info("Player checked balance from database.");
+			}
+
+			if (result.next()) {
+				return result.getDouble("balance");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return 0.0;
+
+	}
 }
