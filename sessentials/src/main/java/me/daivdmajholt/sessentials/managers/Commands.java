@@ -3,6 +3,8 @@ package me.daivdmajholt.sessentials.managers;
 import me.daivdmajholt.sessentials.Main;
 import me.daivdmajholt.sessentials.commands.give.GiveCommand;
 import me.daivdmajholt.sessentials.commands.give.GiveTab;
+import me.daivdmajholt.sessentials.commands.god.GodCommand;
+import me.daivdmajholt.sessentials.commands.god.GodTab;
 import me.daivdmajholt.sessentials.commands.rank.RankCommand;
 import me.daivdmajholt.sessentials.commands.rank.RankTab;
 import me.daivdmajholt.sessentials.commands.sessentials.MainCommand;
@@ -73,6 +75,10 @@ public class Commands {
             // FLY
             plugin.getCommand("fly").setExecutor(new FlyCommand());
             plugin.getCommand("fly").setTabCompleter(new FlyTab());
+
+            // GOD
+            plugin.getCommand("god").setExecutor(new GodCommand());
+            plugin.getCommand("god").setTabCompleter(new GodTab());
 
             // SPAWN
             plugin.getCommand("spawn").setExecutor(new SpawnCommand());

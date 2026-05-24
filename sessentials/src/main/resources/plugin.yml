@@ -15,6 +15,9 @@ commands:
   fly:
     description: This command toggles flight mode for a player.
     usage: /fly (player)
+  god:
+    description: This command toggles god mode for a player.
+    usage: /god (player)
   rm:
     description: This commands handles ranks and permissions.
     usage: /rm help
