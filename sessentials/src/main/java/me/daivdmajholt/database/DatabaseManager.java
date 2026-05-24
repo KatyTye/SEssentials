@@ -65,6 +65,25 @@ public class DatabaseManager {
             e.printStackTrace();
         }
 
+        String sqlgodmode = """
+                    CREATE TABLE IF NOT EXISTS godmode (
+                        uuid TEXT PRIMARY KEY,
+                        enabled BOOLEAN DEFAULT false
+                    );
+                """;
+
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sqlgodmode)) {
+
+            statement.execute();
+
+            if (plugin.getConfig().getBoolean("settings.debug-mode")) {
+                plugin.getLogger().info("God mode database table created/loaded.");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public Boolean setPlayerRank(String uuid, Integer rank) {
@@ -133,6 +152,35 @@ public class DatabaseManager {
         return "0";
     }
 
+    public Boolean findGodMode(Player player) {
+
+        String sql = """
+                    SELECT enabled FROM godmode WHERE uuid = ?
+                """;
+
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, player.getUniqueId().toString());
+            
+            ResultSet result = statement.executeQuery();
+
+            if (result.next()) {
+
+                if (plugin.getConfig().getBoolean("settings.debug-mode")) {
+                    plugin.getLogger().info("Found a player named " + player.getName() + " from the database.");
+                }
+
+                Boolean returnValue = result.getBoolean("enabled");
+
+                return returnValue;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
     public void registerPlayer(Player player, int rank, double balance) {
 
         String checkSQL = """
@@ -185,6 +233,33 @@ public class DatabaseManager {
 
             Integer Amount = cfg.getInt("0.members");
             cfg.set("0.members", Amount + 1);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void setGodMode(Player player, boolean mode) {
+
+        String sql = """
+                    INSERT INTO godmode(uuid, enabled)
+                    VALUES(?, ?)
+                    ON CONFLICT(uuid)
+                    DO UPDATE SET enabled = excluded.enabled;
+                """;
+
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, player.getUniqueId().toString());
+
+            statement.setBoolean(2, mode);
+
+            statement.executeUpdate();
+
+            if (plugin.getConfig().getBoolean("settings.debug-mode")) {
+                plugin.getLogger().info("Changed god mode for a player to: " + mode);
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
