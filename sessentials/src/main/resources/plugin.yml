@@ -18,6 +18,9 @@ commands:
   god:
     description: This command toggles god mode for a player.
     usage: /god (player)
+  buy:
+    description: This command shows the online store link for the player.
+    usage: /buy
   discord:
     description: This command shows the discord link for the player.
     usage: /discord

@@ -36,7 +36,7 @@ messages:
   join: " &8[&a+&8] &f"
   quit: " &8[&c-&8] &f"
   reloaded: "&aSEssentials has been reloaded."
-  online-shop: "https://shop.website.com"
+  online-shop: "https://shop.website.com/"
   discord-link: "https://discord.gg/xxxxxxxx"
   sender-message: " &8[%color%%prefix%&8] &f%name% &8≫"
   permission-denied: "&cYou don't have the required permission to use this command."
