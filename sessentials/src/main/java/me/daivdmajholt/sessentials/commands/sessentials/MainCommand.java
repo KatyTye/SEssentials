@@ -81,6 +81,11 @@ public class MainCommand implements CommandExecutor {
 				} else {
 					sender.sendMessage(cc(" &fCommands: &c&lDISABLED"));
 				}
+				if (plugin.getConfig().getBoolean("features.community")) {
+					sender.sendMessage(cc(" &fCommunity: &a&lENABLED"));
+				} else {
+					sender.sendMessage(cc(" &fCommunity: &c&lDISABLED"));
+				}
 				sender.sendMessage("");
 				sender.sendMessage(cc(" &f&m                                  &f"));
 				sender.sendMessage("");
