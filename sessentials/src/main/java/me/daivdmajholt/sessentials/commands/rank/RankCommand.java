@@ -16,6 +16,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
+import me.daivdmajholt.database.DatabaseManager.ValueType;
 import me.daivdmajholt.sessentials.Main;
 
 public class RankCommand implements CommandExecutor {
@@ -91,12 +92,17 @@ public class RankCommand implements CommandExecutor {
 						if (p.getName() != null && p.getName().equalsIgnoreCase(args[2])) {
 							found = p.getUniqueId();
 
-							String oldRank = Main.databaseManager.findPlayerRank(null, 
-								found.toString()
-							);
+							String oldRank = Main.databaseManager.getSpefic("players", "rank",
+							"uuid", found.toString(), ValueType.STRING);
 
 							cfg.set(oldRank + ".members", cfg.getInt(oldRank + ".members") - 1);
 							cfg.set(args[1] + ".members", cfg.getInt(args[1] + ".members") + 1);
+
+							try {
+								cfg.save(file);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 
 							if (Main.databaseManager.setPlayerRank(found.toString(), Integer.parseInt(args[1]))) {
 								sender.sendMessage(cc(" &aYou have changed the rank of &f" + found.toString() + "&a to &f" + cfg.getString(args[1] + ".name")));
@@ -112,10 +118,17 @@ public class RankCommand implements CommandExecutor {
 					return true;
 				}
 
-				String oldRank = Main.databaseManager.findPlayerRank(target, null);
+				String oldRank = Main.databaseManager.getSpefic("players", "rank",
+				"uuid", target.getUniqueId().toString(), ValueType.STRING);
 
 				cfg.set(oldRank + ".members", cfg.getInt(oldRank + ".members") - 1);
-				cfg.set(args[1] + ".members", cfg.getInt(args[1] + ".members") + Integer.parseInt(args[1]));
+				cfg.set(args[1] + ".members", cfg.getInt(args[1] + ".members") + 1);
+
+				try {
+					cfg.save(file);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 
 				if (Main.databaseManager.setPlayerRank(target.getUniqueId().toString(), Integer.parseInt(args[1]))) {
 					sender.sendMessage(cc(" &aYou have changed the rank of &f" + target.getName() + "&a to &f" + cfg.getString(args[1] + ".name")));

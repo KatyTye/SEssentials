@@ -3,11 +3,13 @@ package me.daivdmajholt.database;
 import me.daivdmajholt.sessentials.Main;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +18,11 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 public class DatabaseManager {
+	
+	public static enum ValueType { STRING, INT, LONG, DOUBLE, BOOLEAN, UUID, OBJECT }
 
 	private final Main plugin;
+	
 	private String url;
 
 	public DatabaseManager(Main plugin) {
@@ -112,6 +117,33 @@ public class DatabaseManager {
 
 	}
 
+
+	public String getSpefic(String table, String field, String whereColumn, String whereValue, ValueType type) {
+
+		String sql = "SELECT " + field + " FROM " + table + " WHERE " + whereColumn + " = ?";
+
+		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
+			
+			switch (type) {
+				case STRING -> statement.setString(1, whereValue);
+				case INT -> statement.setInt(1, Integer.valueOf(whereValue));
+				case LONG -> statement.setLong(1, Long.valueOf(whereValue));
+				case DOUBLE -> statement.setDouble(1, Double.valueOf(whereValue));
+				case BOOLEAN -> statement.setBoolean(1, Boolean.valueOf(whereValue));
+				case UUID -> statement.setObject(1, whereValue, Types.VARCHAR);
+				default -> statement.setString(1, whereValue);
+			}
+
+			ResultSet result = statement.executeQuery();
+
+			if (result.next()) return result.getString(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return "";
+	}
+
 	public Boolean setPlayerRank(String uuid, Integer rank) {
 
 		String sql = """
@@ -181,45 +213,7 @@ public class DatabaseManager {
 
 		return false;
 	}
-
-	public String findPlayerRank(Player player, String uuid) {
-
-		String sql = """
-					SELECT rank FROM players WHERE uuid = ?
-				""";
-
-		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
-
-			if (player == null) {
-				statement.setString(1, uuid);
-			} else {
-				statement.setString(1, player.getUniqueId().toString());
-			}
-
-			ResultSet result = statement.executeQuery();
-
-			if (result.next()) {
-
-				if (plugin.getConfig().getBoolean("settings.debug-mode")) {
-
-					if (player == null) {
-						plugin.getLogger().info("Could not find rank from " + uuid + " in the database.");
-					} else {
-						plugin.getLogger().info("Could not find rank from " + player.getName() + " in the database.");
-					}
-				}
-
-				String returnValue = String.valueOf(result.getInt("rank"));
-
-				return returnValue;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return "0";
-	}
-
+	
 	public Boolean findGodMode(Player player) {
 
 		String sql = """
@@ -301,6 +295,12 @@ public class DatabaseManager {
 
 			Integer Amount = cfg.getInt("0.members");
 			cfg.set("0.members", Amount + 1);
+
+			try {
+				cfg.save(file);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

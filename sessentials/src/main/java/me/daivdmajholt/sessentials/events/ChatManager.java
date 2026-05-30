@@ -12,6 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+import me.daivdmajholt.database.DatabaseManager.ValueType;
 import me.daivdmajholt.sessentials.Main;
 
 public class ChatManager implements Listener {
@@ -30,9 +31,10 @@ public class ChatManager implements Listener {
 
 		FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
 
-		String rank = Main.databaseManager.findPlayerRank(player, null);
+		String rank = Main.databaseManager.getSpefic("players", "rank",
+		"uuid", player.getUniqueId().toString(), ValueType.STRING);
 		String message = plugin.getConfig().getString("messages.sender-message");
-		
+				
 		message = message.replace("%name%", player.getName());
 		message = message.replace("%display%", player.getDisplayName());
 		message = message.replace("%group%", cfg.getString(rank + ".name"));
