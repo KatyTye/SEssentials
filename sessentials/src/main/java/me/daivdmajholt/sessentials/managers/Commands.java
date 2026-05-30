@@ -12,6 +12,8 @@ import me.daivdmajholt.sessentials.commands.sessentials.MainTab;
 import me.daivdmajholt.sessentials.commands.spawn.SetSpawnCommand;
 import me.daivdmajholt.sessentials.commands.spawn.SpawnCommand;
 import me.daivdmajholt.sessentials.commands.spawn.SpawnTab;
+import me.daivdmajholt.sessentials.commands.warp.WarpCommand;
+import me.daivdmajholt.sessentials.commands.warp.WarpTab;
 import me.daivdmajholt.sessentials.commands.NothingTab;
 import me.daivdmajholt.sessentials.commands.economy.BalanceCommand;
 import me.daivdmajholt.sessentials.commands.economy.BalanceTab;
@@ -79,6 +81,10 @@ public class Commands {
             // GOD
             plugin.getCommand("god").setExecutor(new GodCommand());
             plugin.getCommand("god").setTabCompleter(new GodTab());
+
+            // WARP
+            plugin.getCommand("warp").setExecutor(new WarpCommand());
+            plugin.getCommand("warp").setTabCompleter(new WarpTab());
 
             // SPAWN
             plugin.getCommand("spawn").setExecutor(new SpawnCommand());
