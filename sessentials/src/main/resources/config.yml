@@ -39,5 +39,5 @@ messages:
   online-shop: "https://shop.website.com/"
   discord-link: "https://discord.gg/xxxxxxxx"
   sender-message: " &8[%color%%prefix%&8] &f%name% &8≫"
-  permission-denied: "&cYou don't have the required permission to use this command."
+  permission-denied: " &cYou don't have the required permission to use this command."
   subcommand-unknown: " &cUnknown subcommand. Try "
