@@ -92,8 +92,8 @@ public class RankCommand implements CommandExecutor {
 						if (p.getName() != null && p.getName().equalsIgnoreCase(args[2])) {
 							found = p.getUniqueId();
 
-							String oldRank = Main.databaseManager.getSpefic("players", "rank",
-							"uuid", found.toString(), ValueType.STRING);
+							String oldRank = (String) Main.databaseManager.getValueFromDB("players", "rank",
+							"uuid", found.toString(), ValueType.STRING, ValueType.STRING);
 
 							cfg.set(oldRank + ".members", cfg.getInt(oldRank + ".members") - 1);
 							cfg.set(args[1] + ".members", cfg.getInt(args[1] + ".members") + 1);
@@ -118,8 +118,8 @@ public class RankCommand implements CommandExecutor {
 					return true;
 				}
 
-				String oldRank = Main.databaseManager.getSpefic("players", "rank",
-				"uuid", target.getUniqueId().toString(), ValueType.STRING);
+				String oldRank = (String) Main.databaseManager.getValueFromDB("players", "rank",
+				"uuid", target.getUniqueId().toString(), ValueType.STRING, ValueType.STRING);
 
 				cfg.set(oldRank + ".members", cfg.getInt(oldRank + ".members") - 1);
 				cfg.set(args[1] + ".members", cfg.getInt(args[1] + ".members") + 1);

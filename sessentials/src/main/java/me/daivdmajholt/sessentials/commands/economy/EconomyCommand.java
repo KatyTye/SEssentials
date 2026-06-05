@@ -9,6 +9,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import me.daivdmajholt.database.DatabaseManager.ValueType;
 import me.daivdmajholt.sessentials.Main;
 
 public class EconomyCommand implements CommandExecutor  {
@@ -72,10 +73,12 @@ public class EconomyCommand implements CommandExecutor  {
 
 						Main.databaseManager.setBalance(null, p.getUniqueId().toString(), amount);
 					} else if (args[0].equalsIgnoreCase("give")) {
-						amount += (double) Main.databaseManager.getBalance(null, p.getUniqueId().toString());
+						amount += (double) Main.databaseManager.getValueFromDB("players", "balance",
+						"uuid", p.getUniqueId().toString(), ValueType.STRING, ValueType.DOUBLE);
 						Main.databaseManager.setBalance(null, p.getUniqueId().toString(), amount);
 					} else {
-						amount = Main.databaseManager.getBalance(null, p.getUniqueId().toString()) - amount;
+						amount = (Double) Main.databaseManager.getValueFromDB("players", "balance",
+						"uuid", p.getUniqueId().toString(), ValueType.STRING, ValueType.DOUBLE) - amount;
 
 						if (amount < 0) {
 							sender.sendMessage(cc(" &cYou can't set a player's balance below 0$."));
@@ -85,7 +88,8 @@ public class EconomyCommand implements CommandExecutor  {
 						Main.databaseManager.setBalance(null, p.getUniqueId().toString(), amount);
 					}
 
-					sender.sendMessage(cc(" &aYou have changed " + p.getName() + "'s balance to " + String.format("%.2f", Main.databaseManager.getBalance(null, p.getUniqueId().toString())) + "$."));
+					sender.sendMessage(cc(" &aYou have changed " + p.getName() + "'s balance to " + String.format("%.2f", Main.databaseManager.getValueFromDB("players", "balance",
+						"uuid", p.getUniqueId().toString(), ValueType.STRING, ValueType.DOUBLE)) + "$."));
 					break;
 				}
 			}
@@ -100,10 +104,12 @@ public class EconomyCommand implements CommandExecutor  {
 
 				Main.databaseManager.setBalance(null, player.getUniqueId().toString(), amount);
 			} else if (args[0].equalsIgnoreCase("give")) {
-				amount += (double) Main.databaseManager.getBalance(null, player.getUniqueId().toString());
+				amount += (double) Main.databaseManager.getValueFromDB("players", "balance",
+						"uuid", player.getUniqueId().toString(), ValueType.STRING, ValueType.DOUBLE);
 				Main.databaseManager.setBalance(null, player.getUniqueId().toString(), amount);
 			} else {
-				amount = (double) Main.databaseManager.getBalance(null, player.getUniqueId().toString()) - amount;
+				amount = (double) Main.databaseManager.getValueFromDB("players", "balance",
+						"uuid", player.getUniqueId().toString(), ValueType.STRING, ValueType.DOUBLE) - amount;
 
 				if (amount < 0) {
 					sender.sendMessage(cc(" &cYou can't set a player's balance below 0$."));
@@ -112,8 +118,10 @@ public class EconomyCommand implements CommandExecutor  {
 
 				Main.databaseManager.setBalance(null, player.getUniqueId().toString(), amount);
 			}
-			sender.sendMessage(cc(" &aYou have changed " + player.getName() + "'s balance to " + String.format("%.2f", Main.databaseManager.getBalance(null, player.getUniqueId().toString())) + "$."));
-			player.sendMessage(cc(" &aYour balance has changed to " + Main.databaseManager.getBalance(null, player.getUniqueId().toString()) + "$."));
+			sender.sendMessage(cc(" &aYou have changed " + player.getName() + "'s balance to " + String.format("%.2f", Main.databaseManager.getValueFromDB("players", "balance",
+						"uuid", player.getUniqueId().toString(), ValueType.STRING, ValueType.DOUBLE)) + "$."));
+			player.sendMessage(cc(" &aYour balance has changed to " + Main.databaseManager.getValueFromDB("players", "balance",
+						"uuid", player.getUniqueId().toString(), ValueType.STRING, ValueType.DOUBLE) + "$."));
 		}
 
 		return true;

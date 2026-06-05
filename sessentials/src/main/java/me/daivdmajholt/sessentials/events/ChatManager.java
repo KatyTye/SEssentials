@@ -31,8 +31,8 @@ public class ChatManager implements Listener {
 
 		FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
 
-		String rank = Main.databaseManager.getSpefic("players", "rank",
-		"uuid", player.getUniqueId().toString(), ValueType.STRING);
+		String rank = (String) Main.databaseManager.getValueFromDB("players", "rank",
+		"uuid", player.getUniqueId().toString(), ValueType.STRING, ValueType.STRING);
 		String message = plugin.getConfig().getString("messages.sender-message");
 				
 		message = message.replace("%name%", player.getName());

@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -118,31 +119,47 @@ public class DatabaseManager {
 	}
 
 
-	public String getSpefic(String table, String field, String whereColumn, String whereValue, ValueType type) {
+	public Object getValueFromDB(String table, String field, String whereColumn, String whereValue, ValueType type, ValueType returnType) {
+		if (type == null) type = ValueType.STRING;
+		if (returnType == null) returnType = ValueType.STRING;
 
 		String sql = "SELECT " + field + " FROM " + table + " WHERE " + whereColumn + " = ?";
+		try (Connection connection = getConnection();
+			PreparedStatement statement = connection.prepareStatement(sql)) {
 
-		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
-			
 			switch (type) {
 				case STRING -> statement.setString(1, whereValue);
-				case INT -> statement.setInt(1, Integer.valueOf(whereValue));
-				case LONG -> statement.setLong(1, Long.valueOf(whereValue));
-				case DOUBLE -> statement.setDouble(1, Double.valueOf(whereValue));
-				case BOOLEAN -> statement.setBoolean(1, Boolean.valueOf(whereValue));
+				case INT -> statement.setInt(1, Integer.parseInt(whereValue));
+				case LONG -> statement.setLong(1, Long.parseLong(whereValue));
+				case DOUBLE -> statement.setDouble(1, Double.parseDouble(whereValue));
+				case BOOLEAN -> statement.setBoolean(1, Boolean.parseBoolean(whereValue));
 				case UUID -> statement.setObject(1, whereValue, Types.VARCHAR);
 				default -> statement.setString(1, whereValue);
 			}
 
-			ResultSet result = statement.executeQuery();
+			try (ResultSet result = statement.executeQuery()) {
+				if (!result.next()) return null;
 
-			if (result.next()) return result.getString(1);
+				Object raw = result.getObject(field);
+				if (raw == null) return null;
+
+				switch (returnType) {
+					case STRING:  return raw.toString();
+					case INT:     return raw instanceof Number ? ((Number) raw).intValue() : Integer.parseInt(raw.toString());
+					case LONG:    return raw instanceof Number ? ((Number) raw).longValue() : Long.parseLong(raw.toString());
+					case DOUBLE:  return raw instanceof Number ? ((Number) raw).doubleValue() : Double.parseDouble(raw.toString());
+					case BOOLEAN: return raw instanceof Boolean ? raw : Boolean.parseBoolean(raw.toString());
+					case UUID:    return UUID.fromString(raw.toString());
+					case OBJECT:  return raw;
+					default:      return raw;
+				}
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return null;
 		}
-
-		return "";
 	}
+
 
 	public Boolean setPlayerRank(String uuid, Integer rank) {
 
@@ -362,38 +379,6 @@ public class DatabaseManager {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-	}
-
-	public double getBalance(Player player, String uuid) {
-
-		String sql = """
-					SELECT balance FROM players WHERE uuid = ?
-				""";
-
-		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
-
-			if (player == null) {
-				statement.setString(1, uuid);
-			} else {
-				statement.setString(1, player.getUniqueId().toString());
-			}
-
-			ResultSet result = statement.executeQuery();
-
-			if (plugin.getConfig().getBoolean("settings.debug-mode")) {
-				plugin.getLogger().info("Player checked balance from database.");
-			}
-
-			if (result.next()) {
-				return result.getDouble("balance");
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return 0.0;
 
 	}
 }
