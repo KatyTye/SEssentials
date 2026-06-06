@@ -118,7 +118,6 @@ public class DatabaseManager {
 
 	}
 
-
 	public Object getValueFromDB(String table, String field, String whereColumn, String whereValue, ValueType type, ValueType returnType) {
 		if (type == null) type = ValueType.STRING;
 		if (returnType == null) returnType = ValueType.STRING;
@@ -160,6 +159,33 @@ public class DatabaseManager {
 		}
 	}
 
+	public Boolean checkValueFromDB(String table, String field, String whereColumn, String whereValue, ValueType type) {
+
+		String sql = "SELECT " + field + " FROM " + table + " WHERE " + whereColumn + " = ?";
+		
+		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
+
+			switch (type) {
+				case STRING -> statement.setString(1, whereValue);
+				case INT -> statement.setInt(1, Integer.parseInt(whereValue));
+				case LONG -> statement.setLong(1, Long.parseLong(whereValue));
+				case DOUBLE -> statement.setDouble(1, Double.parseDouble(whereValue));
+				case BOOLEAN -> statement.setBoolean(1, Boolean.parseBoolean(whereValue));
+				case UUID -> statement.setObject(1, whereValue, Types.VARCHAR);
+				default -> statement.setString(1, whereValue);
+			}
+
+			ResultSet result = statement.executeQuery();
+
+			if (result.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
 
 	public Boolean setPlayerRank(String uuid, Integer rank) {
 
@@ -189,6 +215,40 @@ public class DatabaseManager {
 		return false;
 	}
 
+	public List<Object> getAllValuesFromDB(String table, String field, ValueType type) {
+		List<Object> list = new ArrayList<>();
+
+		String sql = "SELECT " + field + " FROM " + table;
+
+		try (Connection connection = getConnection();
+			PreparedStatement statement = connection.prepareStatement(sql);
+			ResultSet result = statement.executeQuery()) {
+
+			while (result.next()) {
+				Object raw = result.getObject(field);
+
+				if (raw == null) {
+					continue;
+				}
+
+				switch (type) {
+					case STRING -> list.add(raw.toString());
+					case INT -> list.add(raw instanceof Number ? ((Number) raw).intValue() : Integer.parseInt(raw.toString()));
+					case LONG -> list.add(raw instanceof Number ? ((Number) raw).longValue() : Long.parseLong(raw.toString()));
+					case DOUBLE -> list.add(raw instanceof Number ? ((Number) raw).doubleValue() : Double.parseDouble(raw.toString()));
+					case BOOLEAN -> list.add(raw instanceof Boolean ? raw : Boolean.parseBoolean(raw.toString()));
+					case UUID -> list.add(UUID.fromString(raw.toString()));
+					case OBJECT -> list.add(raw);
+					default -> list.add(raw);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
 	public List<String> getAllWarps() {
 		List<String> warps = new ArrayList<>();
 
@@ -206,29 +266,6 @@ public class DatabaseManager {
 		}
 
 		return warps;
-	}
-
-	public boolean checkWarpExists(String name) {
-
-		String sql = """
-				SELECT name FROM warps WHERE name = ?
-				""";
-
-			try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
-
-			statement.setString(1, name);
-
-			ResultSet result = statement.executeQuery();
-
-			if (result.next()) {
-				return true;
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return false;
 	}
 	
 	public Boolean findGodMode(Player player) {
