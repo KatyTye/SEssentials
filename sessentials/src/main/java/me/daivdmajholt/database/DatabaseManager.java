@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
@@ -19,11 +20,13 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 public class DatabaseManager {
-	
-	public static enum ValueType { STRING, INT, LONG, DOUBLE, BOOLEAN, UUID, OBJECT }
+
+	public static enum ValueType {
+		STRING, INT, LONG, DOUBLE, BOOLEAN, UUID, OBJECT
+	}
 
 	private final Main plugin;
-	
+
 	private String url;
 
 	public DatabaseManager(Main plugin) {
@@ -80,7 +83,8 @@ public class DatabaseManager {
 					);
 				""";
 
-		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sqlgodmode)) {
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(sqlgodmode)) {
 
 			statement.execute();
 
@@ -104,7 +108,8 @@ public class DatabaseManager {
 					);
 				""";
 
-		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sqlwarp)) {
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(sqlwarp)) {
 
 			statement.execute();
 
@@ -118,13 +123,16 @@ public class DatabaseManager {
 
 	}
 
-	public Object getValueFromDB(String table, String field, String whereColumn, String whereValue, ValueType type, ValueType returnType) {
-		if (type == null) type = ValueType.STRING;
-		if (returnType == null) returnType = ValueType.STRING;
+	public Object getValueFromDB(String table, String field, String whereColumn, String whereValue, ValueType type,
+			ValueType returnType) {
+		if (type == null)
+			type = ValueType.STRING;
+		if (returnType == null)
+			returnType = ValueType.STRING;
 
 		String sql = "SELECT " + field + " FROM " + table + " WHERE " + whereColumn + " = ?";
 		try (Connection connection = getConnection();
-			PreparedStatement statement = connection.prepareStatement(sql)) {
+				PreparedStatement statement = connection.prepareStatement(sql)) {
 
 			switch (type) {
 				case STRING -> statement.setString(1, whereValue);
@@ -137,20 +145,31 @@ public class DatabaseManager {
 			}
 
 			try (ResultSet result = statement.executeQuery()) {
-				if (!result.next()) return null;
+				if (!result.next())
+					return null;
 
 				Object raw = result.getObject(field);
-				if (raw == null) return null;
+				if (raw == null)
+					return null;
 
 				switch (returnType) {
-					case STRING:  return raw.toString();
-					case INT:     return raw instanceof Number ? ((Number) raw).intValue() : Integer.parseInt(raw.toString());
-					case LONG:    return raw instanceof Number ? ((Number) raw).longValue() : Long.parseLong(raw.toString());
-					case DOUBLE:  return raw instanceof Number ? ((Number) raw).doubleValue() : Double.parseDouble(raw.toString());
-					case BOOLEAN: return raw instanceof Boolean ? raw : Boolean.parseBoolean(raw.toString());
-					case UUID:    return UUID.fromString(raw.toString());
-					case OBJECT:  return raw;
-					default:      return raw;
+					case STRING:
+						return raw.toString();
+					case INT:
+						return raw instanceof Number ? ((Number) raw).intValue() : Integer.parseInt(raw.toString());
+					case LONG:
+						return raw instanceof Number ? ((Number) raw).longValue() : Long.parseLong(raw.toString());
+					case DOUBLE:
+						return raw instanceof Number ? ((Number) raw).doubleValue()
+								: Double.parseDouble(raw.toString());
+					case BOOLEAN:
+						return raw instanceof Boolean ? raw : Boolean.parseBoolean(raw.toString());
+					case UUID:
+						return UUID.fromString(raw.toString());
+					case OBJECT:
+						return raw;
+					default:
+						return raw;
 				}
 			}
 		} catch (SQLException e) {
@@ -162,7 +181,7 @@ public class DatabaseManager {
 	public Boolean checkValueFromDB(String table, String field, String whereColumn, String whereValue, ValueType type) {
 
 		String sql = "SELECT " + field + " FROM " + table + " WHERE " + whereColumn + " = ?";
-		
+
 		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
 
 			switch (type) {
@@ -215,14 +234,67 @@ public class DatabaseManager {
 		return false;
 	}
 
+	public List<Object> getSpeficValuesFromDB(String table, String where, String whereValue,
+			ValueType type, ValueType returnType) {
+		List<Object> list = new ArrayList<>();
+
+		String sql = "SELECT * FROM " + table + " WHERE " + where + " = ?";
+
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(sql);) {
+
+			switch (type) {
+				case STRING -> statement.setString(1, whereValue);
+				case INT -> statement.setInt(1, Integer.parseInt(whereValue));
+				case LONG -> statement.setLong(1, Long.parseLong(whereValue));
+				case DOUBLE -> statement.setDouble(1, Double.parseDouble(whereValue));
+				case BOOLEAN -> statement.setBoolean(1, Boolean.parseBoolean(whereValue));
+				case UUID -> statement.setObject(1, whereValue, Types.VARCHAR);
+				default -> statement.setString(1, whereValue);
+			}
+
+			ResultSet result = statement.executeQuery();
+
+			ResultSetMetaData meta = result.getMetaData();
+			int cols = meta.getColumnCount();
+
+			while (result.next()) {
+				for (int i = 1; i <= cols; i++) {
+					Object raw = result.getObject(i);
+					if (raw == null) {
+						continue;
+					}
+
+					switch (returnType) {
+						case STRING -> list.add(raw.toString());
+						case INT -> list.add(raw instanceof Number ? ((Number) raw).intValue()
+								: Integer.parseInt(raw.toString()));
+						case LONG -> list.add(raw instanceof Number ? ((Number) raw).longValue()
+								: Long.parseLong(raw.toString()));
+						case DOUBLE -> list.add(raw instanceof Number ? ((Number) raw).doubleValue()
+								: Double.parseDouble(raw.toString()));
+						case BOOLEAN -> list.add(raw instanceof Boolean ? raw : Boolean.parseBoolean(raw.toString()));
+						case UUID -> list.add(UUID.fromString(raw.toString()));
+						case OBJECT -> list.add(raw);
+						default -> list.add(raw);
+					}
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+
 	public List<Object> getAllValuesFromDB(String table, String field, ValueType type) {
 		List<Object> list = new ArrayList<>();
 
 		String sql = "SELECT " + field + " FROM " + table;
 
 		try (Connection connection = getConnection();
-			PreparedStatement statement = connection.prepareStatement(sql);
-			ResultSet result = statement.executeQuery()) {
+				PreparedStatement statement = connection.prepareStatement(sql);
+				ResultSet result = statement.executeQuery()) {
 
 			while (result.next()) {
 				Object raw = result.getObject(field);
@@ -233,9 +305,12 @@ public class DatabaseManager {
 
 				switch (type) {
 					case STRING -> list.add(raw.toString());
-					case INT -> list.add(raw instanceof Number ? ((Number) raw).intValue() : Integer.parseInt(raw.toString()));
-					case LONG -> list.add(raw instanceof Number ? ((Number) raw).longValue() : Long.parseLong(raw.toString()));
-					case DOUBLE -> list.add(raw instanceof Number ? ((Number) raw).doubleValue() : Double.parseDouble(raw.toString()));
+					case INT ->
+						list.add(raw instanceof Number ? ((Number) raw).intValue() : Integer.parseInt(raw.toString()));
+					case LONG ->
+						list.add(raw instanceof Number ? ((Number) raw).longValue() : Long.parseLong(raw.toString()));
+					case DOUBLE -> list.add(
+							raw instanceof Number ? ((Number) raw).doubleValue() : Double.parseDouble(raw.toString()));
 					case BOOLEAN -> list.add(raw instanceof Boolean ? raw : Boolean.parseBoolean(raw.toString()));
 					case UUID -> list.add(UUID.fromString(raw.toString()));
 					case OBJECT -> list.add(raw);
@@ -255,9 +330,10 @@ public class DatabaseManager {
 		String sql = """
 				SELECT name FROM warps
 				""";
-		
-		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql);
-		ResultSet resultSet = statement.executeQuery();) {
+
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(sql);
+				ResultSet resultSet = statement.executeQuery();) {
 			while (resultSet.next()) {
 				warps.add(resultSet.getString("name"));
 			}
@@ -267,7 +343,7 @@ public class DatabaseManager {
 
 		return warps;
 	}
-	
+
 	public Boolean findGodMode(Player player) {
 
 		String sql = """
@@ -277,7 +353,7 @@ public class DatabaseManager {
 		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
 
 			statement.setString(1, player.getUniqueId().toString());
-			
+
 			ResultSet result = statement.executeQuery();
 
 			if (result.next()) {
