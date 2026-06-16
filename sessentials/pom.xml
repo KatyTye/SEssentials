@@ -25,9 +25,6 @@
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-        <maven.build.timestamp.format>yyyy/MM/dd HH:mm</maven.build.timestamp.format>
-
     </properties>
 
     <!-- ===================== -->
@@ -192,6 +189,20 @@
                 <executions>
 
                     <execution>
+                        <id>build-timestamp</id>
+
+                        <goals>
+                            <goal>timestamp-property</goal>
+                        </goals>
+
+                        <configuration>
+                            <name>build.time</name>
+                            <pattern>yyyy/MM/dd HH:mm</pattern>
+                            <timeZone>Europe/Copenhagen</timeZone>
+                        </configuration>
+                    </execution>
+
+                    <execution>
                         <id>add-generated-source</id>
                         <phase>generate-sources</phase>
 
@@ -245,7 +256,7 @@ package me.daivdmajholt;
 
 public final class BuildInfo {
 
-    public static final String BUILD_TIMESTAMP = "${maven.build.timestamp}";
+    public static final String BUILD_TIMESTAMP = "${build.time}";
 
     private BuildInfo() {}
 
