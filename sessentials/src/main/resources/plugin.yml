@@ -21,6 +21,9 @@ commands:
   buy:
     description: This command shows the online store link for the player.
     usage: /buy
+  store:
+    description: This command shows the online store link for the player.
+    usage: /store
   warp:
     description: This command teleports a player to any warps.
     usage: /warp (warp name) (player)

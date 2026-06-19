@@ -10,7 +10,7 @@ import org.bukkit.command.CommandExecutor;
 import me.daivdmajholt.sessentials.Main;
 
 public class BuyCommand implements CommandExecutor {
-	
+
 	private final Main plugin = Main.plugin;
 
 	@Override
@@ -21,8 +21,9 @@ public class BuyCommand implements CommandExecutor {
 		if (storeUrl.equalsIgnoreCase("https://shop.website.com/")) {
 			sender.sendMessage(cc(" &cThis server currently does not have a online shop yet."));
 		} else {
-			
-			sender.sendMessage(cc(" &6&lLINK: &f" + returnClickLink(storeUrl)));
+			sender.sendMessage("");
+			sender.sendMessage(cc(" &6&lSTORE: &f" + returnClickLink(storeUrl)));
+			sender.sendMessage("");
 		}
 
 		return true;

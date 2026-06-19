@@ -18,9 +18,11 @@ public class Community {
 			// BUY
 			plugin.getCommand("buy").setExecutor(new BuyCommand());
 			plugin.getCommand("buy").setTabCompleter(new NothingTab());
+			plugin.getCommand("store").setExecutor(new BuyCommand());
+			plugin.getCommand("store").setTabCompleter(new NothingTab());
 		} else {
-            plugin.getLogger().info("Community are disabled!");
-        }
+			plugin.getLogger().info("Community are disabled!");
+		}
 	}
-	
+
 }
