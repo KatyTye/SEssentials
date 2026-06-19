@@ -24,6 +24,9 @@ commands:
   warp:
     description: This command teleports a player to any warps.
     usage: /warp (warp name) (player)
+  warps:
+    description: This command shows all warps that exist.
+    usage: /warps
   discord:
     description: This command shows the discord link for the player.
     usage: /discord
