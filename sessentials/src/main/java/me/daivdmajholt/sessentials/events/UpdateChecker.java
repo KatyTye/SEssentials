@@ -25,9 +25,26 @@ public class UpdateChecker {
                 String current = plugin.getDescription().getVersion();
 
                 if (!current.equals(latest)) {
-                    plugin.getLogger().info("New version available: " + latest);
+                    plugin.getLogger().warning("New version available: " + latest);
                 } else {
                     plugin.getLogger().info("You are running the latest version.");
+                }
+            } catch (Exception e) {
+                plugin.getLogger().warning("Could not check for updates.");
+            }
+        });
+    }
+
+    public void versionCheck(CommandSender sender) {
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+            try (Scanner scanner = new Scanner(URI.create(apiUrl).toURL().openStream())) {
+                String latest = scanner.nextLine();
+                String current = plugin.getDescription().getVersion();
+
+                if (!current.equals(latest)) {
+                    sender.sendMessage("");
+                    sender.sendMessage(cc(" &a&l[SEssentials] &aYour plugin version is outdated, your on version " + current + " and the latest version is " + latest + "."));
+                    sender.sendMessage("");
                 }
             } catch (Exception e) {
                 plugin.getLogger().warning("Could not check for updates.");

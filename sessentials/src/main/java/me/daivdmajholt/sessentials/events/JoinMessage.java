@@ -39,6 +39,10 @@ public class JoinMessage implements Listener {
             player.sendMessage("");
         }
 
+        if (plugin.getConfig().getBoolean("check-updates") && player.hasPermission("sessentials.*")) {
+            new UpdateChecker().versionCheck(player);
+        }
+
         if (plugin.getConfig().getBoolean("settings.force-gamemode")) {
             try {
                 GameMode gm;
