@@ -287,6 +287,34 @@ public class DatabaseManager {
 		return list;
 	}
 
+	public Boolean deleteSpeficItemFromDB(String table, String where, String whereValue, ValueType type) {
+		String sql = "DELETE FROM " + table + " WHERE " + where + " = ?";
+
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(sql);) {
+
+			switch (type) {
+				case STRING -> statement.setString(1, whereValue);
+				case INT -> statement.setInt(1, Integer.parseInt(whereValue));
+				case LONG -> statement.setLong(1, Long.parseLong(whereValue));
+				case DOUBLE -> statement.setDouble(1, Double.parseDouble(whereValue));
+				case BOOLEAN -> statement.setBoolean(1, Boolean.parseBoolean(whereValue));
+				case UUID -> statement.setObject(1, whereValue, Types.VARCHAR);
+				default -> statement.setString(1, whereValue);
+			}
+
+			int result = statement.executeUpdate();
+
+			if (result > 0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+
 	public List<Object> getAllValuesFromDB(String table, String field, ValueType type) {
 		List<Object> list = new ArrayList<>();
 
@@ -324,24 +352,113 @@ public class DatabaseManager {
 		return list;
 	}
 
-	public List<String> getAllWarps() {
-		List<String> warps = new ArrayList<>();
+	public Boolean updateSpeficValueInDB(String table, String field, String value, ValueType type) {
 
-		String sql = """
-				SELECT name FROM warps
-				""";
+		String sql = "INSERT INTO " + table + "(" + field + ") VALUES(?) ON CONFLICT(" + field + ") DO UPDATE SET "
+				+ field + " = excluded." + field + ";";
 
-		try (Connection connection = getConnection();
-				PreparedStatement statement = connection.prepareStatement(sql);
-				ResultSet resultSet = statement.executeQuery();) {
-			while (resultSet.next()) {
-				warps.add(resultSet.getString("name"));
+		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
+			switch (type) {
+				case STRING -> statement.setString(1, value);
+				case INT -> statement.setInt(1, Integer.parseInt(value));
+				case LONG -> statement.setLong(1, Long.parseLong(value));
+				case DOUBLE -> statement.setDouble(1, Double.parseDouble(value));
+				case BOOLEAN -> statement.setBoolean(1, Boolean.parseBoolean(value));
+				case UUID -> statement.setObject(1, value, Types.VARCHAR);
+				default -> statement.setString(1, value);
+			}
+
+			ResultSet result = statement.executeQuery();
+
+			if (result.next()) {
+				return true;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return warps;
+		return false;
+	}
+
+	public Boolean updateValuesInDB(String table, String conflict, String fields, List<String> values, List<ValueType> types) {
+		
+		String qMarks = "?";
+		for (int i = 1; i < values.size(); i++) {
+			qMarks = qMarks + ", ?";
+		}
+		
+		String[] fieldArray = fields.split(",");
+		StringBuilder setClause = new StringBuilder();
+		for (int i = 0; i < fieldArray.length; i++) {
+			String field = fieldArray[i].trim();
+			if (i > 0) setClause.append(", ");
+			setClause.append(field).append(" = excluded.").append(field);
+		}
+		
+		String sql = "INSERT INTO " + table + "(" + fields + ") VALUES(" + qMarks + 
+					") ON CONFLICT(" + conflict + ") DO UPDATE SET " + setClause + ";";
+		
+		try (Connection connection = getConnection(); 
+			PreparedStatement statement = connection.prepareStatement(sql)) {
+			for (int i = 0; i < types.size(); i++) {
+				ValueType type = types.get(i);
+				int index = i + 1;
+				
+				switch (type) {
+					case STRING -> statement.setString(index, values.get(i));
+					case INT -> statement.setInt(index, Integer.parseInt(values.get(i)));
+					case LONG -> statement.setLong(index, Long.parseLong(values.get(i)));
+					case DOUBLE -> statement.setDouble(index, Double.parseDouble(values.get(i)));
+					case BOOLEAN -> statement.setBoolean(index, Boolean.parseBoolean(values.get(i)));
+					case UUID -> statement.setObject(index, values.get(i), Types.VARCHAR);
+					default -> statement.setString(index, values.get(i));
+				}
+			}
+			
+			return statement.executeUpdate() > 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+
+	public Boolean createNewDataInDB(String table, String fields, List<String> values, List<ValueType> types) {
+
+		String qMarks = "?";
+
+		for (int i = 1; i < values.size(); i++) {
+			qMarks = qMarks + ", ?";
+		}
+
+		String sql = "INSERT INTO " + table + "(" + fields + ") VALUES(" + qMarks + ")";
+
+		try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement(sql)) {
+			for (int i = 0; i < types.size(); i++) {
+				ValueType type = types.get(i);
+				int index = i + 1;
+
+				switch (type) {
+					case STRING -> statement.setString(index, values.get(i));
+					case INT -> statement.setInt(index, Integer.parseInt(values.get(i)));
+					case LONG -> statement.setLong(index, Long.parseLong(values.get(i)));
+					case DOUBLE -> statement.setDouble(index, Double.parseDouble(values.get(i)));
+					case BOOLEAN -> statement.setBoolean(index, Boolean.parseBoolean(values.get(i)));
+					case UUID -> statement.setObject(index, values.get(i), Types.VARCHAR);
+					default -> statement.setString(index, values.get(i));
+				}
+			}
+
+			int result = statement.executeUpdate();
+
+			if (result > 0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return false;
 	}
 
 	public Boolean findGodMode(Player player) {
