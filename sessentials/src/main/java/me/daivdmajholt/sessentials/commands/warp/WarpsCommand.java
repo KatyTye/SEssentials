@@ -27,6 +27,11 @@ public class WarpsCommand implements CommandExecutor {
 				ValueType.STRING);
 		String listedWarps = warps.toString().replace("[", "").replace("]", "");
 
+		if (warps.size() == 0) {
+			sender.sendMessage(cc(" &cThere are currently no warps available on this server."));
+			return true;
+		}
+
 		sender.sendMessage("");
 		sender.sendMessage(cc(" &6&lWARPS:"));
 		sender.sendMessage(cc(" &f" + listedWarps));
