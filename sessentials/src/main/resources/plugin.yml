@@ -36,6 +36,12 @@ commands:
   rm:
     description: This commands handles ranks and permissions.
     usage: /rm help
+  clearchat:
+    description: This command clears the chat for all players.
+    usage: /clearchat
+  cc:
+    description: This command clears the chat for all players.
+    usage: /cc
   rankmanager:
     description: This commands handles ranks and permissions.
     usage: /rankmanager help

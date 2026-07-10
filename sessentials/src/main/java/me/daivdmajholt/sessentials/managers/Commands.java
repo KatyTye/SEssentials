@@ -16,6 +16,7 @@ import me.daivdmajholt.sessentials.commands.warp.WarpCommand;
 import me.daivdmajholt.sessentials.commands.warp.WarpTab;
 import me.daivdmajholt.sessentials.commands.warp.WarpsCommand;
 import me.daivdmajholt.sessentials.commands.NothingTab;
+import me.daivdmajholt.sessentials.commands.clearchat.ClearChatCommand;
 import me.daivdmajholt.sessentials.commands.economy.BalanceCommand;
 import me.daivdmajholt.sessentials.commands.economy.BalanceTab;
 import me.daivdmajholt.sessentials.commands.economy.EconomyCommand;
@@ -88,6 +89,12 @@ public class Commands {
             plugin.getCommand("warp").setTabCompleter(new WarpTab());
             plugin.getCommand("warps").setExecutor(new WarpsCommand());
             plugin.getCommand("warps").setTabCompleter(new NothingTab());
+
+            // CLEARCHAT
+            plugin.getCommand("clearchat").setExecutor(new ClearChatCommand());
+            plugin.getCommand("clearchat").setTabCompleter(new NothingTab());
+            plugin.getCommand("cc").setExecutor(new ClearChatCommand());
+            plugin.getCommand("cc").setTabCompleter(new NothingTab());
 
             // SPAWN
             plugin.getCommand("spawn").setExecutor(new SpawnCommand());
