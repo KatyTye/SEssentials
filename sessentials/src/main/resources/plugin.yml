@@ -27,6 +27,9 @@ commands:
   feed:
     description: This command will fill a player's hunger.
     usage: /feed (player)
+  stop:
+    description: This command will stop the server.
+    usage: /stop
   store:
     description: This command shows the online store link for the player.
     usage: /store

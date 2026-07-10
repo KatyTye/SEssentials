@@ -13,6 +13,7 @@ import me.daivdmajholt.sessentials.commands.sessentials.MainTab;
 import me.daivdmajholt.sessentials.commands.spawn.SetSpawnCommand;
 import me.daivdmajholt.sessentials.commands.spawn.SpawnCommand;
 import me.daivdmajholt.sessentials.commands.spawn.SpawnTab;
+import me.daivdmajholt.sessentials.commands.stop.StopCommand;
 import me.daivdmajholt.sessentials.commands.warp.WarpCommand;
 import me.daivdmajholt.sessentials.commands.warp.WarpTab;
 import me.daivdmajholt.sessentials.commands.warp.WarpsCommand;
@@ -40,9 +41,15 @@ public class Commands {
 
     public void registerCommands() {
 
+        // PRIMARY/MAIN
         plugin.getCommand("sessentials").setExecutor(new MainCommand());
         plugin.getCommand("sessentials").setTabCompleter(new MainTab());
 
+        // STOP
+        plugin.getCommand("stop").setExecutor(new StopCommand());
+        plugin.getCommand("stop").setTabCompleter(new NothingTab());
+
+        // COMMANDS AFTER CONFIG
         if (plugin.getConfig().getBoolean("features.commands")) {
             // GAMEMODES
             plugin.getCommand("gmc").setExecutor(new GamemodeCCommand());
