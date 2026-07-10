@@ -1,25 +1,35 @@
 package me.daivdmajholt.sessentials.events;
 
 import me.daivdmajholt.sessentials.Main;
+import me.daivdmajholt.database.DatabaseManager.ValueType;
 
+import org.bukkit.World;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 import static me.daivdmajholt.sessentials.Utils.cc;
+import static me.daivdmajholt.sessentials.Utils.applyRankPerms;
 
 import java.io.File;
+import java.util.List;
 
 public class JoinMessage implements Listener {
 
     private final Main plugin = Main.plugin;
+
+    File dataFolder = plugin.getDataFolder();
+    File spawnFile = new File(dataFolder, "spawn.yml");
+    File rankFile = new File(dataFolder, "ranks.yml");
+
+    FileConfiguration spawnCFG = YamlConfiguration.loadConfiguration(spawnFile);
+    FileConfiguration rankCFG = YamlConfiguration.loadConfiguration(rankFile);
 
     @EventHandler
     public void onPlayerJoinEvent(PlayerJoinEvent event) {
@@ -27,6 +37,13 @@ public class JoinMessage implements Listener {
         event.setJoinMessage(cc(plugin.getConfig().getString("messages.join") + player.getName()));
 
         Main.databaseManager.registerPlayer(player, 0, 0);
+
+        String rank = (String) Main.databaseManager.getValueFromDB("players", "rank",
+		"uuid", player.getUniqueId().toString(), ValueType.STRING, ValueType.STRING);
+
+        List<String> perms = rankCFG.getStringList(rank + ".permissions");
+
+		applyRankPerms(player, perms);
 
         if (plugin.getConfig().getBoolean("do-plugin-advertisements")) {
             plugin.getLogger().info(
@@ -63,22 +80,17 @@ public class JoinMessage implements Listener {
         }
 
         if (plugin.getConfig().getBoolean("settings.spawn-on-join")) {
-            File dataFolder = plugin.getDataFolder();
-            File file = new File(dataFolder, "spawn.yml");
-
-            FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
-
-            String worldName = cfg.getString("world", "world");
+            String worldName = spawnCFG.getString("world", "world");
             World world = Bukkit.getWorld(worldName);
             if (world == null) {
                 plugin.getLogger().warning("World not found: " + worldName);
             }
 
-            double x = cfg.getDouble("x", 0.0);
-            double y = cfg.getDouble("y", 0.0);
-            double z = cfg.getDouble("z", 0.0);
-            float yaw = (float) cfg.getDouble("yaw", 0.0);
-            float pitch = (float) cfg.getDouble("pitch", 0.0);
+            double x = spawnCFG.getDouble("x", 0.0);
+            double y = spawnCFG.getDouble("y", 0.0);
+            double z = spawnCFG.getDouble("z", 0.0);
+            float yaw = (float) spawnCFG.getDouble("yaw", 0.0);
+            float pitch = (float) spawnCFG.getDouble("pitch", 0.0);
 
             Location loc = new Location(world, x, y, z, yaw, pitch);
 

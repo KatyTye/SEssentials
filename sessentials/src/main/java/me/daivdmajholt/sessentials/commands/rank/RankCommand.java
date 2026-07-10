@@ -1,6 +1,8 @@
 package me.daivdmajholt.sessentials.commands.rank;
 
 import static me.daivdmajholt.sessentials.Utils.cc;
+import static me.daivdmajholt.sessentials.Utils.applyRankPerms;
+import static me.daivdmajholt.sessentials.Utils.clearRankPerms;
 
 import java.io.File;
 import java.util.List;
@@ -121,17 +123,23 @@ public class RankCommand implements CommandExecutor {
 				String oldRank = (String) Main.databaseManager.getValueFromDB("players", "rank",
 				"uuid", target.getUniqueId().toString(), ValueType.STRING, ValueType.STRING);
 
-				cfg.set(oldRank + ".members", cfg.getInt(oldRank + ".members") - 1);
-				cfg.set(args[1] + ".members", cfg.getInt(args[1] + ".members") + 1);
-
-				try {
-					cfg.save(file);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-
 				if (Main.databaseManager.setPlayerRank(target.getUniqueId().toString(), Integer.parseInt(args[1]))) {
 					sender.sendMessage(cc(" &aYou have changed the rank of &f" + target.getName() + "&a to &f" + cfg.getString(args[1] + ".name")));
+
+					clearRankPerms(target);
+
+					List<String> perms = cfg.getStringList(args[1] + ".permissions");
+
+					applyRankPerms(target, perms);
+
+					cfg.set(oldRank + ".members", cfg.getInt(oldRank + ".members") - 1);
+					cfg.set(args[1] + ".members", cfg.getInt(args[1] + ".members") + 1);
+
+					try {
+						cfg.save(file);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				} else {
 					sender.sendMessage(cc(" &cCould not change the rank of the player named " + target.getName() + "."));
 				}

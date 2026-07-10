@@ -1,5 +1,9 @@
 package me.daivdmajholt.sessentials;
 
+import java.util.Map;
+import java.util.UUID;
+import java.util.List;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.lang.reflect.Method;
@@ -8,6 +12,8 @@ import org.bukkit.World;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+import org.bukkit.permissions.PermissionAttachment;
 
 import com.google.gson.JsonObject;
 
@@ -16,10 +22,31 @@ import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
 
 public class Utils {
+
+	private static final Map<UUID, PermissionAttachment> attachments = new HashMap<>();
+
+    public static void clearRankPerms(Player player) {
+        PermissionAttachment old = attachments.remove(player.getUniqueId());
+        if (old != null) {
+            player.removeAttachment(old);
+        }
+    }
+
+    public static void applyRankPerms(Player player, List<String> perms) {
+        clearRankPerms(player);
+
+        PermissionAttachment attachment = player.addAttachment(Main.plugin);
+        for (String perm : perms) {
+            attachment.setPermission(perm, true);
+        }
+
+        attachments.put(player.getUniqueId(), attachment);
+    }
+	
 	public static String cc(String message) {
 		return ChatColor.translateAlternateColorCodes('&', message);
 	}
-
+	
 	public static <T> T reqNN(T obj) {
 		return java.util.Objects.requireNonNull(obj);
 	}
