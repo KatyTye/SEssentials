@@ -24,6 +24,9 @@ commands:
   heal:
     description: This command will fully restore a players health.
     usage: /heal (player)
+  feed:
+    description: This command will fill a player's hunger.
+    usage: /feed (player)
   store:
     description: This command shows the online store link for the player.
     usage: /store

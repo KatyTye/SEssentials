@@ -23,6 +23,7 @@ import me.daivdmajholt.sessentials.commands.economy.BalanceCommand;
 import me.daivdmajholt.sessentials.commands.economy.BalanceTab;
 import me.daivdmajholt.sessentials.commands.economy.EconomyCommand;
 import me.daivdmajholt.sessentials.commands.economy.EconomyTab;
+import me.daivdmajholt.sessentials.commands.feed.FeedCommand;
 import me.daivdmajholt.sessentials.commands.fly.FlyCommand;
 import me.daivdmajholt.sessentials.commands.fly.FlyTab;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeACommand;
@@ -81,6 +82,10 @@ public class Commands {
             // HEAL
             plugin.getCommand("heal").setExecutor(new HealCommand());
             plugin.getCommand("heal").setTabCompleter(new PlayerTab());
+
+            // FEED
+            plugin.getCommand("feed").setExecutor(new FeedCommand());
+            plugin.getCommand("feed").setTabCompleter(new PlayerTab());
 
             // FLY
             plugin.getCommand("fly").setExecutor(new FlyCommand());
