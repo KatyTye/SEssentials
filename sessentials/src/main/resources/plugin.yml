@@ -30,6 +30,9 @@ commands:
   stop:
     description: This command will stop the server.
     usage: /stop
+  kick:
+    description: This command kicks any player for any reason provided.
+    usage: /kick (player) (reason)
   store:
     description: This command shows the online store link for the player.
     usage: /store

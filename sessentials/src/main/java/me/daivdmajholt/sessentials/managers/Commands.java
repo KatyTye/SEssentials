@@ -6,6 +6,7 @@ import me.daivdmajholt.sessentials.commands.give.GiveTab;
 import me.daivdmajholt.sessentials.commands.god.GodCommand;
 import me.daivdmajholt.sessentials.commands.god.GodTab;
 import me.daivdmajholt.sessentials.commands.heal.HealCommand;
+import me.daivdmajholt.sessentials.commands.kick.KickCommand;
 import me.daivdmajholt.sessentials.commands.rank.RankCommand;
 import me.daivdmajholt.sessentials.commands.rank.RankTab;
 import me.daivdmajholt.sessentials.commands.sessentials.MainCommand;
@@ -48,6 +49,10 @@ public class Commands {
         // STOP
         plugin.getCommand("stop").setExecutor(new StopCommand());
         plugin.getCommand("stop").setTabCompleter(new NothingTab());
+
+        // KICK
+        plugin.getCommand("kick").setExecutor(new KickCommand());
+        plugin.getCommand("kick").setTabCompleter(new PlayerTab());
 
         // COMMANDS AFTER CONFIG
         if (plugin.getConfig().getBoolean("features.commands")) {
