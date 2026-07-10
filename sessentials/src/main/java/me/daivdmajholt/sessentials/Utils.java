@@ -28,7 +28,10 @@ public class Utils {
     public static void clearRankPerms(Player player) {
         PermissionAttachment old = attachments.remove(player.getUniqueId());
         if (old != null) {
-            player.removeAttachment(old);
+			try {
+				player.removeAttachment(old);
+			} catch (IllegalArgumentException ignored) {}
+			attachments.remove(player.getUniqueId());
         }
     }
 
