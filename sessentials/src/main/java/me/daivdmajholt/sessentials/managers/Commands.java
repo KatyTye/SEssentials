@@ -5,6 +5,7 @@ import me.daivdmajholt.sessentials.commands.give.GiveCommand;
 import me.daivdmajholt.sessentials.commands.give.GiveTab;
 import me.daivdmajholt.sessentials.commands.god.GodCommand;
 import me.daivdmajholt.sessentials.commands.god.GodTab;
+import me.daivdmajholt.sessentials.commands.heal.HealCommand;
 import me.daivdmajholt.sessentials.commands.rank.RankCommand;
 import me.daivdmajholt.sessentials.commands.rank.RankTab;
 import me.daivdmajholt.sessentials.commands.sessentials.MainCommand;
@@ -16,6 +17,7 @@ import me.daivdmajholt.sessentials.commands.warp.WarpCommand;
 import me.daivdmajholt.sessentials.commands.warp.WarpTab;
 import me.daivdmajholt.sessentials.commands.warp.WarpsCommand;
 import me.daivdmajholt.sessentials.commands.NothingTab;
+import me.daivdmajholt.sessentials.commands.PlayerTab;
 import me.daivdmajholt.sessentials.commands.clearchat.ClearChatCommand;
 import me.daivdmajholt.sessentials.commands.economy.BalanceCommand;
 import me.daivdmajholt.sessentials.commands.economy.BalanceTab;
@@ -75,6 +77,10 @@ public class Commands {
             plugin.getCommand("rm").setTabCompleter(new RankTab());
             plugin.getCommand("rankmanager").setExecutor(new RankCommand());
             plugin.getCommand("rankmanager").setTabCompleter(new RankTab());
+
+            // HEAL
+            plugin.getCommand("heal").setExecutor(new HealCommand());
+            plugin.getCommand("heal").setTabCompleter(new PlayerTab());
 
             // FLY
             plugin.getCommand("fly").setExecutor(new FlyCommand());

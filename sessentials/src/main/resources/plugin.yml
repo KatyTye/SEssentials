@@ -21,6 +21,9 @@ commands:
   buy:
     description: This command shows the online store link for the player.
     usage: /buy
+  heal:
+    description: This command will fully restore a players health.
+    usage: /heal (player)
   store:
     description: This command shows the online store link for the player.
     usage: /store
