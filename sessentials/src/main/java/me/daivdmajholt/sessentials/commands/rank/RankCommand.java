@@ -95,7 +95,7 @@ public class RankCommand implements CommandExecutor {
 							found = p.getUniqueId();
 
 							String oldRank = (String) Main.databaseManager.getValueFromDB("players", "rank",
-							"uuid", found.toString(), ValueType.STRING, ValueType.STRING);
+									"uuid", found.toString(), ValueType.STRING, ValueType.STRING);
 
 							cfg.set(oldRank + ".members", cfg.getInt(oldRank + ".members") - 1);
 							cfg.set(args[1] + ".members", cfg.getInt(args[1] + ".members") + 1);
@@ -103,28 +103,33 @@ public class RankCommand implements CommandExecutor {
 							try {
 								cfg.save(file);
 							} catch (IOException e) {
-								e.printStackTrace();
+								if (plugin.getConfig().getBoolean("settings.debug-mode"))
+									e.printStackTrace();
 							}
 
 							if (Main.databaseManager.setPlayerRank(found.toString(), Integer.parseInt(args[1]))) {
-								sender.sendMessage(cc(" &aYou have changed the rank of &f" + found.toString() + "&a to &f" + cfg.getString(args[1] + ".name")));
+								sender.sendMessage(cc(" &aYou have changed the rank of &f" + found.toString()
+										+ "&a to &f" + cfg.getString(args[1] + ".name")));
 							} else {
-								sender.sendMessage(cc(" &cCould not change the rank of the player named " + args[2] + "."));
+								sender.sendMessage(
+										cc(" &cCould not change the rank of the player named " + args[2] + "."));
 							}
 
 							break;
 						}
 					}
 
-					if (found == null) sender.sendMessage(cc(" &cThe player named " + args[0] + " does not exist!"));
+					if (found == null)
+						sender.sendMessage(cc(" &cThe player named " + args[0] + " does not exist!"));
 					return true;
 				}
 
 				String oldRank = (String) Main.databaseManager.getValueFromDB("players", "rank",
-				"uuid", target.getUniqueId().toString(), ValueType.STRING, ValueType.STRING);
+						"uuid", target.getUniqueId().toString(), ValueType.STRING, ValueType.STRING);
 
 				if (Main.databaseManager.setPlayerRank(target.getUniqueId().toString(), Integer.parseInt(args[1]))) {
-					sender.sendMessage(cc(" &aYou have changed the rank of &f" + target.getName() + "&a to &f" + cfg.getString(args[1] + ".name")));
+					sender.sendMessage(cc(" &aYou have changed the rank of &f" + target.getName() + "&a to &f"
+							+ cfg.getString(args[1] + ".name")));
 
 					clearRankPerms(target);
 
@@ -138,10 +143,12 @@ public class RankCommand implements CommandExecutor {
 					try {
 						cfg.save(file);
 					} catch (IOException e) {
-						e.printStackTrace();
+						if (plugin.getConfig().getBoolean("settings.debug-mode"))
+							e.printStackTrace();
 					}
 				} else {
-					sender.sendMessage(cc(" &cCould not change the rank of the player named " + target.getName() + "."));
+					sender.sendMessage(
+							cc(" &cCould not change the rank of the player named " + target.getName() + "."));
 				}
 			}
 
@@ -204,7 +211,8 @@ public class RankCommand implements CommandExecutor {
 				try {
 					cfg.save(file);
 				} catch (IOException e) {
-					e.printStackTrace();
+					if (plugin.getConfig().getBoolean("settings.debug-mode"))
+						e.printStackTrace();
 				}
 				sender.sendMessage(cc(" &aYou have now changed the ranks name to: &f" + args[2]));
 			}
@@ -225,7 +233,8 @@ public class RankCommand implements CommandExecutor {
 				try {
 					cfg.save(file);
 				} catch (IOException e) {
-					e.printStackTrace();
+					if (plugin.getConfig().getBoolean("settings.debug-mode"))
+						e.printStackTrace();
 				}
 				sender.sendMessage(cc(" &aYou have now changed the ranks prefix to: &f" + args[2]));
 			}
@@ -246,7 +255,8 @@ public class RankCommand implements CommandExecutor {
 				try {
 					cfg.save(file);
 				} catch (IOException e) {
-					e.printStackTrace();
+					if (plugin.getConfig().getBoolean("settings.debug-mode"))
+						e.printStackTrace();
 				}
 				sender.sendMessage(cc(" &aYou have now changed the ranks suffix to: &f" + args[2]));
 			}
@@ -267,7 +277,8 @@ public class RankCommand implements CommandExecutor {
 				try {
 					cfg.save(file);
 				} catch (IOException e) {
-					e.printStackTrace();
+					if (plugin.getConfig().getBoolean("settings.debug-mode"))
+						e.printStackTrace();
 				}
 				sender.sendMessage(cc(" &aYou have now changed the ranks color to: " + args[2]) + args[2]);
 			}
@@ -288,7 +299,8 @@ public class RankCommand implements CommandExecutor {
 				try {
 					cfg.save(file);
 				} catch (IOException e) {
-					e.printStackTrace();
+					if (plugin.getConfig().getBoolean("settings.debug-mode"))
+						e.printStackTrace();
 				}
 				sender.sendMessage(cc(" &aYou have now changed the ranks priority to: &f" + args[2]));
 			}
@@ -319,7 +331,8 @@ public class RankCommand implements CommandExecutor {
 					try {
 						cfg.save(file);
 					} catch (IOException e) {
-						e.printStackTrace();
+						if (plugin.getConfig().getBoolean("settings.debug-mode"))
+							e.printStackTrace();
 					}
 					sender.sendMessage(cc(" &aYou have now added the permission &f" + args[3] + "&a to the rank."));
 				} else {
@@ -333,7 +346,8 @@ public class RankCommand implements CommandExecutor {
 					try {
 						cfg.save(file);
 					} catch (IOException e) {
-						e.printStackTrace();
+						if (plugin.getConfig().getBoolean("settings.debug-mode"))
+							e.printStackTrace();
 					}
 					sender.sendMessage(cc(" &aYou have now removed a permission from the rank."));
 				}

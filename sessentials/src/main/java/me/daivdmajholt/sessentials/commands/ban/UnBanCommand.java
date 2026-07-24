@@ -45,7 +45,8 @@ public class UnBanCommand implements CommandExecutor {
 			if (Bukkit.getBanList(Type.IP).isBanned(uuid.toString()))
 				Bukkit.getBanList(Type.IP).pardon(uuid.toString());
 		} catch (Error e) {
-			e.printStackTrace();
+			if (plugin.getConfig().getBoolean("settings.debug-mode"))
+				e.printStackTrace();
 		}
 
 		return true;

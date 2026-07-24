@@ -74,7 +74,8 @@ public class DatabaseManager {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			if (plugin.getConfig().getBoolean("settings.debug-mode"))
+				e.printStackTrace();
 		}
 
 		String sqlgodmode = """
@@ -94,7 +95,8 @@ public class DatabaseManager {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			if (plugin.getConfig().getBoolean("settings.debug-mode"))
+				e.printStackTrace();
 		}
 
 		String sqlwarp = """
@@ -119,7 +121,8 @@ public class DatabaseManager {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			if (plugin.getConfig().getBoolean("settings.debug-mode"))
+				e.printStackTrace();
 		}
 
 	}
@@ -174,7 +177,8 @@ public class DatabaseManager {
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			if (plugin.getConfig().getBoolean("settings.debug-mode"))
+				e.printStackTrace();
 			return null;
 		}
 	}
@@ -201,7 +205,8 @@ public class DatabaseManager {
 				return true;
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			if (plugin.getConfig().getBoolean("settings.debug-mode"))
+				e.printStackTrace();
 		}
 
 		return false;
@@ -229,7 +234,8 @@ public class DatabaseManager {
 				return true;
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			if (plugin.getConfig().getBoolean("settings.debug-mode"))
+				e.printStackTrace();
 		}
 
 		return false;
@@ -282,7 +288,8 @@ public class DatabaseManager {
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			if (plugin.getConfig().getBoolean("settings.debug-mode"))
+				e.printStackTrace();
 		}
 
 		return list;
@@ -310,7 +317,8 @@ public class DatabaseManager {
 				return true;
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			if (plugin.getConfig().getBoolean("settings.debug-mode"))
+				e.printStackTrace();
 		}
 
 		return false;
@@ -347,7 +355,8 @@ public class DatabaseManager {
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			if (plugin.getConfig().getBoolean("settings.debug-mode"))
+				e.printStackTrace();
 		}
 
 		return list;
@@ -375,36 +384,39 @@ public class DatabaseManager {
 				return true;
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			if (plugin.getConfig().getBoolean("settings.debug-mode"))
+				e.printStackTrace();
 		}
 
 		return false;
 	}
 
-	public Boolean updateValuesInDB(String table, String conflict, String fields, List<String> values, List<ValueType> types) {
-		
+	public Boolean updateValuesInDB(String table, String conflict, String fields, List<String> values,
+			List<ValueType> types) {
+
 		String qMarks = "?";
 		for (int i = 1; i < values.size(); i++) {
 			qMarks = qMarks + ", ?";
 		}
-		
+
 		String[] fieldArray = fields.split(",");
 		StringBuilder setClause = new StringBuilder();
 		for (int i = 0; i < fieldArray.length; i++) {
 			String field = fieldArray[i].trim();
-			if (i > 0) setClause.append(", ");
+			if (i > 0)
+				setClause.append(", ");
 			setClause.append(field).append(" = excluded.").append(field);
 		}
-		
-		String sql = "INSERT INTO " + table + "(" + fields + ") VALUES(" + qMarks + 
-					") ON CONFLICT(" + conflict + ") DO UPDATE SET " + setClause + ";";
-		
-		try (Connection connection = getConnection(); 
-			PreparedStatement statement = connection.prepareStatement(sql)) {
+
+		String sql = "INSERT INTO " + table + "(" + fields + ") VALUES(" + qMarks +
+				") ON CONFLICT(" + conflict + ") DO UPDATE SET " + setClause + ";";
+
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(sql)) {
 			for (int i = 0; i < types.size(); i++) {
 				ValueType type = types.get(i);
 				int index = i + 1;
-				
+
 				switch (type) {
 					case STRING -> statement.setString(index, values.get(i));
 					case INT -> statement.setInt(index, Integer.parseInt(values.get(i)));
@@ -415,12 +427,13 @@ public class DatabaseManager {
 					default -> statement.setString(index, values.get(i));
 				}
 			}
-			
+
 			return statement.executeUpdate() > 0;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			if (plugin.getConfig().getBoolean("settings.debug-mode"))
+				e.printStackTrace();
 		}
-		
+
 		return false;
 	}
 
@@ -456,7 +469,8 @@ public class DatabaseManager {
 				return true;
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			if (plugin.getConfig().getBoolean("settings.debug-mode"))
+				e.printStackTrace();
 		}
 
 		return false;
@@ -485,7 +499,8 @@ public class DatabaseManager {
 				return returnValue;
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			if (plugin.getConfig().getBoolean("settings.debug-mode"))
+				e.printStackTrace();
 		}
 
 		return false;
@@ -513,7 +528,8 @@ public class DatabaseManager {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			if (plugin.getConfig().getBoolean("settings.debug-mode"))
+				e.printStackTrace();
 			return;
 		}
 
@@ -548,10 +564,12 @@ public class DatabaseManager {
 			try {
 				cfg.save(file);
 			} catch (IOException e) {
-				e.printStackTrace();
+				if (plugin.getConfig().getBoolean("settings.debug-mode"))
+					e.printStackTrace();
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			if (plugin.getConfig().getBoolean("settings.debug-mode"))
+				e.printStackTrace();
 		}
 
 	}
@@ -578,7 +596,8 @@ public class DatabaseManager {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			if (plugin.getConfig().getBoolean("settings.debug-mode"))
+				e.printStackTrace();
 		}
 
 	}
@@ -609,7 +628,8 @@ public class DatabaseManager {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			if (plugin.getConfig().getBoolean("settings.debug-mode"))
+				e.printStackTrace();
 		}
 
 	}
