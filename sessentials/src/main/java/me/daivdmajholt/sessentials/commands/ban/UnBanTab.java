@@ -3,9 +3,7 @@ package me.daivdmajholt.sessentials.commands.ban;
 import java.util.List;
 import java.util.Objects;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
-import org.bukkit.BanEntry;
 import org.bukkit.Bukkit;
 import org.bukkit.BanList.Type;
 import org.bukkit.command.Command;

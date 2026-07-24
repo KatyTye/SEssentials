@@ -8,9 +8,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.CommandExecutor;
 
-import me.daivdmajholt.database.DatabaseManager;
-import me.daivdmajholt.database.DatabaseManager.ValueType;
 import me.daivdmajholt.sessentials.Main;
+import me.daivdmajholt.database.DatabaseManager.ValueType;
 
 public class UnBanCommand implements CommandExecutor {
 
