@@ -36,7 +36,7 @@ public class BanCommand implements CommandExecutor {
 
 		String banMessage = (args.length <= 2)
 				? "No reason was provided."
-				: String.join(" ", Arrays.copyOfRange(args, 2, args.length));
+				: String.join(" ", Arrays.copyOfRange(args, 2, args.length)).replace("\\", "");
 
 		Date expires = null;
 
@@ -73,7 +73,7 @@ public class BanCommand implements CommandExecutor {
 					.addBan(args[0], banMessage, expires, sender.getName());
 
 			player.kickPlayer(
-					cc("&cYou have been banned!\n&7Reason: &f" + banMessage));
+					cc("&cYou have been banned!\n\n&7Reason: &f" + banMessage));
 		}
 
 		sender.sendMessage(cc(" &aYou have now banned the player named &f" + args[0] + "&a."));
