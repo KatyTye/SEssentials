@@ -22,7 +22,7 @@ public class BanCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-		if (!sender.hasPermission("sessentials.ban") || !sender.hasPermission("sessentials.*")) {
+		if (!sender.hasPermission("sessentials.ban") && !sender.hasPermission("sessentials.*")) {
 			sender.sendMessage(cc(plugin.getConfig().getString("messages.permission-denied")));
 			return true;
 		}
@@ -40,7 +40,7 @@ public class BanCommand implements CommandExecutor {
 
 		Date expires = null;
 
-		if (args.length > 1 && (!args[1].equals("0") || !args[1].equalsIgnoreCase("(time in minutes)"))) {
+		if (args.length > 1 && (!args[1].equals("0") && !args[1].equalsIgnoreCase("(time in minutes)"))) {
 			try {
 				int time = Integer.parseInt(args[1]);
 				expires = Date.from(Instant.now().plusSeconds(time * 60));

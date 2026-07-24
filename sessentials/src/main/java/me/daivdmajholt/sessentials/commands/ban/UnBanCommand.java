@@ -39,9 +39,7 @@ public class UnBanCommand implements CommandExecutor {
 			Object uuid = Main.databaseManager.getValueFromDB("players", "uuid", "name", args[0], ValueType.STRING,
 					ValueType.STRING);
 
-			plugin.getLogger().info(uuid.toString());
-
-			if (Bukkit.getBanList(Type.IP).isBanned(uuid.toString()))
+			if (uuid != null && Bukkit.getBanList(Type.IP).isBanned(uuid.toString()))
 				Bukkit.getBanList(Type.IP).pardon(uuid.toString());
 		} catch (Error e) {
 			if (plugin.getConfig().getBoolean("settings.debug-mode"))
