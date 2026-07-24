@@ -48,6 +48,8 @@ public class UnBanCommand implements CommandExecutor {
 				e.printStackTrace();
 		}
 
+		sender.sendMessage(cc(" &aYou have now unbanned the player named &f" + args[0] + "&a."));
+
 		return true;
 	}
 }

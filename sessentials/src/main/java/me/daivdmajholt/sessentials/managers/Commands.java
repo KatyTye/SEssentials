@@ -24,6 +24,8 @@ import me.daivdmajholt.sessentials.commands.ban.BanCommand;
 import me.daivdmajholt.sessentials.commands.ban.BanTab;
 import me.daivdmajholt.sessentials.commands.ban.ListBansCommand;
 import me.daivdmajholt.sessentials.commands.ban.UnBanCommand;
+import me.daivdmajholt.sessentials.commands.ban.UnBanIpCommand;
+import me.daivdmajholt.sessentials.commands.ban.UnBanIpTab;
 import me.daivdmajholt.sessentials.commands.ban.UnBanTab;
 import me.daivdmajholt.sessentials.commands.clearchat.ClearChatCommand;
 import me.daivdmajholt.sessentials.commands.economy.BalanceCommand;
@@ -64,6 +66,9 @@ public class Commands {
 
         plugin.getCommand("unban").setExecutor(new UnBanCommand());
         plugin.getCommand("unban").setTabCompleter(new UnBanTab());
+
+        plugin.getCommand("unbanip").setExecutor(new UnBanIpCommand());
+        plugin.getCommand("unbanip").setTabCompleter(new UnBanIpTab());
 
         // KICK
         plugin.getCommand("kick").setExecutor(new KickCommand());
