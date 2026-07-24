@@ -20,6 +20,11 @@ import me.daivdmajholt.sessentials.commands.warp.WarpTab;
 import me.daivdmajholt.sessentials.commands.warp.WarpsCommand;
 import me.daivdmajholt.sessentials.commands.NothingTab;
 import me.daivdmajholt.sessentials.commands.PlayerTab;
+import me.daivdmajholt.sessentials.commands.ban.BanCommand;
+import me.daivdmajholt.sessentials.commands.ban.BanTab;
+import me.daivdmajholt.sessentials.commands.ban.ListBansCommand;
+import me.daivdmajholt.sessentials.commands.ban.UnBanCommand;
+import me.daivdmajholt.sessentials.commands.ban.UnBanTab;
 import me.daivdmajholt.sessentials.commands.clearchat.ClearChatCommand;
 import me.daivdmajholt.sessentials.commands.economy.BalanceCommand;
 import me.daivdmajholt.sessentials.commands.economy.BalanceTab;
@@ -49,6 +54,16 @@ public class Commands {
         // STOP
         plugin.getCommand("stop").setExecutor(new StopCommand());
         plugin.getCommand("stop").setTabCompleter(new NothingTab());
+
+        // BAN/IP BAN
+        plugin.getCommand("ban").setExecutor(new BanCommand());
+        plugin.getCommand("ban").setTabCompleter(new BanTab());
+
+        plugin.getCommand("bans").setExecutor(new ListBansCommand());
+        plugin.getCommand("bans").setTabCompleter(new NothingTab());
+
+        plugin.getCommand("unban").setExecutor(new UnBanCommand());
+        plugin.getCommand("unban").setTabCompleter(new UnBanTab());
 
         // KICK
         plugin.getCommand("kick").setExecutor(new KickCommand());

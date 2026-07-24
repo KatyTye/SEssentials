@@ -33,6 +33,15 @@ commands:
   kick:
     description: This command kicks any player for any reason provided.
     usage: /kick (player) (reason)
+  ban:
+    description: This command bans any player who is below the executor's rank, regardless of the reason.
+    usage: /ban (player) (reason)
+  bans:
+    description: This command will show all players who are banned on this server.
+    usage: /bans
+  unban:
+    description: This command 
+    usage: /unban (name)
   store:
     description: This command shows the online store link for the player.
     usage: /store

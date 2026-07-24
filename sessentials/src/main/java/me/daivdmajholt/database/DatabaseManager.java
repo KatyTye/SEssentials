@@ -59,6 +59,7 @@ public class DatabaseManager {
 		String sql = """
 					CREATE TABLE IF NOT EXISTS players (
 						uuid TEXT PRIMARY KEY,
+						name TEXT DEFAULT null,
 						balance DOUBLE,
 						rank INT
 					);
@@ -517,16 +518,17 @@ public class DatabaseManager {
 		}
 
 		String insertSQL = """
-					INSERT INTO players(uuid, rank, balance)
-					VALUES (?, ?, ?)
+					INSERT INTO players(uuid, name, rank, balance)
+					VALUES (?, ?, ?, ?)
 				""";
 
 		try (Connection connection = getConnection();
 				PreparedStatement statement = connection.prepareStatement(insertSQL)) {
 
 			statement.setString(1, player.getUniqueId().toString());
-			statement.setInt(2, rank);
-			statement.setDouble(3, balance);
+			statement.setString(2, player.getName().toString());
+			statement.setInt(3, rank);
+			statement.setDouble(4, balance);
 
 			statement.executeUpdate();
 
