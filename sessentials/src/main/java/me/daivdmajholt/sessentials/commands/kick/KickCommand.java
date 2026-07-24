@@ -17,7 +17,7 @@ public class KickCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-		if (!sender.hasPermission("sessentials.feed")) {
+		if (!sender.hasPermission("sessentials.kick")) {
 			sender.sendMessage(cc(plugin.getConfig().getString("messages.permission-denied")));
 			return true;
 		}
