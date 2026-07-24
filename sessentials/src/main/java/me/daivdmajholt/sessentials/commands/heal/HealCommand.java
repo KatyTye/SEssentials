@@ -14,11 +14,11 @@ import me.daivdmajholt.sessentials.Main;
 public class HealCommand implements CommandExecutor {
 
 	private final Main plugin = Main.plugin;
-	
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-		if (!sender.hasPermission("sessentials.heal")) {
+		if (!sender.hasPermission("sessentials.heal") && !sender.hasPermission("sessentials.*")) {
 			sender.sendMessage(cc(plugin.getConfig().getString("messages.permission-denied")));
 			return true;
 		}
@@ -26,7 +26,7 @@ public class HealCommand implements CommandExecutor {
 		Player player = (Player) sender;
 
 		if (args.length != 0) {
-			if (sender.hasPermission("sessentials.heal.other")) {
+			if (!sender.hasPermission("sessentials.heal.other") && !sender.hasPermission("sessentials.*")) {
 				sender.sendMessage(cc(" &cYou don’t have the required permission to heal other players."));
 				return true;
 			}

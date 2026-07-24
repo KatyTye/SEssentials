@@ -28,7 +28,7 @@ public class SetSpawnCommand implements CommandExecutor {
 			return true;
 		}
 
-		if (!sender.hasPermission("sessentials.spawn.set")) {
+		if (!sender.hasPermission("sessentials.spawn.set") && !sender.hasPermission("sessentials.*")) {
 			sender.sendMessage(cc(plugin.getConfig().getString("messages.permission-denied")));
 			return true;
 		}

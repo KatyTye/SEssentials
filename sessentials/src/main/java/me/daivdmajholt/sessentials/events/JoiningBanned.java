@@ -47,7 +47,7 @@ public class JoiningBanned implements Listener {
 							"§eAppeal: §b" + discordMessage);
 
 			Bukkit.getOnlinePlayers().stream()
-					.filter(p -> p.hasPermission("sessentials.ban.notify"))
+					.filter(p -> p.hasPermission("sessentials.ban.notify") || p.hasPermission("sessentials.*"))
 					.forEach(p -> p.sendMessage("§c" + event.getName() + " tried to join while banned!"));
 
 			Bukkit.getLogger().info(event.getName() + " tried to join while banned.");
@@ -70,7 +70,7 @@ public class JoiningBanned implements Listener {
 							"§eAppeal: §b" + discordMessage);
 
 			Bukkit.getOnlinePlayers().stream()
-					.filter(p -> p.hasPermission("sessentials.ban.notify"))
+					.filter(p -> p.hasPermission("sessentials.ban.notify") || p.hasPermission("sessentials.*"))
 					.forEach(p -> p.sendMessage("§c" + event.getName() + " tried to join while banned!"));
 
 			Bukkit.getLogger().info(event.getName() + " tried to join while banned.");

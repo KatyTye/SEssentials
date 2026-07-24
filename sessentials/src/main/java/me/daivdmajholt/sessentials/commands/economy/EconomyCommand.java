@@ -12,14 +12,14 @@ import org.bukkit.entity.Player;
 import me.daivdmajholt.database.DatabaseManager.ValueType;
 import me.daivdmajholt.sessentials.Main;
 
-public class EconomyCommand implements CommandExecutor  {
+public class EconomyCommand implements CommandExecutor {
 
 	private final Main plugin = Main.plugin;
 
-    @Override
+	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-		if (!sender.hasPermission("sessentials.economy")) {
+		if (!sender.hasPermission("sessentials.economy") && !sender.hasPermission("sessentials.*")) {
 			sender.sendMessage(cc(plugin.getConfig().getString("messages.permission-denied")));
 			return true;
 		}
@@ -30,7 +30,8 @@ public class EconomyCommand implements CommandExecutor  {
 			sender.sendMessage("");
 			sender.sendMessage(cc(" &6/economy set (player) (amount) &7- Sets players balance to specific amount."));
 			sender.sendMessage(cc(" &6/economy give (player) (amount) &7- Adds specific amount to player's balance."));
-			sender.sendMessage(cc(" &6/economy remove (player) (amount) &7- Removes a specific amount from the players balance."));
+			sender.sendMessage(
+					cc(" &6/economy remove (player) (amount) &7- Removes a specific amount from the players balance."));
 			sender.sendMessage("");
 			sender.sendMessage(cc(" &f&m                                  &f"));
 			sender.sendMessage("");
@@ -42,7 +43,8 @@ public class EconomyCommand implements CommandExecutor  {
 			return true;
 		}
 
-		if (!args[0].equalsIgnoreCase("give") && !args[0].equalsIgnoreCase("set") && !args[0].equalsIgnoreCase("remove")) {
+		if (!args[0].equalsIgnoreCase("give") && !args[0].equalsIgnoreCase("set")
+				&& !args[0].equalsIgnoreCase("remove")) {
 			sender.sendMessage(cc(" &cUnknown subcommand, please use the command correctly."));
 			return true;
 		}
@@ -74,11 +76,11 @@ public class EconomyCommand implements CommandExecutor  {
 						Main.databaseManager.setBalance(null, p.getUniqueId().toString(), amount);
 					} else if (args[0].equalsIgnoreCase("give")) {
 						amount += (double) Main.databaseManager.getValueFromDB("players", "balance",
-						"uuid", p.getUniqueId().toString(), ValueType.STRING, ValueType.DOUBLE);
+								"uuid", p.getUniqueId().toString(), ValueType.STRING, ValueType.DOUBLE);
 						Main.databaseManager.setBalance(null, p.getUniqueId().toString(), amount);
 					} else {
 						amount = (Double) Main.databaseManager.getValueFromDB("players", "balance",
-						"uuid", p.getUniqueId().toString(), ValueType.STRING, ValueType.DOUBLE) - amount;
+								"uuid", p.getUniqueId().toString(), ValueType.STRING, ValueType.DOUBLE) - amount;
 
 						if (amount < 0) {
 							sender.sendMessage(cc(" &cYou can't set a player's balance below 0$."));
@@ -88,13 +90,17 @@ public class EconomyCommand implements CommandExecutor  {
 						Main.databaseManager.setBalance(null, p.getUniqueId().toString(), amount);
 					}
 
-					sender.sendMessage(cc(" &aYou have changed " + p.getName() + "'s balance to " + String.format("%.2f", Main.databaseManager.getValueFromDB("players", "balance",
-						"uuid", p.getUniqueId().toString(), ValueType.STRING, ValueType.DOUBLE)) + "$."));
+					sender.sendMessage(cc(" &aYou have changed "
+							+ p.getName() + "'s balance to " + String.format("%.2f",
+									Main.databaseManager.getValueFromDB("players", "balance",
+											"uuid", p.getUniqueId().toString(), ValueType.STRING, ValueType.DOUBLE))
+							+ "$."));
 					break;
 				}
 			}
 
-			if (!found) sender.sendMessage(cc(" &cThe player named " + args[0] + " does not exist!"));
+			if (!found)
+				sender.sendMessage(cc(" &cThe player named " + args[0] + " does not exist!"));
 		} else {
 			if (args[0].equalsIgnoreCase("set")) {
 				if (amount < 0) {
@@ -118,10 +124,14 @@ public class EconomyCommand implements CommandExecutor  {
 
 				Main.databaseManager.setBalance(null, player.getUniqueId().toString(), amount);
 			}
-			sender.sendMessage(cc(" &aYou have changed " + player.getName() + "'s balance to " + String.format("%.2f", Main.databaseManager.getValueFromDB("players", "balance",
-						"uuid", player.getUniqueId().toString(), ValueType.STRING, ValueType.DOUBLE)) + "$."));
-			player.sendMessage(cc(" &aYour balance has changed to " + Main.databaseManager.getValueFromDB("players", "balance",
-						"uuid", player.getUniqueId().toString(), ValueType.STRING, ValueType.DOUBLE) + "$."));
+			sender.sendMessage(cc(" &aYou have changed "
+					+ player.getName() + "'s balance to " + String.format("%.2f",
+							Main.databaseManager.getValueFromDB("players", "balance",
+									"uuid", player.getUniqueId().toString(), ValueType.STRING, ValueType.DOUBLE))
+					+ "$."));
+			player.sendMessage(
+					cc(" &aYour balance has changed to " + Main.databaseManager.getValueFromDB("players", "balance",
+							"uuid", player.getUniqueId().toString(), ValueType.STRING, ValueType.DOUBLE) + "$."));
 		}
 
 		return true;

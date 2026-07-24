@@ -24,7 +24,7 @@ public class WarpCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-		if (!sender.hasPermission("sessentials.warp")) {
+		if (!sender.hasPermission("sessentials.warp") && !sender.hasPermission("sessentials.*")) {
 			sender.sendMessage(cc(plugin.getConfig().getString("messages.permission-denied")));
 			return true;
 		}
@@ -45,7 +45,7 @@ public class WarpCommand implements CommandExecutor {
 		}
 
 		if (commands.contains(lowercaseArg)) {
-			if (!sender.hasPermission("sessentials.warp.edit")) {
+			if (!sender.hasPermission("sessentials.warp.edit") && !sender.hasPermission("sessentials.*")) {
 				sender.sendMessage(cc(" &cYou don't have the required permission to edit warps."));
 				return true;
 			}
@@ -58,7 +58,7 @@ public class WarpCommand implements CommandExecutor {
 					}
 
 					if (Main.databaseManager.checkValueFromDB("warps", "name", "name", args[1].toLowerCase(),
-							ValueType.STRING) == false	) {
+							ValueType.STRING) == false) {
 						sender.sendMessage(cc(" &cThe warp name you have entered does not exist."));
 						break;
 					}
@@ -68,7 +68,8 @@ public class WarpCommand implements CommandExecutor {
 						break;
 					}
 
-					Boolean deleted = Main.databaseManager.deleteSpeficItemFromDB("warps", "name", args[1].toLowerCase(), ValueType.STRING);
+					Boolean deleted = Main.databaseManager.deleteSpeficItemFromDB("warps", "name",
+							args[1].toLowerCase(), ValueType.STRING);
 
 					if (deleted) {
 						sender.sendMessage(cc(" &aThe warp named " + args[1].toLowerCase() + " has now been deleted."));
@@ -87,7 +88,7 @@ public class WarpCommand implements CommandExecutor {
 					}
 
 					if (Main.databaseManager.checkValueFromDB("warps", "name", "name", args[1].toLowerCase(),
-							ValueType.STRING) == false	) {
+							ValueType.STRING) == false) {
 						sender.sendMessage(cc(" &cThe warp name you have entered does not exist."));
 						break;
 					}
@@ -100,7 +101,8 @@ public class WarpCommand implements CommandExecutor {
 					player = (Player) sender;
 					location = player.getLocation();
 
-					Boolean updated = Main.databaseManager.updateValuesInDB("warps", "name", "name, x, y, z, yaw, pitch, world", List.of(
+					Boolean updated = Main.databaseManager.updateValuesInDB("warps", "name",
+							"name, x, y, z, yaw, pitch, world", List.of(
 									args[1].toLowerCase(), String.valueOf(location.getX()),
 									String.valueOf(location.getY()), String.valueOf(location.getZ()),
 									String.valueOf(location.getYaw()), String.valueOf(location.getPitch()),
@@ -110,7 +112,8 @@ public class WarpCommand implements CommandExecutor {
 									ValueType.DOUBLE, ValueType.DOUBLE, ValueType.STRING));
 
 					if (updated) {
-						sender.sendMessage(cc(" &aThe warp named " + args[1].toLowerCase() + " has now been relocated."));
+						sender.sendMessage(
+								cc(" &aThe warp named " + args[1].toLowerCase() + " has now been relocated."));
 					}
 
 					break;
@@ -201,7 +204,8 @@ public class WarpCommand implements CommandExecutor {
 					break;
 			}
 		} else {
-			if (args.length == 2 && !sender.hasPermission("sessentials.warp.others")) {
+			if (args.length == 2 && !sender.hasPermission("sessentials.warp.others")
+					&& !sender.hasPermission("sessentials.*")) {
 				sender.sendMessage(cc(" &cYou don't have the required permission to warp others."));
 				return true;
 			}
@@ -216,8 +220,8 @@ public class WarpCommand implements CommandExecutor {
 				return true;
 			}
 
-			if (!sender.hasPermission("sessentials.warp.*")
-					|| !sender.hasPermission("sessentials.warp." + lowercaseArg)) {
+			if (!sender.hasPermission("sessentials.warp.*") && !sender.hasPermission("sessentials.*")
+					&& !sender.hasPermission("sessentials.warp." + lowercaseArg)) {
 				sender.sendMessage(cc(" &cYou don't have the required permission to use this warp."));
 				return true;
 			}

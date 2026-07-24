@@ -17,7 +17,7 @@ public class FlyCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-		if (!sender.hasPermission("sessentials.fly")) {
+		if (!sender.hasPermission("sessentials.fly") && !sender.hasPermission("sessentials.*")) {
 			sender.sendMessage(cc(plugin.getConfig().getString("messages.permission-denied")));
 			return true;
 		}
@@ -32,7 +32,8 @@ public class FlyCommand implements CommandExecutor {
 			Player player = (Player) sender;
 
 			player.setAllowFlight(!player.getAllowFlight());
-			player.sendMessage(cc((player.getAllowFlight()) ? " &aYour flight has now been enabled." : " &cYour flight has now been disabled."));
+			player.sendMessage(cc((player.getAllowFlight()) ? " &aYour flight has now been enabled."
+					: " &cYour flight has now been disabled."));
 		} else {
 			Player player = Bukkit.getPlayer(args[0]);
 
@@ -42,8 +43,10 @@ public class FlyCommand implements CommandExecutor {
 			}
 
 			player.setAllowFlight(!player.getAllowFlight());
-			sender.sendMessage(cc(" &aYou have now " + (player.getAllowFlight() ? "enabled " : "disabled ") + args[0] + "'s flight."));
-			player.sendMessage(cc((player.getAllowFlight()) ? " &aYour flight has now been enabled." : " &cYour flight has now been disabled."));
+			sender.sendMessage(cc(" &aYou have now " + (player.getAllowFlight() ? "enabled " : "disabled ") + args[0]
+					+ "'s flight."));
+			player.sendMessage(cc((player.getAllowFlight()) ? " &aYour flight has now been enabled."
+					: " &cYour flight has now been disabled."));
 		}
 
 		return true;

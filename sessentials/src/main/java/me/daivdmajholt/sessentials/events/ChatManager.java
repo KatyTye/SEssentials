@@ -32,9 +32,9 @@ public class ChatManager implements Listener {
 		FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
 
 		String rank = (String) Main.databaseManager.getValueFromDB("players", "rank",
-		"uuid", player.getUniqueId().toString(), ValueType.STRING, ValueType.STRING);
+				"uuid", player.getUniqueId().toString(), ValueType.STRING, ValueType.STRING);
 		String message = plugin.getConfig().getString("messages.sender-message");
-				
+
 		message = message.replace("%name%", player.getName());
 		message = message.replace("%display%", player.getDisplayName());
 		message = message.replace("%group%", cfg.getString(rank + ".name"));
@@ -46,7 +46,7 @@ public class ChatManager implements Listener {
 			message = message.replace("] ", "");
 		}
 
-		if (player.hasPermission("sessentials.chat.colored")) {
+		if (player.hasPermission("sessentials.chat.colored") || player.hasPermission("sessentials.*")) {
 			Bukkit.broadcastMessage(cc(message + " &f" + event.getMessage()));
 		} else {
 			Bukkit.broadcastMessage(cc(message + " &f") + event.getMessage());

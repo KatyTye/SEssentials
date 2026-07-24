@@ -17,7 +17,7 @@ public class GodCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-		if (!sender.hasPermission("sessentials.god")) {
+		if (!sender.hasPermission("sessentials.god") && !sender.hasPermission("sessentials.*")) {
 			sender.sendMessage(cc(plugin.getConfig().getString("messages.permission-denied")));
 			return true;
 		}
@@ -32,7 +32,8 @@ public class GodCommand implements CommandExecutor {
 			Player player = (Player) sender;
 
 			Main.databaseManager.setGodMode(player, !Main.databaseManager.findGodMode(player));
-			player.sendMessage(cc((Main.databaseManager.findGodMode(player)) ? " &aYour god mode has now been enabled." : " &cYour god mode has now been disabled."));
+			player.sendMessage(cc((Main.databaseManager.findGodMode(player)) ? " &aYour god mode has now been enabled."
+					: " &cYour god mode has now been disabled."));
 		} else {
 			Player player = Bukkit.getPlayer(args[0]);
 
@@ -42,8 +43,11 @@ public class GodCommand implements CommandExecutor {
 			}
 
 			Main.databaseManager.setGodMode(player, !Main.databaseManager.findGodMode(player));
-			sender.sendMessage(cc(" &aYou have now " + (Main.databaseManager.findGodMode(player) ? "enabled " : "disabled ") + args[0] + "'s god mode."));
-			player.sendMessage(cc((Main.databaseManager.findGodMode(player)) ? " &aYour god mode has now been enabled." : " &cYour god mode has now been disabled."));
+			sender.sendMessage(
+					cc(" &aYou have now " + (Main.databaseManager.findGodMode(player) ? "enabled " : "disabled ")
+							+ args[0] + "'s god mode."));
+			player.sendMessage(cc((Main.databaseManager.findGodMode(player)) ? " &aYour god mode has now been enabled."
+					: " &cYour god mode has now been disabled."));
 		}
 
 		return true;

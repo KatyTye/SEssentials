@@ -18,7 +18,7 @@ public class MainCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-		if (!sender.hasPermission("sessentials.help")) {
+		if (!sender.hasPermission("sessentials.help") && !sender.hasPermission("sessentials.*")) {
 			sender.sendMessage(cc(plugin.getConfig().getString("messages.permission-denied")));
 			return true;
 		}
@@ -36,7 +36,8 @@ public class MainCommand implements CommandExecutor {
 			sender.sendMessage(cc(" &6/sessentials help &7- View plugin commands."));
 			// sender.sendMessage(cc(" &6/sessentials edit &7- Edit plugin features."));
 			sender.sendMessage(cc(" &6/sessentials reload &7- Reload plugin features."));
-			// sender.sendMessage(cc(" &6/sessentials toggle &7- Toggle plugin masterswitch."));
+			// sender.sendMessage(cc(" &6/sessentials toggle &7- Toggle plugin
+			// masterswitch."));
 			sender.sendMessage(cc(" &6/sessentials status &7- View status of plugin and config."));
 			sender.sendMessage("");
 			sender.sendMessage(cc(" &f&m                                  &f"));

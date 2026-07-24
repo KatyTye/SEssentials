@@ -13,11 +13,11 @@ import me.daivdmajholt.sessentials.Main;
 public class FeedCommand implements CommandExecutor {
 
 	private final Main plugin = Main.plugin;
-	
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-		if (!sender.hasPermission("sessentials.feed")) {
+		if (!sender.hasPermission("sessentials.feed") && !sender.hasPermission("sessentials.*")) {
 			sender.sendMessage(cc(plugin.getConfig().getString("messages.permission-denied")));
 			return true;
 		}
@@ -25,7 +25,7 @@ public class FeedCommand implements CommandExecutor {
 		Player player = (Player) sender;
 
 		if (args.length != 0) {
-			if (sender.hasPermission("sessentials.feed.other")) {
+			if (!sender.hasPermission("sessentials.feed.other") && !sender.hasPermission("sessentials.*")) {
 				sender.sendMessage(cc(" &cYou don’t have the required permission to feed other players."));
 				return true;
 			}

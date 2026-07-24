@@ -24,7 +24,8 @@ public class SpawnCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-		if (plugin.getConfig().getBoolean("settings.spawn-permission") && !sender.hasPermission("sessentials.spawn")) {
+		if (plugin.getConfig().getBoolean("settings.spawn-permission") && !sender.hasPermission("sessentials.spawn")
+				&& !sender.hasPermission("sessentials.*")) {
 			sender.sendMessage(cc(plugin.getConfig().getString("messages.permission-denied")));
 			return true;
 		}
@@ -70,7 +71,7 @@ public class SpawnCommand implements CommandExecutor {
 			Location loc = new Location(world, x, y, z, yaw, pitch);
 
 			if (args.length == 1) {
-				if (!player.hasPermission("sessentials.spawn.others")) {
+				if (!player.hasPermission("sessentials.spawn.others") && !player.hasPermission("sessentials.*")) {
 					sender.sendMessage(cc(plugin.getConfig().getString("messages.permission-denied")));
 					return true;
 				}

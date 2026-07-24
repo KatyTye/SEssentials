@@ -20,10 +20,10 @@ public class GiveCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-		if (!sender.hasPermission("sessentials.give")) {
-			sender.sendMessage(cc(plugin.getConfig().getString("messages.permission-denied")));
-			return true;
-		}
+        if (!sender.hasPermission("sessentials.give") && !sender.hasPermission("sessentials.*")) {
+            sender.sendMessage(cc(plugin.getConfig().getString("messages.permission-denied")));
+            return true;
+        }
 
         if (args.length < 2) {
             sender.sendMessage(cc(" &cPlease use the command correctly /give (player) (material) [amount]"));
@@ -56,10 +56,13 @@ public class GiveCommand implements CommandExecutor {
         target.getInventory().addItem(item);
 
         if (!sender.equals(target)) {
-            target.sendMessage(cc(" &aYou have received " + (amount >= 2 ? amount + " of " : "a ") + material.name().toLowerCase() + " from " + sender.getName() + "."));
-            sender.sendMessage(cc(" &aYou just gave " + (amount >= 2 ? amount + " of " : "a ") + material.name().toLowerCase() + " to " + target.getName() + "."));
+            target.sendMessage(cc(" &aYou have received " + (amount >= 2 ? amount + " of " : "a ")
+                    + material.name().toLowerCase() + " from " + sender.getName() + "."));
+            sender.sendMessage(cc(" &aYou just gave " + (amount >= 2 ? amount + " of " : "a ")
+                    + material.name().toLowerCase() + " to " + target.getName() + "."));
         } else {
-            target.sendMessage(cc(" &aYou have received " + (amount >= 2 ? amount + " of " : "a ") + material.name().toLowerCase() + "."));
+            target.sendMessage(cc(" &aYou have received " + (amount >= 2 ? amount + " of " : "a ")
+                    + material.name().toLowerCase() + "."));
         }
 
         return true;

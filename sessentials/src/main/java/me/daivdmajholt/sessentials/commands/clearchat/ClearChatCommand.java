@@ -13,11 +13,11 @@ import me.daivdmajholt.sessentials.Main;
 public class ClearChatCommand implements CommandExecutor {
 
 	private final Main plugin = Main.plugin;
-	
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-		if (!sender.hasPermission("sessentials.chat.clear")) {
+		if (!sender.hasPermission("sessentials.chat.clear") && !sender.hasPermission("sessentials.*")) {
 			sender.sendMessage(cc(plugin.getConfig().getString("messages.permission-denied")));
 			return true;
 		}

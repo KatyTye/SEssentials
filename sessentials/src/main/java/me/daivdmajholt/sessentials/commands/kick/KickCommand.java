@@ -13,11 +13,11 @@ import me.daivdmajholt.sessentials.Main;
 public class KickCommand implements CommandExecutor {
 
 	private final Main plugin = Main.plugin;
-	
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-		if (!sender.hasPermission("sessentials.kick")) {
+		if (!sender.hasPermission("sessentials.kick") && !sender.hasPermission("sessentials.*")) {
 			sender.sendMessage(cc(plugin.getConfig().getString("messages.permission-denied")));
 			return true;
 		}
@@ -37,12 +37,14 @@ public class KickCommand implements CommandExecutor {
 		String message = "";
 
 		for (int i = 1; i < args.length; i++) {
-			if (i > 1) message += " " + args[i];
+			if (i > 1)
+				message += " " + args[i];
 		}
 
-		String kickMessage = (args.length == 1) ? "KICKED BY " + sender.getName().toUpperCase() + ": No reason was provided."
-		: "KICKED BY " + sender.getName().toUpperCase() + ":" + message;
-		
+		String kickMessage = (args.length == 1)
+				? "KICKED BY " + sender.getName().toUpperCase() + ": No reason was provided."
+				: "KICKED BY " + sender.getName().toUpperCase() + ":" + message;
+
 		player.kickPlayer(kickMessage);
 		sender.sendMessage(cc(" &aYou have now kicked the player named &f" + args[0] + "&a."));
 

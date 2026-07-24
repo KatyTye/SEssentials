@@ -1,4 +1,5 @@
 package me.daivdmajholt.sessentials.commands.gamemode;
+
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
@@ -10,15 +11,14 @@ import me.daivdmajholt.sessentials.Main;
 
 import static me.daivdmajholt.sessentials.Utils.cc;
 
-
 public class GamemodeSPCommand implements CommandExecutor {
 
 	private final Main plugin = Main.plugin;
-	
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-		if (!sender.hasPermission("sessentials.gamemode")) {
+		if (!sender.hasPermission("sessentials.gamemode") && !sender.hasPermission("sessentials.*")) {
 			sender.sendMessage(cc(plugin.getConfig().getString("messages.permission-denied")));
 			return true;
 		}

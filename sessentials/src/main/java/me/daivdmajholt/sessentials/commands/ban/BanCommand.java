@@ -22,7 +22,7 @@ public class BanCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-		if (!sender.hasPermission("sessentials.ban")) {
+		if (!sender.hasPermission("sessentials.ban") || !sender.hasPermission("sessentials.*")) {
 			sender.sendMessage(cc(plugin.getConfig().getString("messages.permission-denied")));
 			return true;
 		}
@@ -60,7 +60,7 @@ public class BanCommand implements CommandExecutor {
 					.addBan(args[0], banMessage, expires, sender.getName());
 		} else {
 
-			if (player.hasPermission("sessentials.ban.immunity")) {
+			if (player.hasPermission("sessentials.ban.immunity") || player.hasPermission("sessentials.*")) {
 				sender.sendMessage(cc(" &cThis player cannot be banned or kicked from this server."));
 				return true;
 			}

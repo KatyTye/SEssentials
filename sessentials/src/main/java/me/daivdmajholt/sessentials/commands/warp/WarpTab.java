@@ -21,7 +21,7 @@ public class WarpTab implements TabCompleter {
 		List<String> suggestions = new ArrayList<>();
 
 		if (args.length == 1) {
-			if (sender.hasPermission("sessentials.warp.edit")) {
+			if (sender.hasPermission("sessentials.warp.edit") || sender.hasPermission("sessentials.*")) {
 				warps.addAll(commands);
 			}
 
