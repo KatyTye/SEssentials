@@ -88,6 +88,12 @@ public class MainCommand implements CommandExecutor {
 					sender.sendMessage(cc(" &fCommunity: &c&lDISABLED"));
 				}
 				sender.sendMessage("");
+
+				if (plugin.getConfig().getBoolean("settings.allow-interfering")) {
+					sender.sendMessage(
+							cc(" &e&lWARNING:&e Allow-Interfering is enabled, please disable it in the config."));
+					sender.sendMessage("");
+				}
 				sender.sendMessage(cc(" &f&m                                  &f"));
 				sender.sendMessage("");
 			});

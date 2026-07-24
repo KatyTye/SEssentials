@@ -29,6 +29,7 @@ settings:
   force-respawn: false              # Force player's to respawn on death
   force-gamemode: true              # Force player's gamemode on server join
   spawn-permission: false           # Require special permission to use spawn
+  allow-interfering: false          # Disables commands and events from interfering with the plugin’s functionality
   default-gamemode: "survival"      # Sets the gamemode for force-gamemode setting
 
 # Default messages
