@@ -1,23 +1,6 @@
 package me.daivdmajholt.sessentials.managers;
 
 import me.daivdmajholt.sessentials.Main;
-import me.daivdmajholt.sessentials.commands.give.GiveCommand;
-import me.daivdmajholt.sessentials.commands.give.GiveTab;
-import me.daivdmajholt.sessentials.commands.god.GodCommand;
-import me.daivdmajholt.sessentials.commands.god.GodTab;
-import me.daivdmajholt.sessentials.commands.heal.HealCommand;
-import me.daivdmajholt.sessentials.commands.kick.KickCommand;
-import me.daivdmajholt.sessentials.commands.rank.RankCommand;
-import me.daivdmajholt.sessentials.commands.rank.RankTab;
-import me.daivdmajholt.sessentials.commands.sessentials.MainCommand;
-import me.daivdmajholt.sessentials.commands.sessentials.MainTab;
-import me.daivdmajholt.sessentials.commands.spawn.SetSpawnCommand;
-import me.daivdmajholt.sessentials.commands.spawn.SpawnCommand;
-import me.daivdmajholt.sessentials.commands.spawn.SpawnTab;
-import me.daivdmajholt.sessentials.commands.stop.StopCommand;
-import me.daivdmajholt.sessentials.commands.warp.WarpCommand;
-import me.daivdmajholt.sessentials.commands.warp.WarpTab;
-import me.daivdmajholt.sessentials.commands.warp.WarpsCommand;
 import me.daivdmajholt.sessentials.commands.NothingTab;
 import me.daivdmajholt.sessentials.commands.PlayerTab;
 import me.daivdmajholt.sessentials.commands.ban.BanCommand;
@@ -28,6 +11,7 @@ import me.daivdmajholt.sessentials.commands.ban.UnBanIpCommand;
 import me.daivdmajholt.sessentials.commands.ban.UnBanIpTab;
 import me.daivdmajholt.sessentials.commands.ban.UnBanTab;
 import me.daivdmajholt.sessentials.commands.clearchat.ClearChatCommand;
+import me.daivdmajholt.sessentials.commands.clearlag.ClearLagCommand;
 import me.daivdmajholt.sessentials.commands.economy.BalanceCommand;
 import me.daivdmajholt.sessentials.commands.economy.BalanceTab;
 import me.daivdmajholt.sessentials.commands.economy.EconomyCommand;
@@ -42,6 +26,24 @@ import me.daivdmajholt.sessentials.commands.gamemode.GamemodeMiniTab;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeSCommand;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeSPCommand;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeTab;
+import me.daivdmajholt.sessentials.commands.give.GiveCommand;
+import me.daivdmajholt.sessentials.commands.give.GiveTab;
+import me.daivdmajholt.sessentials.commands.god.GodCommand;
+import me.daivdmajholt.sessentials.commands.god.GodTab;
+import me.daivdmajholt.sessentials.commands.heal.HealCommand;
+import me.daivdmajholt.sessentials.commands.invensee.InvenseeCommand;
+import me.daivdmajholt.sessentials.commands.kick.KickCommand;
+import me.daivdmajholt.sessentials.commands.rank.RankCommand;
+import me.daivdmajholt.sessentials.commands.rank.RankTab;
+import me.daivdmajholt.sessentials.commands.sessentials.MainCommand;
+import me.daivdmajholt.sessentials.commands.sessentials.MainTab;
+import me.daivdmajholt.sessentials.commands.spawn.SetSpawnCommand;
+import me.daivdmajholt.sessentials.commands.spawn.SpawnCommand;
+import me.daivdmajholt.sessentials.commands.spawn.SpawnTab;
+import me.daivdmajholt.sessentials.commands.stop.StopCommand;
+import me.daivdmajholt.sessentials.commands.warp.WarpCommand;
+import me.daivdmajholt.sessentials.commands.warp.WarpTab;
+import me.daivdmajholt.sessentials.commands.warp.WarpsCommand;
 
 public class Commands {
 
@@ -104,6 +106,17 @@ public class Commands {
             plugin.getCommand("eco").setTabCompleter(new EconomyTab());
             plugin.getCommand("economy").setExecutor(new EconomyCommand());
             plugin.getCommand("economy").setTabCompleter(new EconomyTab());
+
+            // INVENSEE
+            plugin.getCommand("invensee").setExecutor(new InvenseeCommand());
+            plugin.getCommand("invensee").setTabCompleter(new PlayerTab());
+
+            // CLEARLAG
+            plugin.getCommand("clearlag").setExecutor(new ClearLagCommand());
+            plugin.getCommand("clearlag").setTabCompleter(new NothingTab());
+
+            plugin.getCommand("cl").setExecutor(new ClearLagCommand());
+            plugin.getCommand("cl").setTabCompleter(new NothingTab());
 
             // RANK
             plugin.getCommand("rm").setExecutor(new RankCommand());

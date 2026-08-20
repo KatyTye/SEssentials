@@ -66,6 +66,12 @@ commands:
   cc:
     description: This command clears the chat for all players.
     usage: /cc
+  clearlag:
+    description: This command clears all dropped items on the ground.
+    usage: /clearlag
+  cl:
+    description: This command clears all dropped items on the ground.
+    usage: /cl
   rankmanager:
     description: This commands handles ranks and permissions.
     usage: /rankmanager help
@@ -102,3 +108,6 @@ commands:
   give:
     description: This command gives a player a specific  item.
     usage: /give (player) (item) (amount)
+  invensee:
+    description: This command opens another players inventory.
+    usage: /invensee (player)
