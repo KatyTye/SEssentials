@@ -18,6 +18,9 @@ commands:
   realname:
     description: Discover your and other players' real username.
     usage: /realname (player)
+  ping:
+    description: This commands shows yours and other players' ping.
+    usage: /ping (player)
   online:
     description: Discover total online player count.
     usage: /online

@@ -35,6 +35,7 @@ import me.daivdmajholt.sessentials.commands.invensee.InvenseeCommand;
 import me.daivdmajholt.sessentials.commands.kick.KickCommand;
 import me.daivdmajholt.sessentials.commands.online.OnlineCommand;
 import me.daivdmajholt.sessentials.commands.online.OnlineStaffCommand;
+import me.daivdmajholt.sessentials.commands.ping.PingCommand;
 import me.daivdmajholt.sessentials.commands.rank.RankCommand;
 import me.daivdmajholt.sessentials.commands.rank.RankTab;
 import me.daivdmajholt.sessentials.commands.realname.RealNameCommand;
@@ -86,6 +87,10 @@ public class Commands {
 		// KICK
 		plugin.getCommand("kick").setExecutor(new KickCommand());
 		plugin.getCommand("kick").setTabCompleter(new PlayerTab());
+
+		// PING
+		plugin.getCommand("ping").setExecutor(new PingCommand());
+		plugin.getCommand("ping").setTabCompleter(new PlayerTab());
 
 		// SEED
 		plugin.getCommand("seed").setExecutor(new SeedCommand());
