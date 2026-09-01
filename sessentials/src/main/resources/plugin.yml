@@ -18,6 +18,9 @@ commands:
   god:
     description: This command toggles god mode for a player.
     usage: /god (player)
+  seed:
+    description: This command shows the world seed.
+    usage: /seed
   buy:
     description: This command shows the online store link for the player.
     usage: /buy

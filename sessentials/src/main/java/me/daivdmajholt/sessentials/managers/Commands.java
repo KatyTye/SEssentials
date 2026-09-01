@@ -35,6 +35,7 @@ import me.daivdmajholt.sessentials.commands.invensee.InvenseeCommand;
 import me.daivdmajholt.sessentials.commands.kick.KickCommand;
 import me.daivdmajholt.sessentials.commands.rank.RankCommand;
 import me.daivdmajholt.sessentials.commands.rank.RankTab;
+import me.daivdmajholt.sessentials.commands.seed.SeedCommand;
 import me.daivdmajholt.sessentials.commands.sessentials.MainCommand;
 import me.daivdmajholt.sessentials.commands.sessentials.MainTab;
 import me.daivdmajholt.sessentials.commands.spawn.SetSpawnCommand;
@@ -75,6 +76,10 @@ public class Commands {
         // KICK
         plugin.getCommand("kick").setExecutor(new KickCommand());
         plugin.getCommand("kick").setTabCompleter(new PlayerTab());
+
+        // SEED
+        plugin.getCommand("seed").setExecutor(new SeedCommand());
+        plugin.getCommand("seed").setTabCompleter(new NothingTab());
 
         // COMMANDS AFTER CONFIG
         if (plugin.getConfig().getBoolean("features.commands")) {
