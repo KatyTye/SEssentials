@@ -37,6 +37,7 @@ import me.daivdmajholt.sessentials.commands.online.OnlineCommand;
 import me.daivdmajholt.sessentials.commands.online.OnlineStaffCommand;
 import me.daivdmajholt.sessentials.commands.rank.RankCommand;
 import me.daivdmajholt.sessentials.commands.rank.RankTab;
+import me.daivdmajholt.sessentials.commands.realname.RealNameCommand;
 import me.daivdmajholt.sessentials.commands.seed.SeedCommand;
 import me.daivdmajholt.sessentials.commands.sessentials.MainCommand;
 import me.daivdmajholt.sessentials.commands.sessentials.MainTab;
@@ -105,6 +106,10 @@ public class Commands {
 			plugin.getCommand("gm").setTabCompleter(new GamemodeTab());
 			plugin.getCommand("gamemode").setExecutor(new GamemodeCommand());
 			plugin.getCommand("gamemode").setTabCompleter(new GamemodeTab());
+
+			// REAL USERNAME
+			plugin.getCommand("realname").setExecutor(new RealNameCommand());
+			plugin.getCommand("realname").setTabCompleter(new PlayerTab());
 
 			// GIVE
 			plugin.getCommand("give").setExecutor(new GiveCommand());

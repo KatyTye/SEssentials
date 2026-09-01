@@ -15,6 +15,9 @@ commands:
   balance:
     description: This commands shows yours and other players' balance.
     usage: /balance (player)
+  realname:
+    description: Discover your and other players' real username.
+    usage: /realname (player)
   online:
     description: Discover total online player count.
     usage: /online
