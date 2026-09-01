@@ -9,6 +9,9 @@ commands:
   bal:
     description: This commands shows yours and other players' balance.
     usage: /bal (player)
+  money:
+    description: This commands shows yours and other players' balance.
+    usage: /money (player)
   balance:
     description: This commands shows yours and other players' balance.
     usage: /balance (player)

@@ -104,6 +104,8 @@ public class Commands {
             // ECONOMY
             plugin.getCommand("bal").setExecutor(new BalanceCommand());
             plugin.getCommand("bal").setTabCompleter(new BalanceTab());
+            plugin.getCommand("money").setExecutor(new BalanceCommand());
+            plugin.getCommand("money").setTabCompleter(new BalanceTab());
             plugin.getCommand("balance").setExecutor(new BalanceCommand());
             plugin.getCommand("balance").setTabCompleter(new BalanceTab());
 
