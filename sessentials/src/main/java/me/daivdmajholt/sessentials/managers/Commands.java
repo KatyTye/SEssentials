@@ -33,6 +33,8 @@ import me.daivdmajholt.sessentials.commands.god.GodTab;
 import me.daivdmajholt.sessentials.commands.heal.HealCommand;
 import me.daivdmajholt.sessentials.commands.invensee.InvenseeCommand;
 import me.daivdmajholt.sessentials.commands.kick.KickCommand;
+import me.daivdmajholt.sessentials.commands.online.OnlineCommand;
+import me.daivdmajholt.sessentials.commands.online.OnlineStaffCommand;
 import me.daivdmajholt.sessentials.commands.rank.RankCommand;
 import me.daivdmajholt.sessentials.commands.rank.RankTab;
 import me.daivdmajholt.sessentials.commands.seed.SeedCommand;
@@ -48,124 +50,131 @@ import me.daivdmajholt.sessentials.commands.warp.WarpsCommand;
 
 public class Commands {
 
-    private final Main plugin = Main.plugin;
+	private final Main plugin = Main.plugin;
 
-    public void registerCommands() {
+	public void registerCommands() {
 
-        // PRIMARY/MAIN
-        plugin.getCommand("sessentials").setExecutor(new MainCommand());
-        plugin.getCommand("sessentials").setTabCompleter(new MainTab());
+		// PRIMARY/MAIN
+		plugin.getCommand("sessentials").setExecutor(new MainCommand());
+		plugin.getCommand("sessentials").setTabCompleter(new MainTab());
 
-        // STOP
-        plugin.getCommand("stop").setExecutor(new StopCommand());
-        plugin.getCommand("stop").setTabCompleter(new NothingTab());
+		// STOP
+		plugin.getCommand("stop").setExecutor(new StopCommand());
+		plugin.getCommand("stop").setTabCompleter(new NothingTab());
 
-        // BAN/IP BAN
-        plugin.getCommand("ban").setExecutor(new BanCommand());
-        plugin.getCommand("ban").setTabCompleter(new BanTab());
+		// BAN/IP BAN
+		plugin.getCommand("ban").setExecutor(new BanCommand());
+		plugin.getCommand("ban").setTabCompleter(new BanTab());
 
-        plugin.getCommand("bans").setExecutor(new ListBansCommand());
-        plugin.getCommand("bans").setTabCompleter(new NothingTab());
+		plugin.getCommand("bans").setExecutor(new ListBansCommand());
+		plugin.getCommand("bans").setTabCompleter(new NothingTab());
 
-        plugin.getCommand("unban").setExecutor(new UnBanCommand());
-        plugin.getCommand("unban").setTabCompleter(new UnBanTab());
+		plugin.getCommand("unban").setExecutor(new UnBanCommand());
+		plugin.getCommand("unban").setTabCompleter(new UnBanTab());
 
-        plugin.getCommand("unbanip").setExecutor(new UnBanIpCommand());
-        plugin.getCommand("unbanip").setTabCompleter(new UnBanIpTab());
+		plugin.getCommand("unbanip").setExecutor(new UnBanIpCommand());
+		plugin.getCommand("unbanip").setTabCompleter(new UnBanIpTab());
 
-        // KICK
-        plugin.getCommand("kick").setExecutor(new KickCommand());
-        plugin.getCommand("kick").setTabCompleter(new PlayerTab());
+		// ONLINE
+		plugin.getCommand("online").setExecutor(new OnlineCommand());
+		plugin.getCommand("online").setTabCompleter(new NothingTab());
 
-        // SEED
-        plugin.getCommand("seed").setExecutor(new SeedCommand());
-        plugin.getCommand("seed").setTabCompleter(new NothingTab());
+        plugin.getCommand("onlinestaff").setExecutor(new OnlineStaffCommand());
+        plugin.getCommand("onlinestaff").setTabCompleter(new NothingTab());
 
-        // COMMANDS AFTER CONFIG
-        if (plugin.getConfig().getBoolean("features.commands")) {
-            // GAMEMODES
-            plugin.getCommand("gmc").setExecutor(new GamemodeCCommand());
-            plugin.getCommand("gms").setExecutor(new GamemodeSCommand());
-            plugin.getCommand("gma").setExecutor(new GamemodeACommand());
-            plugin.getCommand("gmsp").setExecutor(new GamemodeSPCommand());
-            plugin.getCommand("gmc").setTabCompleter(new GamemodeMiniTab());
-            plugin.getCommand("gma").setTabCompleter(new GamemodeMiniTab());
-            plugin.getCommand("gms").setTabCompleter(new GamemodeMiniTab());
-            plugin.getCommand("gmsp").setTabCompleter(new GamemodeMiniTab());
-            plugin.getCommand("gm").setExecutor(new GamemodeCommand());
-            plugin.getCommand("gm").setTabCompleter(new GamemodeTab());
-            plugin.getCommand("gamemode").setExecutor(new GamemodeCommand());
-            plugin.getCommand("gamemode").setTabCompleter(new GamemodeTab());
+		// KICK
+		plugin.getCommand("kick").setExecutor(new KickCommand());
+		plugin.getCommand("kick").setTabCompleter(new PlayerTab());
 
-            // GIVE
-            plugin.getCommand("give").setExecutor(new GiveCommand());
-            plugin.getCommand("give").setTabCompleter(new GiveTab());
+		// SEED
+		plugin.getCommand("seed").setExecutor(new SeedCommand());
+		plugin.getCommand("seed").setTabCompleter(new NothingTab());
 
-            // ECONOMY
-            plugin.getCommand("bal").setExecutor(new BalanceCommand());
-            plugin.getCommand("bal").setTabCompleter(new BalanceTab());
-            plugin.getCommand("money").setExecutor(new BalanceCommand());
-            plugin.getCommand("money").setTabCompleter(new BalanceTab());
-            plugin.getCommand("balance").setExecutor(new BalanceCommand());
-            plugin.getCommand("balance").setTabCompleter(new BalanceTab());
+		// COMMANDS AFTER CONFIG
+		if (plugin.getConfig().getBoolean("features.commands")) {
+			// GAMEMODES
+			plugin.getCommand("gmc").setExecutor(new GamemodeCCommand());
+			plugin.getCommand("gms").setExecutor(new GamemodeSCommand());
+			plugin.getCommand("gma").setExecutor(new GamemodeACommand());
+			plugin.getCommand("gmsp").setExecutor(new GamemodeSPCommand());
+			plugin.getCommand("gmc").setTabCompleter(new GamemodeMiniTab());
+			plugin.getCommand("gma").setTabCompleter(new GamemodeMiniTab());
+			plugin.getCommand("gms").setTabCompleter(new GamemodeMiniTab());
+			plugin.getCommand("gmsp").setTabCompleter(new GamemodeMiniTab());
+			plugin.getCommand("gm").setExecutor(new GamemodeCommand());
+			plugin.getCommand("gm").setTabCompleter(new GamemodeTab());
+			plugin.getCommand("gamemode").setExecutor(new GamemodeCommand());
+			plugin.getCommand("gamemode").setTabCompleter(new GamemodeTab());
 
-            plugin.getCommand("eco").setExecutor(new EconomyCommand());
-            plugin.getCommand("eco").setTabCompleter(new EconomyTab());
-            plugin.getCommand("economy").setExecutor(new EconomyCommand());
-            plugin.getCommand("economy").setTabCompleter(new EconomyTab());
+			// GIVE
+			plugin.getCommand("give").setExecutor(new GiveCommand());
+			plugin.getCommand("give").setTabCompleter(new GiveTab());
 
-            // INVENSEE
-            plugin.getCommand("invensee").setExecutor(new InvenseeCommand());
-            plugin.getCommand("invensee").setTabCompleter(new PlayerTab());
+			// ECONOMY
+			plugin.getCommand("bal").setExecutor(new BalanceCommand());
+			plugin.getCommand("bal").setTabCompleter(new BalanceTab());
+			plugin.getCommand("money").setExecutor(new BalanceCommand());
+			plugin.getCommand("money").setTabCompleter(new BalanceTab());
+			plugin.getCommand("balance").setExecutor(new BalanceCommand());
+			plugin.getCommand("balance").setTabCompleter(new BalanceTab());
 
-            // CLEARLAG
-            plugin.getCommand("clearlag").setExecutor(new ClearLagCommand());
-            plugin.getCommand("clearlag").setTabCompleter(new NothingTab());
+			plugin.getCommand("eco").setExecutor(new EconomyCommand());
+			plugin.getCommand("eco").setTabCompleter(new EconomyTab());
+			plugin.getCommand("economy").setExecutor(new EconomyCommand());
+			plugin.getCommand("economy").setTabCompleter(new EconomyTab());
 
-            plugin.getCommand("cl").setExecutor(new ClearLagCommand());
-            plugin.getCommand("cl").setTabCompleter(new NothingTab());
+			// INVENSEE
+			plugin.getCommand("invensee").setExecutor(new InvenseeCommand());
+			plugin.getCommand("invensee").setTabCompleter(new PlayerTab());
 
-            // RANK
-            plugin.getCommand("rm").setExecutor(new RankCommand());
-            plugin.getCommand("rm").setTabCompleter(new RankTab());
-            plugin.getCommand("rankmanager").setExecutor(new RankCommand());
-            plugin.getCommand("rankmanager").setTabCompleter(new RankTab());
+			// CLEARLAG
+			plugin.getCommand("clearlag").setExecutor(new ClearLagCommand());
+			plugin.getCommand("clearlag").setTabCompleter(new NothingTab());
 
-            // HEAL
-            plugin.getCommand("heal").setExecutor(new HealCommand());
-            plugin.getCommand("heal").setTabCompleter(new PlayerTab());
+			plugin.getCommand("cl").setExecutor(new ClearLagCommand());
+			plugin.getCommand("cl").setTabCompleter(new NothingTab());
 
-            // FEED
-            plugin.getCommand("feed").setExecutor(new FeedCommand());
-            plugin.getCommand("feed").setTabCompleter(new PlayerTab());
+			// RANK
+			plugin.getCommand("rm").setExecutor(new RankCommand());
+			plugin.getCommand("rm").setTabCompleter(new RankTab());
+			plugin.getCommand("rankmanager").setExecutor(new RankCommand());
+			plugin.getCommand("rankmanager").setTabCompleter(new RankTab());
 
-            // FLY
-            plugin.getCommand("fly").setExecutor(new FlyCommand());
-            plugin.getCommand("fly").setTabCompleter(new FlyTab());
+			// HEAL
+			plugin.getCommand("heal").setExecutor(new HealCommand());
+			plugin.getCommand("heal").setTabCompleter(new PlayerTab());
 
-            // GOD
-            plugin.getCommand("god").setExecutor(new GodCommand());
-            plugin.getCommand("god").setTabCompleter(new GodTab());
+			// FEED
+			plugin.getCommand("feed").setExecutor(new FeedCommand());
+			plugin.getCommand("feed").setTabCompleter(new PlayerTab());
 
-            // WARP
-            plugin.getCommand("warp").setExecutor(new WarpCommand());
-            plugin.getCommand("warp").setTabCompleter(new WarpTab());
-            plugin.getCommand("warps").setExecutor(new WarpsCommand());
-            plugin.getCommand("warps").setTabCompleter(new NothingTab());
+			// FLY
+			plugin.getCommand("fly").setExecutor(new FlyCommand());
+			plugin.getCommand("fly").setTabCompleter(new FlyTab());
 
-            // CLEARCHAT
-            plugin.getCommand("clearchat").setExecutor(new ClearChatCommand());
-            plugin.getCommand("clearchat").setTabCompleter(new NothingTab());
-            plugin.getCommand("cc").setExecutor(new ClearChatCommand());
-            plugin.getCommand("cc").setTabCompleter(new NothingTab());
+			// GOD
+			plugin.getCommand("god").setExecutor(new GodCommand());
+			plugin.getCommand("god").setTabCompleter(new GodTab());
 
-            // SPAWN
-            plugin.getCommand("spawn").setExecutor(new SpawnCommand());
-            plugin.getCommand("spawn").setTabCompleter(new SpawnTab());
-            plugin.getCommand("setspawn").setExecutor(new SetSpawnCommand());
-            plugin.getCommand("setspawn").setTabCompleter(new NothingTab());
-        } else {
-            plugin.getLogger().info("Commands are disabled!");
-        }
-    }
+			// WARP
+			plugin.getCommand("warp").setExecutor(new WarpCommand());
+			plugin.getCommand("warp").setTabCompleter(new WarpTab());
+			plugin.getCommand("warps").setExecutor(new WarpsCommand());
+			plugin.getCommand("warps").setTabCompleter(new NothingTab());
+
+			// CLEARCHAT
+			plugin.getCommand("clearchat").setExecutor(new ClearChatCommand());
+			plugin.getCommand("clearchat").setTabCompleter(new NothingTab());
+			plugin.getCommand("cc").setExecutor(new ClearChatCommand());
+			plugin.getCommand("cc").setTabCompleter(new NothingTab());
+
+			// SPAWN
+			plugin.getCommand("spawn").setExecutor(new SpawnCommand());
+			plugin.getCommand("spawn").setTabCompleter(new SpawnTab());
+			plugin.getCommand("setspawn").setExecutor(new SetSpawnCommand());
+			plugin.getCommand("setspawn").setTabCompleter(new NothingTab());
+		} else {
+			plugin.getLogger().info("Commands are disabled!");
+		}
+	}
 }
