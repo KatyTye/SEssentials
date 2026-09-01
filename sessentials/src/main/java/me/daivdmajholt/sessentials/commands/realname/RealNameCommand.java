@@ -38,6 +38,9 @@ public class RealNameCommand implements CommandExecutor {
 				sender.sendMessage(cc(" &cThe player named " + args[0] + " is currently not online!"));
 				return true;
 			}
+
+			sender.sendMessage(cc(" &aThe players' real username is &f" + player.getName() + "&a."));
+			return true;
 		}
 
 		Player player = (Player) sender;

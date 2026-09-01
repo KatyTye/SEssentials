@@ -39,7 +39,7 @@ public class PingCommand implements CommandExecutor {
 				return true;
 			}
 
-			sender.sendMessage(cc(" &aThe ping of " + player.getName() + "&f is &f" + player.getPing() + "&a."));
+			sender.sendMessage(cc(" &aThe ping of " + player.getName() + " is &f" + player.getPing() + "&a."));
 			return true;
 		}
 
