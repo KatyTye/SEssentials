@@ -21,7 +21,10 @@ public class RealNameCommand implements CommandExecutor {
 			return true;
 		}
 
-		Player player = (Player) sender;
+		if (!(sender instanceof Player) && args.length == 0) {
+			sender.sendMessage(cc(" &cYou need to use the full command as the console."));
+			return true;
+		}
 
 		if (args.length != 0) {
 			if (!sender.hasPermission("sessentials.realname.other") && !sender.hasPermission("sessentials.*")) {
@@ -29,13 +32,15 @@ public class RealNameCommand implements CommandExecutor {
 				return true;
 			}
 
-			player = Bukkit.getPlayer(args[0]);
+			Player player = Bukkit.getPlayer(args[0]);
 
 			if (player == null) {
 				sender.sendMessage(cc(" &cThe player named " + args[0] + " is currently not online!"));
 				return true;
 			}
 		}
+
+		Player player = (Player) sender;
 
 		sender.sendMessage(cc(" &aThe players' real username is &f" + player.getName() + "&a."));
 

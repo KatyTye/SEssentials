@@ -45,6 +45,8 @@ import me.daivdmajholt.sessentials.commands.sessentials.MainTab;
 import me.daivdmajholt.sessentials.commands.spawn.SetSpawnCommand;
 import me.daivdmajholt.sessentials.commands.spawn.SpawnCommand;
 import me.daivdmajholt.sessentials.commands.spawn.SpawnTab;
+import me.daivdmajholt.sessentials.commands.speed.SpeedCommand;
+import me.daivdmajholt.sessentials.commands.speed.SpeedTab;
 import me.daivdmajholt.sessentials.commands.stop.StopCommand;
 import me.daivdmajholt.sessentials.commands.warp.WarpCommand;
 import me.daivdmajholt.sessentials.commands.warp.WarpTab;
@@ -95,6 +97,10 @@ public class Commands {
 		// SEED
 		plugin.getCommand("seed").setExecutor(new SeedCommand());
 		plugin.getCommand("seed").setTabCompleter(new NothingTab());
+
+		// SPEED
+		plugin.getCommand("speed").setExecutor(new SpeedCommand());
+		plugin.getCommand("speed").setTabCompleter(new SpeedTab());
 
 		// COMMANDS AFTER CONFIG
 		if (plugin.getConfig().getBoolean("features.commands")) {

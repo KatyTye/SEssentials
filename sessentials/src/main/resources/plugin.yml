@@ -21,6 +21,9 @@ commands:
   ping:
     description: This commands shows yours and other players' ping.
     usage: /ping (player)
+  speed:
+    description: This commands controls your and other players' flying/running speed.
+    usage: /speed (speed) (player)
   online:
     description: Discover total online player count.
     usage: /online
