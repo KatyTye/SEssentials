@@ -14,7 +14,7 @@ public class SpeedTab implements TabCompleter {
 		List<String> suggestions = new ArrayList<>();
 
 		if (args.length == 1) {
-			List<String> options = List.of("1","2","3","4","5","6","7","8","9","10");
+			List<String> options = List.of("1","2","3","4","5","6","7","8","9");
 			for (String s : options)
 				if (s.startsWith(args[args.length - 1]))
 					suggestions.add(s);

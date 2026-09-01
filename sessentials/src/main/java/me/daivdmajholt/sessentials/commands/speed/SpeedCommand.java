@@ -48,12 +48,12 @@ public class SpeedCommand implements CommandExecutor {
 			}
 
 			if (player.isFlying()) {
-				player.setFlySpeed(speed);
+				player.setFlySpeed(speed/10);
 				sender.sendMessage(cc(" &aChanged &f" + player.getName() + "'s&a flight speed to &f" + speed + "&a."));
 				return true;
 			}
 
-			player.setWalkSpeed(speed);
+			player.setWalkSpeed(speed/10);
 			sender.sendMessage(cc(" &aChanged &f" + player.getName() + "'s&a walking speed to &f" + speed + "&a."));
 			return true;
 		}
@@ -61,12 +61,12 @@ public class SpeedCommand implements CommandExecutor {
 		Player player = (Player) sender;
 
 		if (player.isFlying()) {
-			player.setFlySpeed(speed);
+			player.setFlySpeed(speed/10);
 			sender.sendMessage(cc(" &aChanged your flight speed to &f" + speed + "&a."));
 			return true;
 		}
 
-		player.setWalkSpeed(speed);
+		player.setWalkSpeed(speed/10);
 		sender.sendMessage(cc(" &aChanged your walking speed to &f" + speed + "&a."));
 
 		return true;
