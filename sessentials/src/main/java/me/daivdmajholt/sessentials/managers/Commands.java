@@ -10,6 +10,7 @@ import me.daivdmajholt.sessentials.commands.ban.UnBanCommand;
 import me.daivdmajholt.sessentials.commands.ban.UnBanIpCommand;
 import me.daivdmajholt.sessentials.commands.ban.UnBanIpTab;
 import me.daivdmajholt.sessentials.commands.ban.UnBanTab;
+import me.daivdmajholt.sessentials.commands.broadcast.BroadcastCommand;
 import me.daivdmajholt.sessentials.commands.clearchat.ClearChatCommand;
 import me.daivdmajholt.sessentials.commands.clearlag.ClearLagCommand;
 import me.daivdmajholt.sessentials.commands.economy.BalanceCommand;
@@ -117,6 +118,12 @@ public class Commands {
 			plugin.getCommand("gm").setTabCompleter(new GamemodeTab());
 			plugin.getCommand("gamemode").setExecutor(new GamemodeCommand());
 			plugin.getCommand("gamemode").setTabCompleter(new GamemodeTab());
+
+			// BROADCAST
+			plugin.getCommand("bc").setExecutor(new BroadcastCommand());
+			plugin.getCommand("bc").setTabCompleter(new NothingTab());
+			plugin.getCommand("broadcast").setExecutor(new BroadcastCommand());
+			plugin.getCommand("broadcast").setTabCompleter(new NothingTab());
 
 			// REAL USERNAME
 			plugin.getCommand("realname").setExecutor(new RealNameCommand());
