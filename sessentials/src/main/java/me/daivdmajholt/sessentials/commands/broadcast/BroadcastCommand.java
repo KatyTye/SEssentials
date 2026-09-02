@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import me.daivdmajholt.sessentials.Main;
 import static me.daivdmajholt.sessentials.Utils.cc;
@@ -25,7 +26,9 @@ public class BroadcastCommand implements CommandExecutor {
 			return true;
 		}
 
-		Bukkit.broadcast(cc(String.join(" ", args)), "sessentials.show.broadcasts");
+		for (Player player : Bukkit.getOnlinePlayers()) {
+			player.sendMessage(cc(String.join(" ", args)));
+		}
 
 		return true;
 	}
