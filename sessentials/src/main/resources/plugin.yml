@@ -144,3 +144,9 @@ commands:
   eat:
     description: This command will fill a player's hunger.
     usage: /eat (player)
+  strike:
+    description: This command will strike a player.
+    usage: /strike (player)
+  smite:
+    description: This command will smite a player.
+    usage: /smite (player)

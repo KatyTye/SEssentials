@@ -43,6 +43,7 @@ import me.daivdmajholt.sessentials.commands.realname.RealNameCommand;
 import me.daivdmajholt.sessentials.commands.seed.SeedCommand;
 import me.daivdmajholt.sessentials.commands.sessentials.MainCommand;
 import me.daivdmajholt.sessentials.commands.sessentials.MainTab;
+import me.daivdmajholt.sessentials.commands.smite.SmiteCommand;
 import me.daivdmajholt.sessentials.commands.spawn.SetSpawnCommand;
 import me.daivdmajholt.sessentials.commands.spawn.SpawnCommand;
 import me.daivdmajholt.sessentials.commands.spawn.SpawnTab;
@@ -118,6 +119,12 @@ public class Commands {
 			plugin.getCommand("gm").setTabCompleter(new GamemodeTab());
 			plugin.getCommand("gamemode").setExecutor(new GamemodeCommand());
 			plugin.getCommand("gamemode").setTabCompleter(new GamemodeTab());
+
+			// SMITE
+			plugin.getCommand("smite").setExecutor(new SmiteCommand());
+			plugin.getCommand("smite").setTabCompleter(new PlayerTab());
+			plugin.getCommand("strike").setExecutor(new SmiteCommand());
+			plugin.getCommand("strike").setTabCompleter(new PlayerTab());
 
 			// BROADCAST
 			plugin.getCommand("bc").setExecutor(new BroadcastCommand());
