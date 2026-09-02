@@ -170,6 +170,8 @@ public class Commands {
 			plugin.getCommand("heal").setTabCompleter(new PlayerTab());
 
 			// FEED
+			plugin.getCommand("eat").setExecutor(new FeedCommand());
+			plugin.getCommand("eat").setTabCompleter(new PlayerTab());
 			plugin.getCommand("feed").setExecutor(new FeedCommand());
 			plugin.getCommand("feed").setTabCompleter(new PlayerTab());
 

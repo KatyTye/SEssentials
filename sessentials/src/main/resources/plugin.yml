@@ -141,3 +141,6 @@ commands:
   bc:
     description: This command broadcasts a colored message.
     usage: /bc (message)
+  eat:
+    description: This command will fill a player's hunger.
+    usage: /eat (player)
