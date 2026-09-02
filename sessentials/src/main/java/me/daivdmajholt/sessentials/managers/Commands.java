@@ -153,6 +153,8 @@ public class Commands {
 			// RANK
 			plugin.getCommand("rm").setExecutor(new RankCommand());
 			plugin.getCommand("rm").setTabCompleter(new RankTab());
+			plugin.getCommand("rank").setExecutor(new RankCommand());
+			plugin.getCommand("rank").setTabCompleter(new RankTab());
 			plugin.getCommand("rankmanager").setExecutor(new RankCommand());
 			plugin.getCommand("rankmanager").setTabCompleter(new RankTab());
 

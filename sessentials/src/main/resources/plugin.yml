@@ -132,3 +132,6 @@ commands:
   invensee:
     description: This command opens another players inventory.
     usage: /invensee (player)
+  rank:
+    description: This commands handles ranks and permissions.
+    usage: /rank help
