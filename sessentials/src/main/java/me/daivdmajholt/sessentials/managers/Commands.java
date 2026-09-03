@@ -126,6 +126,8 @@ public class Commands {
 			// TELEPORT
 			plugin.getCommand("tpall").setExecutor(new TeleportAllCommand());
 			plugin.getCommand("tpall").setTabCompleter(new PlayerTab());
+			plugin.getCommand("teleportall").setExecutor(new TeleportAllCommand());
+			plugin.getCommand("teleportall").setTabCompleter(new PlayerTab());
 
 			// CLEAR INVENTORY
 			plugin.getCommand("clear").setExecutor(new ClearCommand());

@@ -159,3 +159,6 @@ commands:
   tpall:
     description: This command teleports all players to another player's location.
     usage: /tpall (player)
+  teleportall:
+    description: This command teleports all players to another player's location.
+    usage: /teleportall (player)
