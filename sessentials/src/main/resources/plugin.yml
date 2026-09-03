@@ -153,3 +153,6 @@ commands:
   clearinventory:
     description: This command will clear a player's entire inventory.
     usage: /clearinventory (player)
+  clear:
+    description: This command will clear your inventory.
+    usage: /clear

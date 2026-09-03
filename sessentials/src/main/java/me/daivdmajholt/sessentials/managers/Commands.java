@@ -11,6 +11,7 @@ import me.daivdmajholt.sessentials.commands.ban.UnBanIpCommand;
 import me.daivdmajholt.sessentials.commands.ban.UnBanIpTab;
 import me.daivdmajholt.sessentials.commands.ban.UnBanTab;
 import me.daivdmajholt.sessentials.commands.broadcast.BroadcastCommand;
+import me.daivdmajholt.sessentials.commands.clearInventory.ClearCommand;
 import me.daivdmajholt.sessentials.commands.clearInventory.ClearInventoryCommand;
 import me.daivdmajholt.sessentials.commands.clearchat.ClearChatCommand;
 import me.daivdmajholt.sessentials.commands.clearlag.ClearLagCommand;
@@ -122,6 +123,8 @@ public class Commands {
 			plugin.getCommand("gamemode").setTabCompleter(new GamemodeTab());
 
 			// CLEAR INVENTORY
+			plugin.getCommand("clear").setExecutor(new ClearCommand());
+			plugin.getCommand("clear").setTabCompleter(new NothingTab());
 			plugin.getCommand("clearinventory").setExecutor(new ClearInventoryCommand());
 			plugin.getCommand("clearinventory").setTabCompleter(new PlayerTab());
 
