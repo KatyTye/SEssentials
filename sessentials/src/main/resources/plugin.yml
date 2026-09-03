@@ -150,3 +150,6 @@ commands:
   smite:
     description: This command will smite a player.
     usage: /smite (player)
+  clearinventory:
+    description: This command will clear a player's entire inventory.
+    usage: /clearinventory (player)
