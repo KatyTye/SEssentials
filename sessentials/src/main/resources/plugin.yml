@@ -156,3 +156,6 @@ commands:
   clear:
     description: This command will clear your inventory.
     usage: /clear
+  tpall:
+    description: This command teleports all players to another player's location.
+    usage: /tpall (player)
