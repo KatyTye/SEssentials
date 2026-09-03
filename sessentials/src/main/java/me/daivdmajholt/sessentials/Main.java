@@ -1,6 +1,15 @@
 package me.daivdmajholt.sessentials;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
+import org.bukkit.entity.Player;
+import org.bukkit.event.HandlerList;
+import org.bukkit.plugin.java.JavaPlugin;
+
 import me.daivdmajholt.database.DatabaseManager;
+import static me.daivdmajholt.sessentials.Utils.cc;
 import me.daivdmajholt.sessentials.events.UpdateChecker;
 import me.daivdmajholt.sessentials.managers.Commands;
 import me.daivdmajholt.sessentials.managers.Community;
@@ -8,16 +17,12 @@ import me.daivdmajholt.sessentials.managers.Disables;
 import me.daivdmajholt.sessentials.managers.Events;
 import me.daivdmajholt.sessentials.managers.Resources;
 
-import static me.daivdmajholt.sessentials.Utils.cc;
-
-import org.bukkit.entity.Player;
-import org.bukkit.event.HandlerList;
-import org.bukkit.plugin.java.JavaPlugin;
-
 public class Main extends JavaPlugin {
 	public static Main plugin;
 
 	public static DatabaseManager databaseManager;
+
+	public static Set<UUID> vanishedPlayers = new HashSet<>();
 
 	@Override
 	public void onEnable() {

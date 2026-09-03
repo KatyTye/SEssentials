@@ -1,24 +1,23 @@
 package me.daivdmajholt.sessentials.events;
 
-import me.daivdmajholt.sessentials.Main;
-import me.daivdmajholt.database.DatabaseManager.ValueType;
+import java.io.File;
+import java.util.List;
 
-import org.bukkit.World;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
-import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 
-import static me.daivdmajholt.sessentials.Utils.cc;
+import me.daivdmajholt.database.DatabaseManager.ValueType;
+import me.daivdmajholt.sessentials.Main;
 import static me.daivdmajholt.sessentials.Utils.applyRankPerms;
-
-import java.io.File;
-import java.util.List;
+import static me.daivdmajholt.sessentials.Utils.cc;
 
 public class JoinMessage implements Listener {
 
@@ -96,6 +95,14 @@ public class JoinMessage implements Listener {
 
             player.teleport(loc);
         }
+
+        for (Player target : Bukkit.getOnlinePlayers()) {
+			if (plugin.vanishedPlayers.contains(target.getUniqueId())) {
+				player.hidePlayer(plugin, target);
+			} else {
+				player.showPlayer(plugin, target);
+			}
+		}
     }
 
 }

@@ -162,3 +162,6 @@ commands:
   teleportall:
     description: This command teleports all players to another player's location.
     usage: /teleportall (player)
+  vanish:
+    description: This command can vanish any player from all other players.
+    usage: /vanish (player)

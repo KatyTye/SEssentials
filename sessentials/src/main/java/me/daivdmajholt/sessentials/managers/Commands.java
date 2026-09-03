@@ -53,6 +53,7 @@ import me.daivdmajholt.sessentials.commands.speed.SpeedCommand;
 import me.daivdmajholt.sessentials.commands.speed.SpeedTab;
 import me.daivdmajholt.sessentials.commands.stop.StopCommand;
 import me.daivdmajholt.sessentials.commands.teleport.TeleportAllCommand;
+import me.daivdmajholt.sessentials.commands.vanish.VanishCommand;
 import me.daivdmajholt.sessentials.commands.warp.WarpCommand;
 import me.daivdmajholt.sessentials.commands.warp.WarpTab;
 import me.daivdmajholt.sessentials.commands.warp.WarpsCommand;
@@ -122,6 +123,10 @@ public class Commands {
 			plugin.getCommand("gm").setTabCompleter(new GamemodeTab());
 			plugin.getCommand("gamemode").setExecutor(new GamemodeCommand());
 			plugin.getCommand("gamemode").setTabCompleter(new GamemodeTab());
+
+			// VANISH
+			plugin.getCommand("vanish").setExecutor(new VanishCommand());
+			plugin.getCommand("vanish").setTabCompleter(new PlayerTab());
 
 			// TELEPORT
 			plugin.getCommand("tpall").setExecutor(new TeleportAllCommand());
