@@ -36,7 +36,7 @@ public class SpeedCommand implements CommandExecutor {
 		if (args.length >= 2) {
 
 			if (!sender.hasPermission("sessentials.speed.other") && !sender.hasPermission("sessentials.*")) {
-				sender.sendMessage(cc(" &cYou don’t have the required permission to feed other players."));
+				sender.sendMessage(cc(" &cYou don’t have the required permission to change the speed of other players."));
 				return true;
 			}
 

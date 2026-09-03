@@ -28,7 +28,7 @@ public class RealNameCommand implements CommandExecutor {
 
 		if (args.length != 0) {
 			if (!sender.hasPermission("sessentials.realname.other") && !sender.hasPermission("sessentials.*")) {
-				sender.sendMessage(cc(" &cYou don’t have the required permission to feed other players."));
+				sender.sendMessage(cc(" &cYou don’t have the required permission to see other players real username."));
 				return true;
 			}
 
