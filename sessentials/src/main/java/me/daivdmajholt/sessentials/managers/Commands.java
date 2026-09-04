@@ -20,6 +20,7 @@ import me.daivdmajholt.sessentials.commands.economy.BalanceCommand;
 import me.daivdmajholt.sessentials.commands.economy.BalanceTab;
 import me.daivdmajholt.sessentials.commands.economy.EconomyCommand;
 import me.daivdmajholt.sessentials.commands.economy.EconomyTab;
+import me.daivdmajholt.sessentials.commands.enderchest.EnderchestCommand;
 import me.daivdmajholt.sessentials.commands.feed.FeedCommand;
 import me.daivdmajholt.sessentials.commands.fly.FlyCommand;
 import me.daivdmajholt.sessentials.commands.fly.FlyTab;
@@ -133,6 +134,10 @@ public class Commands {
 			// ANVIL
 			plugin.getCommand("anvil").setExecutor(new AnvilCommand());
 			plugin.getCommand("anvil").setTabCompleter(new PlayerTab());
+
+			// ENDERCHEST
+			plugin.getCommand("enderchest").setExecutor(new EnderchestCommand());
+			plugin.getCommand("enderchest").setTabCompleter(new PlayerTab());
 
 			// WORKBENCH
 			plugin.getCommand("craft").setExecutor(new WorkbenchCommand());
