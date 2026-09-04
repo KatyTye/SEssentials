@@ -28,7 +28,7 @@ public class ClearInventoryCommand implements CommandExecutor {
 
 		if (args.length != 0) {
 			if (!sender.hasPermission("sessentials.clearinventory.other") && !sender.hasPermission("sessentials.*")) {
-				sender.sendMessage(cc(" &cYou don’t have the required permission to clear other players inventory."));
+				sender.sendMessage(cc(" &cYou don't have the required permission to clear other players inventory."));
 				return true;
 			}
 

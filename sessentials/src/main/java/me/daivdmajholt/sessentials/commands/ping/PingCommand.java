@@ -28,7 +28,7 @@ public class PingCommand implements CommandExecutor {
 
 		if (args.length != 0) {
 			if (!sender.hasPermission("sessentials.ping.other") && !sender.hasPermission("sessentials.*")) {
-				sender.sendMessage(cc(" &cYou don’t have the required permission to ping other players."));
+				sender.sendMessage(cc(" &cYou don't have the required permission to ping other players."));
 				return true;
 			}
 

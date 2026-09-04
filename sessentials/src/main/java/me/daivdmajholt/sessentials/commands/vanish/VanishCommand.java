@@ -25,7 +25,7 @@ public class VanishCommand implements CommandExecutor {
 
 		if (args.length != 0) {
 			if (!sender.hasPermission("sessentials.vanish.other") && !sender.hasPermission("sessentials.*")) {
-				sender.sendMessage(cc(" &cYou don’t have the required permission to vanish other players."));
+				sender.sendMessage(cc(" &cYou don't have the required permission to vanish other players."));
 				return true;
 			}
 

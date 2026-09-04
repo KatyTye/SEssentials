@@ -28,7 +28,7 @@ public class TeleportAllCommand implements CommandExecutor {
 
 		if (args.length != 0) {
 			if (!sender.hasPermission("sessentials.teleport.other") && !sender.hasPermission("sessentials.*")) {
-				sender.sendMessage(cc(" &cYou don’t have the required permission to teleport all players to another player."));
+				sender.sendMessage(cc(" &cYou don't have the required permission to teleport all players to another player."));
 				return true;
 			}
 

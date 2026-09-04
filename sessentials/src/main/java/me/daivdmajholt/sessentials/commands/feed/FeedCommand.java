@@ -1,7 +1,5 @@
 package me.daivdmajholt.sessentials.commands.feed;
 
-import static me.daivdmajholt.sessentials.Utils.cc;
-
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -9,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import me.daivdmajholt.sessentials.Main;
+import static me.daivdmajholt.sessentials.Utils.cc;
 
 public class FeedCommand implements CommandExecutor {
 
@@ -26,7 +25,7 @@ public class FeedCommand implements CommandExecutor {
 
 		if (args.length != 0) {
 			if (!sender.hasPermission("sessentials.feed.other") && !sender.hasPermission("sessentials.*")) {
-				sender.sendMessage(cc(" &cYou don’t have the required permission to feed other players."));
+				sender.sendMessage(cc(" &cYou don't have the required permission to feed other players."));
 				return true;
 			}
 

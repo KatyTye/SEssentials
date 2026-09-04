@@ -30,7 +30,7 @@ public class AnvilCommand implements CommandExecutor {
 
 		if (args.length != 0) {
 			if (!sender.hasPermission("sessentials.anvil.other") && !sender.hasPermission("sessentials.*")) {
-				sender.sendMessage(cc(" &cYou don’t have the required permission to open a anvil menu for others."));
+				sender.sendMessage(cc(" &cYou don't have the required permission to open a anvil menu for others."));
 				return true;
 			}
 

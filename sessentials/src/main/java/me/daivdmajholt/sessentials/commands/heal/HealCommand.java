@@ -1,7 +1,5 @@
 package me.daivdmajholt.sessentials.commands.heal;
 
-import static me.daivdmajholt.sessentials.Utils.cc;
-
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.command.Command;
@@ -10,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import me.daivdmajholt.sessentials.Main;
+import static me.daivdmajholt.sessentials.Utils.cc;
 
 public class HealCommand implements CommandExecutor {
 
@@ -27,7 +26,7 @@ public class HealCommand implements CommandExecutor {
 
 		if (args.length != 0) {
 			if (!sender.hasPermission("sessentials.heal.other") && !sender.hasPermission("sessentials.*")) {
-				sender.sendMessage(cc(" &cYou don’t have the required permission to heal other players."));
+				sender.sendMessage(cc(" &cYou don't have the required permission to heal other players."));
 				return true;
 			}
 

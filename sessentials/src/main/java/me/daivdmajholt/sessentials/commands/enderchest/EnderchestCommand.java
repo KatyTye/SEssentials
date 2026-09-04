@@ -30,7 +30,7 @@ public class EnderchestCommand implements CommandExecutor {
 
 		if (args.length != 0) {
 			if (!sender.hasPermission("sessentials.enderchest.other") && !sender.hasPermission("sessentials.*")) {
-				sender.sendMessage(cc(" &cYou don’t have the required permission to open a enderchest menu for others."));
+				sender.sendMessage(cc(" &cYou don't have the required permission to open a enderchest menu for others."));
 				return true;
 			}
 
