@@ -14,6 +14,11 @@ public class Resources {
 		if (!plugin.getDataFolder().exists())
 			plugin.getDataFolder().mkdirs();
 
+		// License Markdown File
+		File licenseMdFile = new File(plugin.getDataFolder(), "license.md");
+		if (!licenseMdFile.exists())
+			plugin.saveResource("license.md", false);
+
 		// Ranks Data File
 		File ranksDataFile = new File(plugin.getDataFolder(), "ranks.yml");
 		if (!ranksDataFile.exists())
