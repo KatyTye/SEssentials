@@ -136,6 +136,8 @@ public class Commands {
 			plugin.getCommand("anvil").setTabCompleter(new PlayerTab());
 
 			// ENDERCHEST
+			plugin.getCommand("ec").setExecutor(new EnderchestCommand());
+			plugin.getCommand("ec").setTabCompleter(new PlayerTab());
 			plugin.getCommand("enderchest").setExecutor(new EnderchestCommand());
 			plugin.getCommand("enderchest").setTabCompleter(new PlayerTab());
 

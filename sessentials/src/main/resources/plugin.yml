@@ -177,3 +177,6 @@ commands:
   enderchest:
     description: This command opens a enderchest menu for players.
     usage: /enderchest (player)
+  ec:
+    description: This command opens a enderchest menu for players.
+    usage: /ec (player)
