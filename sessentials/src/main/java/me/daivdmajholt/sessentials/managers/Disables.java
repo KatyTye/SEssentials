@@ -1,7 +1,7 @@
 package me.daivdmajholt.sessentials.managers;
 
 import me.daivdmajholt.sessentials.Main;
-import me.daivdmajholt.sessentials.Disables.BanIp;
+import me.daivdmajholt.sessentials.disables.BanIp;
 
 public class Disables {
 

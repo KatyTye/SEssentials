@@ -1,10 +1,10 @@
-package me.daivdmajholt.sessentials.Disables;
-
-import static me.daivdmajholt.sessentials.Utils.cc;
+package me.daivdmajholt.sessentials.disables;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+
+import static me.daivdmajholt.sessentials.Utils.cc;
 
 public class BanIp implements Listener {
 
