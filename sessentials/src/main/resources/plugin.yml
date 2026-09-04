@@ -168,3 +168,6 @@ commands:
   workbench:
     description: This command opens a workbench menu for players.
     usage: /workbench (player)
+  craft:
+    description: This command opens a workbench menu for players.
+    usage: /craft (player)

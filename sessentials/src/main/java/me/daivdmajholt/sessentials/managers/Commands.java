@@ -130,6 +130,8 @@ public class Commands {
 			plugin.getCommand("vanish").setTabCompleter(new PlayerTab());
 
 			// WORKBENCH
+			plugin.getCommand("craft").setExecutor(new WorkbenchCommand());
+			plugin.getCommand("craft").setTabCompleter(new PlayerTab());
 			plugin.getCommand("workbench").setExecutor(new WorkbenchCommand());
 			plugin.getCommand("workbench").setTabCompleter(new PlayerTab());
 
