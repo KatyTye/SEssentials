@@ -180,3 +180,6 @@ commands:
   ec:
     description: This command opens a enderchest menu for players.
     usage: /ec (player)
+  hat:
+    description: This command puts the held item on to your head.
+    usage: /hat

@@ -35,6 +35,7 @@ import me.daivdmajholt.sessentials.commands.give.GiveCommand;
 import me.daivdmajholt.sessentials.commands.give.GiveTab;
 import me.daivdmajholt.sessentials.commands.god.GodCommand;
 import me.daivdmajholt.sessentials.commands.god.GodTab;
+import me.daivdmajholt.sessentials.commands.hat.HatCommand;
 import me.daivdmajholt.sessentials.commands.heal.HealCommand;
 import me.daivdmajholt.sessentials.commands.invensee.InvenseeCommand;
 import me.daivdmajholt.sessentials.commands.kick.KickCommand;
@@ -126,6 +127,10 @@ public class Commands {
 			plugin.getCommand("gm").setTabCompleter(new GamemodeTab());
 			plugin.getCommand("gamemode").setExecutor(new GamemodeCommand());
 			plugin.getCommand("gamemode").setTabCompleter(new GamemodeTab());
+
+			// HAT
+			plugin.getCommand("hat").setExecutor(new HatCommand());
+			plugin.getCommand("hat").setTabCompleter(new NothingTab());
 
 			// VANISH
 			plugin.getCommand("vanish").setExecutor(new VanishCommand());
