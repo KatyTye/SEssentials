@@ -16,13 +16,13 @@ public class SmiteCommand implements CommandExecutor {
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		
-		if (!sender.hasPermission("sessentials.broadcast") && !sender.hasPermission("sessentials.*")) {
+		if (!sender.hasPermission("sessentials.smite") && !sender.hasPermission("sessentials.*")) {
 			sender.sendMessage(cc(plugin.getConfig().getString("messages.permission-denied")));
 			return true;
 		}
 
 		if (args.length == 0) {
-			sender.sendMessage(cc(" &cYou also need to enter the broadcast message."));
+			sender.sendMessage(cc(" &cYou also need to enter the name of the player to be smited."));
 			return true;
 		}
 
