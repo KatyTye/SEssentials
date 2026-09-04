@@ -57,6 +57,7 @@ import me.daivdmajholt.sessentials.commands.vanish.VanishCommand;
 import me.daivdmajholt.sessentials.commands.warp.WarpCommand;
 import me.daivdmajholt.sessentials.commands.warp.WarpTab;
 import me.daivdmajholt.sessentials.commands.warp.WarpsCommand;
+import me.daivdmajholt.sessentials.commands.workbench.WorkbenchCommand;
 
 public class Commands {
 
@@ -127,6 +128,10 @@ public class Commands {
 			// VANISH
 			plugin.getCommand("vanish").setExecutor(new VanishCommand());
 			plugin.getCommand("vanish").setTabCompleter(new PlayerTab());
+
+			// WORKBENCH
+			plugin.getCommand("workbench").setExecutor(new WorkbenchCommand());
+			plugin.getCommand("workbench").setTabCompleter(new PlayerTab());
 
 			// TELEPORT
 			plugin.getCommand("tpall").setExecutor(new TeleportAllCommand());
