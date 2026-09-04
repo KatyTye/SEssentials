@@ -5,8 +5,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.Inventory;
 
 import me.daivdmajholt.sessentials.Main;
 import static me.daivdmajholt.sessentials.Utils.cc;
@@ -41,8 +39,7 @@ public class EnderchestCommand implements CommandExecutor {
 				return true;
 			}
 
-			Inventory enderchest = Bukkit.createInventory(null, InventoryType.ENDER_CHEST);
-			player.openInventory(enderchest);
+			player.openInventory(player.getEnderChest());
 
 			sender.sendMessage(cc(" &aYou have opened a enderchest for the player named &f" + player.getName() + "&a."));
 			return true;
@@ -50,8 +47,7 @@ public class EnderchestCommand implements CommandExecutor {
 
 		Player player = (Player) sender;
 
-		Inventory enderchest = Bukkit.createInventory(null, InventoryType.ENDER_CHEST);
-		player.openInventory(enderchest);
+		player.openInventory(player.getEnderChest());
 
 		sender.sendMessage(cc(" &aOpened a enderchest menu for you."));
 
