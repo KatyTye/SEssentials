@@ -3,6 +3,7 @@ package me.daivdmajholt.sessentials.managers;
 import me.daivdmajholt.sessentials.Main;
 import me.daivdmajholt.sessentials.commands.NothingTab;
 import me.daivdmajholt.sessentials.commands.PlayerTab;
+import me.daivdmajholt.sessentials.commands.anvil.AnvilCommand;
 import me.daivdmajholt.sessentials.commands.ban.BanCommand;
 import me.daivdmajholt.sessentials.commands.ban.BanTab;
 import me.daivdmajholt.sessentials.commands.ban.ListBansCommand;
@@ -128,6 +129,10 @@ public class Commands {
 			// VANISH
 			plugin.getCommand("vanish").setExecutor(new VanishCommand());
 			plugin.getCommand("vanish").setTabCompleter(new PlayerTab());
+
+			// ANVIL
+			plugin.getCommand("anvil").setExecutor(new AnvilCommand());
+			plugin.getCommand("anvil").setTabCompleter(new PlayerTab());
 
 			// WORKBENCH
 			plugin.getCommand("craft").setExecutor(new WorkbenchCommand());

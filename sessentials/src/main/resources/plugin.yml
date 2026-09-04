@@ -171,3 +171,6 @@ commands:
   craft:
     description: This command opens a workbench menu for players.
     usage: /craft (player)
+  anvil:
+    description: This command opens a anvil menu for players.
+    usage: /anvil (player)
