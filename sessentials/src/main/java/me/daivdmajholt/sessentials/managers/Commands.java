@@ -82,54 +82,54 @@ public class Commands {
 		plugin.getCommand("stop").setExecutor(new StopCommand());
 		plugin.getCommand("stop").setTabCompleter(new NothingTab());
 
-		// BAN/IP BAN
-		plugin.getCommand("ban").setExecutor(new BanCommand());
-		plugin.getCommand("ban").setTabCompleter(new BanTab());
-
-		plugin.getCommand("bans").setExecutor(new ListBansCommand());
-		plugin.getCommand("bans").setTabCompleter(new NothingTab());
-
-		plugin.getCommand("unban").setExecutor(new UnBanCommand());
-		plugin.getCommand("unban").setTabCompleter(new UnBanTab());
-
-		plugin.getCommand("unbanip").setExecutor(new UnBanIpCommand());
-		plugin.getCommand("unbanip").setTabCompleter(new UnBanIpTab());
-
-		// KILL
-		plugin.getCommand("kill").setExecutor(new KillCommand());
-		plugin.getCommand("kill").setTabCompleter(new PlayerTab());
-
-		plugin.getCommand("suicide").setExecutor(new SuicideCommand());
-		plugin.getCommand("suicide").setTabCompleter(new NothingTab());
-
-		plugin.getCommand("killall").setExecutor(new KillAllCommand());
-		plugin.getCommand("killall").setTabCompleter(new KillAllTab());
-
-		// ONLINE
-		plugin.getCommand("online").setExecutor(new OnlineCommand());
-		plugin.getCommand("online").setTabCompleter(new NothingTab());
-
-		plugin.getCommand("onlinestaff").setExecutor(new OnlineStaffCommand());
-		plugin.getCommand("onlinestaff").setTabCompleter(new NothingTab());
-
-		// KICK
-		plugin.getCommand("kick").setExecutor(new KickCommand());
-		plugin.getCommand("kick").setTabCompleter(new PlayerTab());
-
-		// PING
-		plugin.getCommand("ping").setExecutor(new PingCommand());
-		plugin.getCommand("ping").setTabCompleter(new PlayerTab());
-
-		// SEED
-		plugin.getCommand("seed").setExecutor(new SeedCommand());
-		plugin.getCommand("seed").setTabCompleter(new NothingTab());
-
-		// SPEED
-		plugin.getCommand("speed").setExecutor(new SpeedCommand());
-		plugin.getCommand("speed").setTabCompleter(new SpeedTab());
-
 		// COMMANDS AFTER CONFIG
 		if (plugin.getConfig().getBoolean("features.commands")) {
+			// BAN/IP BAN
+			plugin.getCommand("ban").setExecutor(new BanCommand());
+			plugin.getCommand("ban").setTabCompleter(new BanTab());
+
+			plugin.getCommand("bans").setExecutor(new ListBansCommand());
+			plugin.getCommand("bans").setTabCompleter(new NothingTab());
+
+			plugin.getCommand("unban").setExecutor(new UnBanCommand());
+			plugin.getCommand("unban").setTabCompleter(new UnBanTab());
+
+			plugin.getCommand("unbanip").setExecutor(new UnBanIpCommand());
+			plugin.getCommand("unbanip").setTabCompleter(new UnBanIpTab());
+
+			// KILL
+			plugin.getCommand("kill").setExecutor(new KillCommand());
+			plugin.getCommand("kill").setTabCompleter(new PlayerTab());
+
+			plugin.getCommand("suicide").setExecutor(new SuicideCommand());
+			plugin.getCommand("suicide").setTabCompleter(new NothingTab());
+
+			plugin.getCommand("killall").setExecutor(new KillAllCommand());
+			plugin.getCommand("killall").setTabCompleter(new KillAllTab());
+
+			// ONLINE
+			plugin.getCommand("online").setExecutor(new OnlineCommand());
+			plugin.getCommand("online").setTabCompleter(new NothingTab());
+
+			plugin.getCommand("onlinestaff").setExecutor(new OnlineStaffCommand());
+			plugin.getCommand("onlinestaff").setTabCompleter(new NothingTab());
+
+			// KICK
+			plugin.getCommand("kick").setExecutor(new KickCommand());
+			plugin.getCommand("kick").setTabCompleter(new PlayerTab());
+
+			// PING
+			plugin.getCommand("ping").setExecutor(new PingCommand());
+			plugin.getCommand("ping").setTabCompleter(new PlayerTab());
+
+			// SEED
+			plugin.getCommand("seed").setExecutor(new SeedCommand());
+			plugin.getCommand("seed").setTabCompleter(new NothingTab());
+
+			// SPEED
+			plugin.getCommand("speed").setExecutor(new SpeedCommand());
+			plugin.getCommand("speed").setTabCompleter(new SpeedTab());
+
 			// GAMEMODES
 			plugin.getCommand("gmc").setExecutor(new GamemodeCCommand());
 			plugin.getCommand("gms").setExecutor(new GamemodeSCommand());
