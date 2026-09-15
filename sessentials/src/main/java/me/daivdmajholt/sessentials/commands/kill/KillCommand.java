@@ -21,6 +21,11 @@ public class KillCommand implements CommandExecutor {
             return true;
         }
 
+		if (!(sender instanceof Player) && args.length == 0) {
+			sender.sendMessage(cc(" &cYou are required to also enter a player's name as console."));
+			return true;
+		}
+
         Player player = (Player) sender;
 
         if (args.length != 0) {

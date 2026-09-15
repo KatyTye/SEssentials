@@ -185,4 +185,7 @@ commands:
     usage: /hat
   kill:
     description: This command will kill any spefic player, even yourself.
-    useage: /kill (player)
+    usage: /kill (player)
+  suicide:
+    description: This command will kill yourself.
+    usage: /suicide

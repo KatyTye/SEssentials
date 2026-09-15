@@ -25,6 +25,7 @@ import me.daivdmajholt.sessentials.commands.feed.FeedCommand;
 import me.daivdmajholt.sessentials.commands.fly.FlyCommand;
 import me.daivdmajholt.sessentials.commands.fly.FlyTab;
 import me.daivdmajholt.sessentials.commands.kill.KillCommand;
+import me.daivdmajholt.sessentials.commands.kill.SuicideCommand;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeACommand;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeCCommand;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeCommand;
@@ -90,13 +91,16 @@ public class Commands {
 		plugin.getCommand("unbanip").setExecutor(new UnBanIpCommand());
 		plugin.getCommand("unbanip").setTabCompleter(new UnBanIpTab());
 
-		// ONLINE
-		plugin.getCommand("online").setExecutor(new OnlineCommand());
-		plugin.getCommand("online").setTabCompleter(new NothingTab());
-
 		// KILL
 		plugin.getCommand("kill").setExecutor(new KillCommand());
 		plugin.getCommand("kill").setTabCompleter(new PlayerTab());
+		
+		plugin.getCommand("suicide").setExecutor(new SuicideCommand());
+		plugin.getCommand("suicide").setTabCompleter(new NothingTab());
+
+		// ONLINE
+		plugin.getCommand("online").setExecutor(new OnlineCommand());
+		plugin.getCommand("online").setTabCompleter(new NothingTab());
 
         plugin.getCommand("onlinestaff").setExecutor(new OnlineStaffCommand());
         plugin.getCommand("onlinestaff").setTabCompleter(new NothingTab());
