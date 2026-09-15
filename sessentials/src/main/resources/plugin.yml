@@ -189,3 +189,6 @@ commands:
   suicide:
     description: This command will kill yourself.
     usage: /suicide
+  killall:
+    description: This command will kill any spefic player, even yourself.
+    usage: /killall (players/staff/mobs/monsters/entitys)
