@@ -65,6 +65,7 @@ import me.daivdmajholt.sessentials.commands.vanish.VanishCommand;
 import me.daivdmajholt.sessentials.commands.warp.WarpCommand;
 import me.daivdmajholt.sessentials.commands.warp.WarpTab;
 import me.daivdmajholt.sessentials.commands.warp.WarpsCommand;
+import me.daivdmajholt.sessentials.commands.weather.LightningCommand;
 import me.daivdmajholt.sessentials.commands.workbench.WorkbenchCommand;
 
 public class Commands {
@@ -191,6 +192,10 @@ public class Commands {
 			plugin.getCommand("smite").setTabCompleter(new PlayerTab());
 			plugin.getCommand("strike").setExecutor(new SmiteCommand());
 			plugin.getCommand("strike").setTabCompleter(new PlayerTab());
+
+			// WEATHER
+			plugin.getCommand("lightning").setExecutor(new LightningCommand());
+			plugin.getCommand("lightning").setTabCompleter(new NothingTab());
 
 			// BROADCAST
 			plugin.getCommand("bc").setExecutor(new BroadcastCommand());

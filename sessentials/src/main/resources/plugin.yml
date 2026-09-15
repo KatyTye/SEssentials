@@ -198,3 +198,6 @@ commands:
   fix:
     description: This command repairs your held item.
     usage: /fix
+  lightning:
+    description: This command changes the weather to rain & thunder.
+    usage: /lightning
