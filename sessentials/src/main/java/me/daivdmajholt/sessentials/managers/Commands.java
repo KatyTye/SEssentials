@@ -147,6 +147,9 @@ public class Commands {
 			plugin.getCommand("repair").setExecutor(new RepairCommand());
 			plugin.getCommand("repair").setTabCompleter(new NothingTab());
 
+			plugin.getCommand("fix").setExecutor(new RepairCommand());
+			plugin.getCommand("fix").setTabCompleter(new NothingTab());
+
 			// HAT
 			plugin.getCommand("hat").setExecutor(new HatCommand());
 			plugin.getCommand("hat").setTabCompleter(new NothingTab());
