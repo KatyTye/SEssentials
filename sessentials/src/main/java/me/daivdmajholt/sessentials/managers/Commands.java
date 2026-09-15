@@ -49,6 +49,7 @@ import me.daivdmajholt.sessentials.commands.ping.PingCommand;
 import me.daivdmajholt.sessentials.commands.rank.RankCommand;
 import me.daivdmajholt.sessentials.commands.rank.RankTab;
 import me.daivdmajholt.sessentials.commands.realname.RealNameCommand;
+import me.daivdmajholt.sessentials.commands.repair.RepairCommand;
 import me.daivdmajholt.sessentials.commands.seed.SeedCommand;
 import me.daivdmajholt.sessentials.commands.sessentials.MainCommand;
 import me.daivdmajholt.sessentials.commands.sessentials.MainTab;
@@ -141,6 +142,10 @@ public class Commands {
 			plugin.getCommand("gm").setTabCompleter(new GamemodeTab());
 			plugin.getCommand("gamemode").setExecutor(new GamemodeCommand());
 			plugin.getCommand("gamemode").setTabCompleter(new GamemodeTab());
+
+			// REPAIR
+			plugin.getCommand("repair").setExecutor(new RepairCommand());
+			plugin.getCommand("repair").setTabCompleter(new NothingTab());
 
 			// HAT
 			plugin.getCommand("hat").setExecutor(new HatCommand());

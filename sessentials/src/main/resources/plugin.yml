@@ -192,3 +192,6 @@ commands:
   killall:
     description: This command will kill any spefic player, even yourself.
     usage: /killall (players/staff/mobs/monsters/entitys)
+  repair:
+    description: This command repairs your held item.
+    usage: /repair
