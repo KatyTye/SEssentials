@@ -183,3 +183,6 @@ commands:
   hat:
     description: This command puts the held item on to your head.
     usage: /hat
+  kill:
+    description: This command will kill any spefic player, even yourself.
+    useage: /kill (player)

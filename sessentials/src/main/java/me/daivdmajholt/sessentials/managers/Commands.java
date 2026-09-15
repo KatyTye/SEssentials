@@ -24,6 +24,7 @@ import me.daivdmajholt.sessentials.commands.enderchest.EnderchestCommand;
 import me.daivdmajholt.sessentials.commands.feed.FeedCommand;
 import me.daivdmajholt.sessentials.commands.fly.FlyCommand;
 import me.daivdmajholt.sessentials.commands.fly.FlyTab;
+import me.daivdmajholt.sessentials.commands.kill.KillCommand;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeACommand;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeCCommand;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeCommand;
@@ -92,6 +93,10 @@ public class Commands {
 		// ONLINE
 		plugin.getCommand("online").setExecutor(new OnlineCommand());
 		plugin.getCommand("online").setTabCompleter(new NothingTab());
+
+		// KILL
+		plugin.getCommand("kill").setExecutor(new KillCommand());
+		plugin.getCommand("kill").setTabCompleter(new PlayerTab());
 
         plugin.getCommand("onlinestaff").setExecutor(new OnlineStaffCommand());
         plugin.getCommand("onlinestaff").setTabCompleter(new NothingTab());
