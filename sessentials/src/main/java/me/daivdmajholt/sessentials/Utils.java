@@ -16,6 +16,8 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachment;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Team;
 
 import com.google.gson.JsonObject;
 
@@ -226,5 +228,28 @@ public class Utils {
 		} catch (Throwable ignored) {
 			player.sendMessage(cc(message));
 		}
+	}
+
+	public static void setNametag(Player target, String prefix, String suffix) {
+		Scoreboard scoreboard = Main.plugin.getServer().getScoreboardManager().getMainScoreboard();
+
+		String teamName = "nt" + target.getUniqueId().toString().replace("-", "").substring(0, 14);
+
+		Team team = scoreboard.getTeam(teamName);
+
+		if (team == null) {
+			team = scoreboard.registerNewTeam(teamName);
+		}
+
+		team.setPrefix(cc(prefix + " &f"));
+		team.setSuffix(cc(" &f" + suffix));
+
+		for (Team oldTeam : scoreboard.getTeams()) {
+			if (!oldTeam.equals(team) && oldTeam.hasEntry(target.getName())) {
+				oldTeam.removeEntry(target.getName());
+			}
+		}
+
+		team.addEntry(target.getName());
 	}
 }

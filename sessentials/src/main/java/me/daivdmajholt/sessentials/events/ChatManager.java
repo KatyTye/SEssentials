@@ -1,7 +1,5 @@
 package me.daivdmajholt.sessentials.events;
 
-import static me.daivdmajholt.sessentials.Utils.cc;
-
 import java.io.File;
 
 import org.bukkit.Bukkit;
@@ -14,6 +12,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import me.daivdmajholt.database.DatabaseManager.ValueType;
 import me.daivdmajholt.sessentials.Main;
+import static me.daivdmajholt.sessentials.Utils.cc;
 
 public class ChatManager implements Listener {
 
@@ -40,6 +39,7 @@ public class ChatManager implements Listener {
 		message = message.replace("%group%", cfg.getString(rank + ".name"));
 		message = message.replace("%color%", cfg.getString(rank + ".color"));
 		message = message.replace("%prefix%", cfg.getString(rank + ".prefix"));
+		message = message.replace("%suffix%", cfg.getString(rank + ".suffix"));
 
 		if (cfg.getString(rank + ".prefix").equals("")) {
 			message = message.replace("[", "");

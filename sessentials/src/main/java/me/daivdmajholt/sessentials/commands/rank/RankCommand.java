@@ -1,25 +1,25 @@
 package me.daivdmajholt.sessentials.commands.rank;
 
-import static me.daivdmajholt.sessentials.Utils.cc;
-import static me.daivdmajholt.sessentials.Utils.applyRankPerms;
-import static me.daivdmajholt.sessentials.Utils.clearRankPerms;
-
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
-import java.io.IOException;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Player;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 
 import me.daivdmajholt.database.DatabaseManager.ValueType;
 import me.daivdmajholt.sessentials.Main;
+import static me.daivdmajholt.sessentials.Utils.applyRankPerms;
+import static me.daivdmajholt.sessentials.Utils.cc;
+import static me.daivdmajholt.sessentials.Utils.clearRankPerms;
+import static me.daivdmajholt.sessentials.Utils.setNametag;
 
 public class RankCommand implements CommandExecutor {
 
@@ -139,6 +139,8 @@ public class RankCommand implements CommandExecutor {
 
 					cfg.set(oldRank + ".members", cfg.getInt(oldRank + ".members") - 1);
 					cfg.set(args[1] + ".members", cfg.getInt(args[1] + ".members") + 1);
+
+					setNametag(target, cfg.getString(args[1] + ".color") + cfg.getString(args[1] + ".prefix"), cfg.getString(args[1] + ".suffix"));
 
 					try {
 						cfg.save(file);
