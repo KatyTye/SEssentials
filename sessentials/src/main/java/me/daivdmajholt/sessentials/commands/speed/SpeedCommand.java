@@ -57,10 +57,10 @@ public class SpeedCommand implements CommandExecutor {
 				return true;
 			}
 
-			Player player = Bukkit.getPlayer(args[0]);
+			Player player = Bukkit.getPlayer(args[1]);
 
 			if (player == null) {
-				sender.sendMessage(cc(" &cThe player named " + args[0] + " is currently not online!"));
+				sender.sendMessage(cc(" &cThe player named " + args[1] + " is currently not online!"));
 				return true;
 			}
 
