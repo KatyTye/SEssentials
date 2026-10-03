@@ -33,6 +33,11 @@ public class SpeedCommand implements CommandExecutor {
 			return true;
 		}
 
+		if (speed < 0) {
+			sender.sendMessage(cc(" &cThe speed cannot be changed to anything below 0."));
+			return true;
+		}
+
 		if (args.length >= 2) {
 
 			if (!sender.hasPermission("sessentials.speed.other") && !sender.hasPermission("sessentials.*")) {
@@ -48,8 +53,18 @@ public class SpeedCommand implements CommandExecutor {
 			}
 
 			if (player.isFlying()) {
-				player.setFlySpeed(speed/10);
+				if (speed+1 > 9) {
+					sender.sendMessage(cc(" &cThe speed cannot be changed to anything above 9."));
+					return true;
+				}
+				
+				player.setFlySpeed(speed+1/10);
 				sender.sendMessage(cc(" &aChanged &f" + player.getName() + "'s&a flight speed to &f" + speed + "&a."));
+				return true;
+			}
+
+			if (speed > 10) {
+				sender.sendMessage(cc(" &cThe speed cannot be changed to anything above 10."));
 				return true;
 			}
 
@@ -61,8 +76,18 @@ public class SpeedCommand implements CommandExecutor {
 		Player player = (Player) sender;
 
 		if (player.isFlying()) {
-			player.setFlySpeed(speed/10);
+			if (speed+1 > 9) {
+				sender.sendMessage(cc(" &cThe speed cannot be changed to anything above 9."));
+				return true;
+			}
+
+			player.setFlySpeed(speed+1/10);
 			sender.sendMessage(cc(" &aChanged your flight speed to &f" + speed + "&a."));
+			return true;
+		}
+
+		if (speed > 10) {
+			sender.sendMessage(cc(" &cThe speed cannot be changed to anything above 10."));
 			return true;
 		}
 
