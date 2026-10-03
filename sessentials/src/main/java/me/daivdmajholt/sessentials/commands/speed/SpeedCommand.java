@@ -26,15 +26,27 @@ public class SpeedCommand implements CommandExecutor {
 			return true;
 		}
 
-		float speed = Float.parseFloat(args[0]);
+		float speed;
+		
+		try {
+			speed = Float.parseFloat(args[0]) + 1;
+		} catch (NumberFormatException e) {
+			sender.sendMessage(cc(" &cYou have entered a invalid speed number."));
+			return true;
+		}
 
 		if (!(sender instanceof Player) && args.length <= 1) {
 			sender.sendMessage(cc(" &cYou need to use the full command as the console."));
 			return true;
 		}
 
-		if (speed < 0) {
+		if (speed < 1) {
 			sender.sendMessage(cc(" &cThe speed cannot be changed to anything below 0."));
+			return true;
+		}
+
+		if (speed > 10) {
+			sender.sendMessage(cc(" &cThe speed cannot be changed to anything 10 or above."));
 			return true;
 		}
 
@@ -53,46 +65,26 @@ public class SpeedCommand implements CommandExecutor {
 			}
 
 			if (player.isFlying()) {
-				if (speed+1 > 9) {
-					sender.sendMessage(cc(" &cThe speed cannot be changed to anything above 9."));
-					return true;
-				}
-				
-				player.setFlySpeed(speed+1/10);
-				sender.sendMessage(cc(" &aChanged &f" + player.getName() + "'s&a flight speed to &f" + speed + "&a."));
-				return true;
-			}
-
-			if (speed > 10) {
-				sender.sendMessage(cc(" &cThe speed cannot be changed to anything above 10."));
+				player.setFlySpeed(speed/10);
+				sender.sendMessage(cc(" &aChanged &f" + player.getName() + "'s&a flight speed to &f" + String.valueOf(speed - 1).replace(".0", "") + "&a."));
 				return true;
 			}
 
 			player.setWalkSpeed(speed/10);
-			sender.sendMessage(cc(" &aChanged &f" + player.getName() + "'s&a walking speed to &f" + speed + "&a."));
+			sender.sendMessage(cc(" &aChanged &f" + player.getName() + "'s&a walking speed to &f" +  String.valueOf(speed - 1).replace(".0", "") + "&a."));
 			return true;
 		}
 
 		Player player = (Player) sender;
 
 		if (player.isFlying()) {
-			if (speed+1 > 9) {
-				sender.sendMessage(cc(" &cThe speed cannot be changed to anything above 9."));
-				return true;
-			}
-
-			player.setFlySpeed(speed+1/10);
-			sender.sendMessage(cc(" &aChanged your flight speed to &f" + speed + "&a."));
-			return true;
-		}
-
-		if (speed > 10) {
-			sender.sendMessage(cc(" &cThe speed cannot be changed to anything above 10."));
+			player.setFlySpeed(speed/10);
+			sender.sendMessage(cc(" &aChanged your flight speed to &f" + String.valueOf(speed - 1).replace(".0", "") + "&a."));
 			return true;
 		}
 
 		player.setWalkSpeed(speed/10);
-		sender.sendMessage(cc(" &aChanged your walking speed to &f" + speed + "&a."));
+		sender.sendMessage(cc(" &aChanged your walking speed to &f" + String.valueOf(speed - 1).replace(".0", "") + "&a."));
 
 		return true;
 	}
