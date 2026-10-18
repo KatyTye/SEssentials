@@ -1,5 +1,5 @@
 name: SEssentials
-version: 0.3.7
+version: 0.4.7
 main: me.daivdmajholt.sessentials.Main
 api-version: 1.19
 commands:
