@@ -20,7 +20,7 @@ import static me.daivdmajholt.sessentials.Utils.applyRankPerms;
 import static me.daivdmajholt.sessentials.Utils.cc;
 import static me.daivdmajholt.sessentials.Utils.setNametag;
 
-public class JoinMessage implements Listener {
+public class JoinHandler implements Listener {
 
 	private final Main plugin = Main.plugin;
 

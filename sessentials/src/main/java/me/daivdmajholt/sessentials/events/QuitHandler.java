@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import static me.daivdmajholt.sessentials.Utils.cc;
 
-public class LeaveMessage implements Listener {
+public class QuitHandler implements Listener {
 
     private final Main plugin = Main.plugin;
 
