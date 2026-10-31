@@ -207,3 +207,6 @@ commands:
   mute:
     description: This command toggles chat mute for players.
     usage: /mute (player)
+  fireball:
+    description: This command shoots a fireball after eye location.
+    usage: /fireball (player)

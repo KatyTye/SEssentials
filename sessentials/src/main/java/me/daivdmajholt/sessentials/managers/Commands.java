@@ -23,6 +23,7 @@ import me.daivdmajholt.sessentials.commands.economy.EconomyCommand;
 import me.daivdmajholt.sessentials.commands.economy.EconomyTab;
 import me.daivdmajholt.sessentials.commands.enderchest.EnderchestCommand;
 import me.daivdmajholt.sessentials.commands.feed.FeedCommand;
+import me.daivdmajholt.sessentials.commands.fireball.FireballCommand;
 import me.daivdmajholt.sessentials.commands.fly.FlyCommand;
 import me.daivdmajholt.sessentials.commands.fly.FlyTab;
 import me.daivdmajholt.sessentials.commands.kill.KillAllCommand;
@@ -102,6 +103,10 @@ public class Commands {
 			// MUTE
 			plugin.getCommand("mute").setExecutor(new MuteCommand());
 			plugin.getCommand("mute").setTabCompleter(new PlayerTab());
+
+			// FIREBALL
+			plugin.getCommand("fireball").setExecutor(new FireballCommand());
+			plugin.getCommand("fireball").setTabCompleter(new PlayerTab());
 
 			// AFK
 			plugin.getCommand("afk").setExecutor(new AfkCommand());
