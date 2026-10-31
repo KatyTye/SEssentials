@@ -25,6 +25,11 @@ public class ChatManager implements Listener {
 
 		Player player = event.getPlayer();
 
+		if (plugin.mutedPlayers.contains(player.getUniqueId()) && !player.hasPermission("sessentials.*") && !player.hasPermission("sessentials.chat.bypass")) {
+			player.sendMessage(cc(" &cYou are currently chat muted."));
+			return;
+		}
+
 		File dataFolder = plugin.getDataFolder();
 		File file = new File(dataFolder, "ranks.yml");
 

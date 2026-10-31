@@ -29,6 +29,7 @@ import me.daivdmajholt.sessentials.commands.kill.KillAllCommand;
 import me.daivdmajholt.sessentials.commands.kill.KillAllTab;
 import me.daivdmajholt.sessentials.commands.kill.KillCommand;
 import me.daivdmajholt.sessentials.commands.kill.SuicideCommand;
+import me.daivdmajholt.sessentials.commands.mute.MuteCommand;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeACommand;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeCCommand;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeCommand;
@@ -97,6 +98,10 @@ public class Commands {
 
 			plugin.getCommand("unbanip").setExecutor(new UnBanIpCommand());
 			plugin.getCommand("unbanip").setTabCompleter(new UnBanIpTab());
+
+			// MUTE
+			plugin.getCommand("mute").setExecutor(new MuteCommand());
+			plugin.getCommand("mute").setTabCompleter(new PlayerTab());
 
 			// AFK
 			plugin.getCommand("afk").setExecutor(new AfkCommand());

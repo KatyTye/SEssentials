@@ -204,3 +204,6 @@ commands:
   afk:
     description: This command toggles afk mode for players.
     usage: /afk (player)
+  mute:
+    description: This command toggles chat mute for players.
+    usage: /mute (player)
