@@ -23,6 +23,7 @@ public class Main extends JavaPlugin {
 	public static DatabaseManager databaseManager;
 
 	public static Set<UUID> vanishedPlayers = new HashSet<>();
+	public static Set<UUID> afkPlayers = new HashSet<>();
 
 	@Override
 	public void onEnable() {

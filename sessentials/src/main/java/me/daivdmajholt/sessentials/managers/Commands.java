@@ -3,6 +3,7 @@ package me.daivdmajholt.sessentials.managers;
 import me.daivdmajholt.sessentials.Main;
 import me.daivdmajholt.sessentials.commands.NothingTab;
 import me.daivdmajholt.sessentials.commands.PlayerTab;
+import me.daivdmajholt.sessentials.commands.afk.AfkCommand;
 import me.daivdmajholt.sessentials.commands.anvil.AnvilCommand;
 import me.daivdmajholt.sessentials.commands.ban.BanCommand;
 import me.daivdmajholt.sessentials.commands.ban.BanTab;
@@ -96,6 +97,10 @@ public class Commands {
 
 			plugin.getCommand("unbanip").setExecutor(new UnBanIpCommand());
 			plugin.getCommand("unbanip").setTabCompleter(new UnBanIpTab());
+
+			// AFK
+			plugin.getCommand("afk").setExecutor(new AfkCommand());
+			plugin.getCommand("afk").setTabCompleter(new PlayerTab());
 
 			// KILL
 			plugin.getCommand("kill").setExecutor(new KillCommand());

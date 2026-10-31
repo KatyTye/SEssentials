@@ -2,6 +2,7 @@ package me.daivdmajholt.sessentials.managers;
 
 import me.daivdmajholt.sessentials.Main;
 import me.daivdmajholt.sessentials.disables.BanIp;
+import me.daivdmajholt.sessentials.events.KickListener;
 
 public class Disables {
 
@@ -11,6 +12,9 @@ public class Disables {
 		if (!plugin.getConfig().getBoolean("settings.allow-interfering")) {
 			// COMMANDS
 			plugin.getServer().getPluginManager().registerEvents(new BanIp(), plugin);
+
+			// EVENTS
+			plugin.getServer().getPluginManager().registerEvents(new KickListener(), plugin);
 		} else {
 			plugin.getLogger().warning("Allow-Interfering is enabled, please disable it!");
 			plugin.getLogger()

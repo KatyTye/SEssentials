@@ -10,11 +10,15 @@ import static me.daivdmajholt.sessentials.Utils.cc;
 
 public class QuitHandler implements Listener {
 
-    private final Main plugin = Main.plugin;
+	private final Main plugin = Main.plugin;
 
-    @EventHandler
-    public void onPlayerJoinEvent(PlayerQuitEvent event){
-        Player player = event.getPlayer();
-        event.setQuitMessage(cc(plugin.getConfig().getString("messages.quit") + player.getName()));
-    }
+	@EventHandler
+	public void onPlayerQuitEvent(PlayerQuitEvent event){
+		Player player = event.getPlayer();
+		event.setQuitMessage(cc(plugin.getConfig().getString("messages.quit") + player.getName()));
+
+		if (plugin.afkPlayers.contains(player.getUniqueId())) {
+			plugin.afkPlayers.remove(player.getUniqueId());
+		}
+	}
 }

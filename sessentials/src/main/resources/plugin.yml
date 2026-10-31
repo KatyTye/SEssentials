@@ -201,3 +201,6 @@ commands:
   lightning:
     description: This command changes the weather to rain & thunder.
     usage: /lightning
+  afk:
+    description: This command toggles afk mode for players.
+    usage: /afk (player)
