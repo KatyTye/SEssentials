@@ -48,6 +48,7 @@ import me.daivdmajholt.sessentials.commands.invensee.InvenseeCommand;
 import me.daivdmajholt.sessentials.commands.kick.KickCommand;
 import me.daivdmajholt.sessentials.commands.online.OnlineCommand;
 import me.daivdmajholt.sessentials.commands.online.OnlineStaffCommand;
+import me.daivdmajholt.sessentials.commands.pay.PayCommand;
 import me.daivdmajholt.sessentials.commands.ping.PingCommand;
 import me.daivdmajholt.sessentials.commands.rank.RankCommand;
 import me.daivdmajholt.sessentials.commands.rank.RankTab;
@@ -99,6 +100,10 @@ public class Commands {
 
 			plugin.getCommand("unbanip").setExecutor(new UnBanIpCommand());
 			plugin.getCommand("unbanip").setTabCompleter(new UnBanIpTab());
+
+			// PAY
+			plugin.getCommand("pay").setExecutor(new PayCommand());
+			plugin.getCommand("pay").setTabCompleter(new PlayerTab());
 
 			// MUTE
 			plugin.getCommand("mute").setExecutor(new MuteCommand());

@@ -210,3 +210,6 @@ commands:
   fireball:
     description: This command shoots a fireball after eye location.
     usage: /fireball (player)
+  pay:
+    description: This command sends your money to another player.
+    usage: /pay (player) (amount)
