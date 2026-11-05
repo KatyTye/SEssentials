@@ -54,6 +54,8 @@ import me.daivdmajholt.sessentials.commands.rank.RankCommand;
 import me.daivdmajholt.sessentials.commands.rank.RankTab;
 import me.daivdmajholt.sessentials.commands.realname.RealNameCommand;
 import me.daivdmajholt.sessentials.commands.repair.RepairCommand;
+import me.daivdmajholt.sessentials.commands.rules.RulesCommand;
+import me.daivdmajholt.sessentials.commands.rules.RulesTab;
 import me.daivdmajholt.sessentials.commands.seed.SeedCommand;
 import me.daivdmajholt.sessentials.commands.sessentials.MainCommand;
 import me.daivdmajholt.sessentials.commands.sessentials.MainTab;
@@ -100,6 +102,10 @@ public class Commands {
 
 			plugin.getCommand("unbanip").setExecutor(new UnBanIpCommand());
 			plugin.getCommand("unbanip").setTabCompleter(new UnBanIpTab());
+
+			// RULES
+			plugin.getCommand("rules").setExecutor(new RulesCommand());
+			plugin.getCommand("rules").setTabCompleter(new RulesTab());
 
 			// PAY
 			plugin.getCommand("pay").setExecutor(new PayCommand());

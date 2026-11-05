@@ -25,6 +25,7 @@ features:
 settings:
   debug-mode: false                 # Send console messages on database changes
   allow-urls: false                 # Controls links in chat is clickable
+  linked-rules: false               # Enables link instead of chat listed rules
   spawn-on-join: false              # Force player's to teleport to spawn on server join
   force-respawn: false              # Force player's to respawn on death
   force-gamemode: true              # Force player's gamemode on server join
@@ -37,6 +38,7 @@ messages:
   join: " &8[&a+&8] &f"
   quit: " &8[&c-&8] &f"
   reloaded: "&aSEssentials has been reloaded."
+  rules-link: "https://google.com/"
   online-shop: "https://shop.website.com/"
   discord-link: "https://discord.gg/xxxxxxxx"
   sender-message: " &8[%color%%prefix%&8] &f%name% &8≫"

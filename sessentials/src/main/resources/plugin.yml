@@ -213,3 +213,6 @@ commands:
   pay:
     description: This command sends your money to another player.
     usage: /pay (player) (amount)
+  rules:
+    description: This command shows the rules of server to the player.
+    usage: /rules (link)

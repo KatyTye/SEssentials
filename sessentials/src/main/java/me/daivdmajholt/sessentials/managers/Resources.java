@@ -19,6 +19,11 @@ public class Resources {
 		if (!licenseMdFile.exists())
 			plugin.saveResource("license.md", false);
 
+		// Server Rules Data File
+		File serverRulesFile = new File(plugin.getDataFolder(), "rules.yml");
+		if (!serverRulesFile.exists())
+			plugin.saveResource("rules.yml", false);
+
 		// Ranks Data File
 		File ranksDataFile = new File(plugin.getDataFolder(), "ranks.yml");
 		if (!ranksDataFile.exists())
