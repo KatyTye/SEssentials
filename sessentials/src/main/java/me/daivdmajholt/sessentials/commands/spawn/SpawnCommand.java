@@ -51,26 +51,34 @@ public class SpawnCommand implements CommandExecutor {
 
 		try {
 			File dataFolder = plugin.getDataFolder();
-			File file = new File(dataFolder, "spawn.yml");
+			File file = new File(dataFolder, "locations.yml");
 
 			FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
 
-			String worldName = cfg.getString("default.world", "world");
+			if (args.length > 1 && !cfg.getStringList("spawns").contains(args[1].toString().toLowerCase())) {
+				sender.sendMessage(cc(" &cThis spawn location does not exist."));
+				return true;
+			}
+
+			String spawnName = args.length > 1 ? args[1].toString().toLowerCase() : "default";
+
+			String worldName = cfg.getString(spawnName + ".world", "world");
 			World world = Bukkit.getWorld(worldName);
+
 			if (world == null) {
 				plugin.getLogger().warning("World not found: " + worldName);
 				return false;
 			}
 
-			double x = cfg.getDouble("default.x", 0.0);
-			double y = cfg.getDouble("default.y", 0.0);
-			double z = cfg.getDouble("default.z", 0.0);
-			float yaw = (float) cfg.getDouble("default.yaw", 0.0);
-			float pitch = (float) cfg.getDouble("default.pitch", 0.0);
+			double x = cfg.getDouble(spawnName + ".x", 0.0);
+			double y = cfg.getDouble(spawnName + ".y", 0.0);
+			double z = cfg.getDouble(spawnName + ".z", 0.0);
+			float yaw = (float) cfg.getDouble(spawnName + ".yaw", 0.0);
+			float pitch = (float) cfg.getDouble(spawnName + ".pitch", 0.0);
 
 			Location loc = new Location(world, x, y, z, yaw, pitch);
 
-			if (args.length == 1) {
+			if (args.length > 0) {
 				if (!player.hasPermission("sessentials.spawn.others") && !player.hasPermission("sessentials.*")) {
 					sender.sendMessage(cc(plugin.getConfig().getString("messages.permission-denied")));
 					return true;

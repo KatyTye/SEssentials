@@ -4,6 +4,7 @@ import static me.daivdmajholt.sessentials.Utils.cc;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -35,28 +36,53 @@ public class SetSpawnCommand implements CommandExecutor {
 
 		Player player = (Player) sender;
 
+		String name = args.length > 0 ? args[0].toString().toLowerCase() : "default";
+
 		try {
 			Location playerLocation = player.getLocation();
 
 			File dataFolder = plugin.getDataFolder();
-			File file = new File(dataFolder, "spawn.yml");
+			File file = new File(dataFolder, "locations.yml");
 
 			FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
 
-			cfg.set("default.x", playerLocation.getX());
-			cfg.set("default.y", playerLocation.getY());
-			cfg.set("default.z", playerLocation.getZ());
-			cfg.set("default.yaw", playerLocation.getYaw());
-			cfg.set("default.pitch", playerLocation.getPitch());
-			cfg.set("default.world", playerLocation.getWorld().getName());
+			if (args.length >= 1) {
+				int price = args.length > 1 ? Integer.parseInt(args[1].toString()) : 0;
+				int cooldown = args.length > 2 ? Integer.parseInt(args[2].toString()) : 0;
+
+				cfg.set(name + ".x", playerLocation.getX());
+				cfg.set(name + ".y", playerLocation.getY());
+				cfg.set(name + ".z", playerLocation.getZ());
+				cfg.set(name + ".yaw", playerLocation.getYaw());
+				cfg.set(name + ".pitch", playerLocation.getPitch());
+				cfg.set(name + ".price", price);
+				cfg.set(name + ".cooldown", cooldown);
+				cfg.set(name + ".world", playerLocation.getWorld().getName());
+
+				if (!cfg.getStringList("spawns").contains(name)) {
+					List<String> spawns = cfg.getStringList("spawns");
+					spawns.add(name);
+
+					cfg.set("spawns", spawns);
+				}
+			} else {
+				String def = cfg.getStringList("spawns").get(0);
+
+				cfg.set(def + ".x", playerLocation.getX());
+				cfg.set(def + ".y", playerLocation.getY());
+				cfg.set(def + ".z", playerLocation.getZ());
+				cfg.set(def + ".yaw", playerLocation.getYaw());
+				cfg.set(def + ".pitch", playerLocation.getPitch());
+				cfg.set(def + ".world", playerLocation.getWorld().getName());
+			}
 
 			cfg.save(file);
 		} catch (IOException e) {
-			plugin.getLogger().severe("Failed to save spawn.yml: " + e.getMessage());
+			plugin.getLogger().severe("Failed to save locations.yml: " + e.getMessage());
 			return true;
 		}
 
-		player.sendMessage(cc(" &aYou have now set the location of spawn to your location."));
+		player.sendMessage(cc(" &aYou have now set the location of " + (args.length > 0 ? args[0] : "") + " to your location."));
 		return true;
 	}
 }

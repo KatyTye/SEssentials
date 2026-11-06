@@ -30,9 +30,9 @@ public class Resources {
 			plugin.saveResource("ranks.yml", false);
 
 		// Spawn Data File
-		File spawnDataFile = new File(plugin.getDataFolder(), "spawn.yml");
+		File spawnDataFile = new File(plugin.getDataFolder(), "locations.yml");
 		if (!spawnDataFile.exists())
-			plugin.saveResource("spawn.yml", false);
+			plugin.saveResource("locations.yml", false);
 	}
 
 }

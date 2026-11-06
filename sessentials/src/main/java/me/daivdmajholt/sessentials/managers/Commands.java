@@ -61,6 +61,7 @@ import me.daivdmajholt.sessentials.commands.sessentials.MainCommand;
 import me.daivdmajholt.sessentials.commands.sessentials.MainTab;
 import me.daivdmajholt.sessentials.commands.smite.SmiteCommand;
 import me.daivdmajholt.sessentials.commands.spawn.SetSpawnCommand;
+import me.daivdmajholt.sessentials.commands.spawn.SetSpawnTab;
 import me.daivdmajholt.sessentials.commands.spawn.SpawnCommand;
 import me.daivdmajholt.sessentials.commands.spawn.SpawnTab;
 import me.daivdmajholt.sessentials.commands.speed.SpeedCommand;
@@ -303,7 +304,7 @@ public class Commands {
 			plugin.getCommand("spawn").setExecutor(new SpawnCommand());
 			plugin.getCommand("spawn").setTabCompleter(new SpawnTab());
 			plugin.getCommand("setspawn").setExecutor(new SetSpawnCommand());
-			plugin.getCommand("setspawn").setTabCompleter(new NothingTab());
+			plugin.getCommand("setspawn").setTabCompleter(new SetSpawnTab());
 		} else {
 			plugin.getLogger().info("Commands are disabled!");
 		}

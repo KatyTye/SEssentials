@@ -1,5 +1,5 @@
 spawns:
-- "default"
+- default
 
 default:
   x: 0

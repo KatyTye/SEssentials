@@ -104,10 +104,10 @@ commands:
     usage: /economy (give/remove/set) (player) (amount)
   spawn:
     description: This command teleports you to spawn.
-    usage: /spawn (player)
+    usage: /spawn (spawn list)
   setspawn:
     description: This command sets the spawn location.
-    usage: /setspawn (rank id)
+    usage: /setspawn (rank name) (price) (cooldown in seconds)
   gamemode:
     description: This command sets a player's gamemode.
     usage: /gamemode (survival/creative/adventure/spectator) (player)

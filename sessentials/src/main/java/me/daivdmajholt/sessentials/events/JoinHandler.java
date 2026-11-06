@@ -25,7 +25,7 @@ public class JoinHandler implements Listener {
 	private final Main plugin = Main.plugin;
 
 	File dataFolder = plugin.getDataFolder();
-	File spawnFile = new File(dataFolder, "spawn.yml");
+	File spawnFile = new File(dataFolder, "locations.yml");
 	File rankFile = new File(dataFolder, "ranks.yml");
 
 	FileConfiguration spawnCFG = YamlConfiguration.loadConfiguration(spawnFile);

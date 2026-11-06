@@ -111,12 +111,12 @@
 
                 <includes>
                     <include>ranks.yml</include>
-                    <include>spawn.yml</include>
                     <include>rules.yml</include>
                     <include>plugin.yml</include>
                     <include>config.yml</include>
                     <include>license.md</include>
                     <include>database.db</include>
+                    <include>locations.yml</include>
                 </includes>
 
             </resource>
