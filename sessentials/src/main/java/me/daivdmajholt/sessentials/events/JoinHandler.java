@@ -1,24 +1,27 @@
 package me.daivdmajholt.sessentials.events;
 
-import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
 
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.entity.Player;
+import org.bukkit.Location;
+import org.bukkit.GameMode;
+import org.bukkit.Bukkit;
+import org.bukkit.World;
 
 import me.daivdmajholt.database.DatabaseManager.ValueType;
 import me.daivdmajholt.sessentials.Main;
+
 import static me.daivdmajholt.sessentials.Utils.applyRankPerms;
-import static me.daivdmajholt.sessentials.Utils.cc;
 import static me.daivdmajholt.sessentials.Utils.setNametag;
+import static me.daivdmajholt.sessentials.Utils.cc;
 
 public class JoinHandler implements Listener {
 
@@ -106,6 +109,27 @@ public class JoinHandler implements Listener {
 				player.showPlayer(plugin, target);
 			}
 		}
-	}
 
+		File dataFolder = plugin.getDataFolder();
+		File file = new File(dataFolder, "temp.yml");
+
+		FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
+
+		try {
+			cfg.set(player.getUniqueId() + ".msg-last-recived", "");
+			cfg.set(player.getUniqueId() + ".last-location.placed", false);
+			cfg.set(player.getUniqueId() + ".last-location.x", 0.0);
+			cfg.set(player.getUniqueId() + ".last-location.y", 0.0);
+			cfg.set(player.getUniqueId() + ".last-location.z", 0.0);
+			cfg.set(player.getUniqueId() + ".last-location.yaw", 0.0);
+			cfg.set(player.getUniqueId() + ".last-location.pitch", 0.0);
+			cfg.set(player.getUniqueId() + ".last-location.world", "");
+			cfg.set(player.getUniqueId() + ".tpa-recived", new ArrayList<String>());
+			cfg.save(file);
+		} catch (IOException e) {
+			if (plugin.getConfig().getBoolean("settings.debug-mode")) {
+				plugin.getLogger().severe("Could not register player.");
+			}
+		}
+	}
 }

@@ -110,6 +110,7 @@
                 <directory>src/main/resources</directory>
 
                 <includes>
+                    <include>temp.yml</include>
                     <include>ranks.yml</include>
                     <include>rules.yml</include>
                     <include>plugin.yml</include>

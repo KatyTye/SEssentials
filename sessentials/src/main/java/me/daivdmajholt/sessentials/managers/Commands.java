@@ -5,6 +5,7 @@ import me.daivdmajholt.sessentials.commands.NothingTab;
 import me.daivdmajholt.sessentials.commands.PlayerTab;
 import me.daivdmajholt.sessentials.commands.afk.AfkCommand;
 import me.daivdmajholt.sessentials.commands.anvil.AnvilCommand;
+import me.daivdmajholt.sessentials.commands.back.BackCommand;
 import me.daivdmajholt.sessentials.commands.ban.BanCommand;
 import me.daivdmajholt.sessentials.commands.ban.BanTab;
 import me.daivdmajholt.sessentials.commands.ban.ListBansCommand;
@@ -117,6 +118,10 @@ public class Commands {
 			// AFK
 			plugin.getCommand("afk").setExecutor(new AfkCommand());
 			plugin.getCommand("afk").setTabCompleter(new PlayerTab());
+
+			// BACK
+			plugin.getCommand("back").setExecutor(new BackCommand());
+			plugin.getCommand("back").setTabCompleter(new NothingTab());
 
 			// KILL
 			plugin.getCommand("kill").setExecutor(new KillCommand());

@@ -216,3 +216,6 @@ commands:
   rules:
     description: This command shows the rules of server to the player.
     usage: /rules (link)
+  back:
+    description: This command teleports you back to your last location.
+    usage: /back

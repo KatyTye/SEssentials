@@ -24,6 +24,11 @@ public class Resources {
 		if (!serverRulesFile.exists())
 			plugin.saveResource("rules.yml", false);
 
+		// Temporary Data File
+		File temporaryFile = new File(plugin.getDataFolder(), "temp.yml");
+		if (!temporaryFile.exists())
+			plugin.saveResource("temp.yml", true);
+
 		// Ranks Data File
 		File ranksDataFile = new File(plugin.getDataFolder(), "ranks.yml");
 		if (!ranksDataFile.exists())

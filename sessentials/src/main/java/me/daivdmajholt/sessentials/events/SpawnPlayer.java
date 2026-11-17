@@ -1,6 +1,8 @@
 package me.daivdmajholt.sessentials.events;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
 import org.bukkit.World;
 import org.bukkit.Bukkit;
@@ -10,6 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 
 import me.daivdmajholt.sessentials.Main;
 import me.daivdmajholt.database.DatabaseManager.ValueType;
@@ -24,9 +27,28 @@ public class SpawnPlayer implements Listener {
 		File dataFolder = plugin.getDataFolder();
 		File file = new File(dataFolder, "locations.yml");
 		File ranksfile = new File(dataFolder, "ranks.yml");
+		File tempfile = new File(dataFolder, "temp.yml");
+		
+		Player player = event.getPlayer();
 
 		FileConfiguration cfg = YamlConfiguration.loadConfiguration(file);
 		FileConfiguration rankcfg = YamlConfiguration.loadConfiguration(ranksfile);
+		FileConfiguration tempcfg = YamlConfiguration.loadConfiguration(tempfile);
+
+		try {
+			tempcfg.set(player.getUniqueId() + ".last-location.placed", true);
+			tempcfg.set(player.getUniqueId() + ".last-location.x", (double) player.getLocation().getX());
+			tempcfg.set(player.getUniqueId() + ".last-location.y", (double) player.getLocation().getY());
+			tempcfg.set(player.getUniqueId() + ".last-location.z", (double) player.getLocation().getZ());
+			tempcfg.set(player.getUniqueId() + ".last-location.yaw", (double) player.getLocation().getYaw());
+			tempcfg.set(player.getUniqueId() + ".last-location.pitch", (double) player.getLocation().getPitch());
+			tempcfg.set(player.getUniqueId() + ".last-location.world", (String) player.getLocation().getWorld().getName());
+			tempcfg.save(tempfile);
+		} catch (IOException e) {
+			if (plugin.getConfig().getBoolean("settings.debug-mode")) {
+				plugin.getLogger().severe("Could not set last player location.");
+			}
+		}
 
 		String spawnName = "default";
 
