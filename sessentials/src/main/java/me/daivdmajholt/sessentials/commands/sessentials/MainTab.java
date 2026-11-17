@@ -16,15 +16,10 @@ public class MainTab implements TabCompleter {
 		String prefix = args.length > 0 ? args[args.length - 1].toLowerCase() : "";
 
 		if (args.length == 1) {
-			List<String> options = List.of("help","reload", "build","status"); //,"edit","toggle"
+			List<String> options = List.of("help","reload","build","status","toggle"); //,"edit"
 			for (String s : options) if (s.startsWith(prefix)) suggestions.add(s);
 		}
-
-		// if (args.length == 2) {
-		// 	List<String> options = List.of("join","leave","events","commands");
-		// 	for (String s : options) if (s.startsWith(prefix)) suggestions.add(s);
-		// }
-
+		
 		return suggestions;
 	}
 }

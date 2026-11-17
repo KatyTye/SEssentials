@@ -10,6 +10,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import me.daivdmajholt.database.DatabaseManager;
 import static me.daivdmajholt.sessentials.Utils.cc;
+
+import me.daivdmajholt.sessentials.commands.sessentials.MainCommand;
+import me.daivdmajholt.sessentials.commands.sessentials.MainTab;
 import me.daivdmajholt.sessentials.events.UpdateChecker;
 import me.daivdmajholt.sessentials.managers.Commands;
 import me.daivdmajholt.sessentials.managers.Community;
@@ -34,10 +37,12 @@ public class Main extends JavaPlugin {
 		new Resources().registerResources();
 		databaseManager = new DatabaseManager(plugin);
 
+		plugin.getCommand("sessentials").setExecutor(new MainCommand());
+		plugin.getCommand("sessentials").setTabCompleter(new MainTab());
+
+		databaseManager.connect();
+
 		if (getConfig().getBoolean("enabled")) {
-
-			databaseManager.connect();
-
 			getLogger().info("----------------------------------");
 			getLogger().info("");
 			getLogger().info("SEssentials has been enabled!");
@@ -69,12 +74,11 @@ public class Main extends JavaPlugin {
 		getLogger().info("----------------------------------");
 	}
 
-	private void unloadPlugin() {
+	public void unloadPlugin() {
 		HandlerList.unregisterAll(plugin);
 	}
 
-	private void loadPlugin() {
-
+	public void loadPlugin() {
 		if (getConfig().getBoolean("enabled")) {
 			// MANAGERS
 			new Events().reqiesterEvents();
@@ -85,16 +89,16 @@ public class Main extends JavaPlugin {
 	}
 
 	public void reloadPlugin(Player player) {
-		player.sendMessage(cc(" &aReloading plugin, this can take some time."));
+		if (player != null) player.sendMessage(cc(" &aReloading plugin, this can take some time."));
 
 		try {
 			unloadPlugin();
 			reloadConfig();
 			loadPlugin();
-			player.sendMessage(cc(" &aReloaded plugin without any issues."));
+			if (player != null) player.sendMessage(cc(" &aReloaded plugin without any issues."));
 			getLogger().info("Plugin reloaded.");
 		} catch (Exception e) {
-			player.sendMessage(cc(" &cFailed to reload plugin, please restart the server."));
+			if (player != null) player.sendMessage(cc(" &cFailed to reload plugin, please restart the server."));
 			getLogger().log(java.util.logging.Level.SEVERE, "Failed to reload plugin. ", e.getMessage());
 		}
 	}

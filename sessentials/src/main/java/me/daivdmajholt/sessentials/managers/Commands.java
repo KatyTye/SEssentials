@@ -57,8 +57,6 @@ import me.daivdmajholt.sessentials.commands.repair.RepairCommand;
 import me.daivdmajholt.sessentials.commands.rules.RulesCommand;
 import me.daivdmajholt.sessentials.commands.rules.RulesTab;
 import me.daivdmajholt.sessentials.commands.seed.SeedCommand;
-import me.daivdmajholt.sessentials.commands.sessentials.MainCommand;
-import me.daivdmajholt.sessentials.commands.sessentials.MainTab;
 import me.daivdmajholt.sessentials.commands.smite.SmiteCommand;
 import me.daivdmajholt.sessentials.commands.spawn.SetSpawnCommand;
 import me.daivdmajholt.sessentials.commands.spawn.SetSpawnTab;
@@ -80,10 +78,6 @@ public class Commands {
 	private final Main plugin = Main.plugin;
 
 	public void registerCommands() {
-
-		// PRIMARY/MAIN
-		plugin.getCommand("sessentials").setExecutor(new MainCommand());
-		plugin.getCommand("sessentials").setTabCompleter(new MainTab());
 
 		// STOP
 		plugin.getCommand("stop").setExecutor(new StopCommand());
