@@ -219,3 +219,12 @@ commands:
   back:
     description: This command teleports you back to your last location.
     usage: /back
+  tpa:
+    description: This command requests teleports to other players.
+    usage: /tpa (player)
+  tpadeny:
+    description: This command rejects teleportation requests.
+    usage: /tpadeny (player)
+  tpaaccept:
+    description: This command accepts teleportation requests.
+    usage: /tpaaccept (player)

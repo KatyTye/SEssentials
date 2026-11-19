@@ -67,6 +67,9 @@ import me.daivdmajholt.sessentials.commands.speed.SpeedCommand;
 import me.daivdmajholt.sessentials.commands.speed.SpeedTab;
 import me.daivdmajholt.sessentials.commands.stop.StopCommand;
 import me.daivdmajholt.sessentials.commands.teleport.TeleportAllCommand;
+import me.daivdmajholt.sessentials.commands.tpa.TpaCommand;
+import me.daivdmajholt.sessentials.commands.tpa.TpaacceptCommand;
+import me.daivdmajholt.sessentials.commands.tpa.TpadenyCommand;
 import me.daivdmajholt.sessentials.commands.vanish.VanishCommand;
 import me.daivdmajholt.sessentials.commands.warp.WarpCommand;
 import me.daivdmajholt.sessentials.commands.warp.WarpTab;
@@ -122,6 +125,16 @@ public class Commands {
 			// BACK
 			plugin.getCommand("back").setExecutor(new BackCommand());
 			plugin.getCommand("back").setTabCompleter(new NothingTab());
+
+			// TPA
+			plugin.getCommand("tpa").setExecutor(new TpaCommand());
+			plugin.getCommand("tpa").setTabCompleter(new PlayerTab());
+
+			plugin.getCommand("tpadeny").setExecutor(new TpadenyCommand());
+			plugin.getCommand("tpadeny").setTabCompleter(new PlayerTab());
+
+			plugin.getCommand("tpaaccept").setExecutor(new TpaacceptCommand());
+			plugin.getCommand("tpaaccept").setTabCompleter(new PlayerTab());
 
 			// KILL
 			plugin.getCommand("kill").setExecutor(new KillCommand());
