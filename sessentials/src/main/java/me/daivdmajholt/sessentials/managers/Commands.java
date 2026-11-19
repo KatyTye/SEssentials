@@ -31,6 +31,8 @@ import me.daivdmajholt.sessentials.commands.kill.KillAllCommand;
 import me.daivdmajholt.sessentials.commands.kill.KillAllTab;
 import me.daivdmajholt.sessentials.commands.kill.KillCommand;
 import me.daivdmajholt.sessentials.commands.kill.SuicideCommand;
+import me.daivdmajholt.sessentials.commands.msg.MsgCommand;
+import me.daivdmajholt.sessentials.commands.msg.ReplyCommand;
 import me.daivdmajholt.sessentials.commands.mute.MuteCommand;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeACommand;
 import me.daivdmajholt.sessentials.commands.gamemode.GamemodeCCommand;
@@ -135,6 +137,25 @@ public class Commands {
 
 			plugin.getCommand("tpaaccept").setExecutor(new TpaacceptCommand());
 			plugin.getCommand("tpaaccept").setTabCompleter(new PlayerTab());
+
+			// PRIVATE MESSAGE
+			plugin.getCommand("privatemessage").setExecutor(new MsgCommand());
+			plugin.getCommand("privatemessage").setTabCompleter(new PlayerTab());
+
+			plugin.getCommand("pm").setExecutor(new MsgCommand());
+			plugin.getCommand("pm").setTabCompleter(new PlayerTab());
+
+			plugin.getCommand("message").setExecutor(new MsgCommand());
+			plugin.getCommand("message").setTabCompleter(new PlayerTab());
+
+			plugin.getCommand("msg").setExecutor(new MsgCommand());
+			plugin.getCommand("msg").setTabCompleter(new PlayerTab());
+
+			plugin.getCommand("r").setExecutor(new ReplyCommand());
+			plugin.getCommand("r").setTabCompleter(new PlayerTab());
+
+			plugin.getCommand("reply").setExecutor(new ReplyCommand());
+			plugin.getCommand("reply").setTabCompleter(new PlayerTab());
 
 			// KILL
 			plugin.getCommand("kill").setExecutor(new KillCommand());

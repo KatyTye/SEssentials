@@ -228,3 +228,21 @@ commands:
   tpaaccept:
     description: This command accepts teleportation requests.
     usage: /tpaaccept (player)
+  privatemessage:
+    description: This command sends private messages to other players.
+    usage: /privatemessage (player) (message)
+  pm:
+    description: This command sends private messages to other players.
+    usage: /pm (player) (message)
+  message:
+    description: This command sends private messages to other players.
+    usage: /message (player) (message)
+  msg:
+    description: This command sends private messages to other players.
+    usage: /msg (player) (message)
+  r:
+    description: This command replys to last sent private message from other players.
+    usage: /r (message)
+  reply:
+    description: This command replys to last sent private message from other players.
+    usage: /reply (message)
