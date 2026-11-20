@@ -20,6 +20,7 @@
         <!-- Supports 1.19 → 1.21 safely -->
         <java.version>17</java.version>
 
+        <maven.compiler.release>${java.version}</maven.compiler.release>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
@@ -54,11 +55,12 @@
     <!-- ===================== -->
 
     <dependencies>
+        <!-- API -->
 
         <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>1.19-R0.1-SNAPSHOT</version>
+            <groupId>io.papermc.paper</groupId>
+            <artifactId>paper-api</artifactId>
+            <version>1.19.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
@@ -90,6 +92,11 @@
         <repository>
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
+
+        <repository>
+            <id>papermc</id>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
         </repository>
 
     </repositories>
@@ -163,6 +170,7 @@
 
                 <configuration>
 
+                    <release>${java.version}</release>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
 

@@ -8,6 +8,8 @@ import me.daivdmajholt.sessentials.events.SpawnPlayer;
 import me.daivdmajholt.sessentials.events.ForceRespawn;
 import me.daivdmajholt.sessentials.events.GodModeDamage;
 import me.daivdmajholt.sessentials.events.JoiningBanned;
+import me.daivdmajholt.sessentials.other.EnablesHandler;
+import me.daivdmajholt.sessentials.events.CommandHandler;
 import me.daivdmajholt.sessentials.events.MovementListener;
 
 public class Events {
@@ -26,6 +28,9 @@ public class Events {
             plugin.getServer().getPluginManager().registerEvents(new ForceRespawn(), plugin);
             plugin.getServer().getPluginManager().registerEvents(new GodModeDamage(), plugin);
             plugin.getServer().getPluginManager().registerEvents(new MovementListener(), plugin);
+            if (!EnablesHandler.isLifecycleRegistrationAvailable()) {
+                plugin.getServer().getPluginManager().registerEvents(new CommandHandler(), plugin);
+            }
         } else {
             plugin.getLogger().info("Events are disabled!");
         }
