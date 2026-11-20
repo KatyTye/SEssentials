@@ -246,3 +246,6 @@ commands:
   reply:
     description: This command replys to last sent private message from other players.
     usage: /reply (message)
+  count:
+    description: This command counts the blocks between first and second location.
+    usage: //count

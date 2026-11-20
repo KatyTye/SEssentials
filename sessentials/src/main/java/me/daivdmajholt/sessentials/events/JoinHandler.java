@@ -118,13 +118,28 @@ public class JoinHandler implements Listener {
 		try {
 			cfg.set(player.getUniqueId() + ".msg-last-recived", "");
 			cfg.set(player.getUniqueId() + ".last-location.placed", false);
+			cfg.set(player.getUniqueId() + ".tpa-recived", new ArrayList<String>());
+			
 			cfg.set(player.getUniqueId() + ".last-location.x", 0.0);
 			cfg.set(player.getUniqueId() + ".last-location.y", 0.0);
 			cfg.set(player.getUniqueId() + ".last-location.z", 0.0);
 			cfg.set(player.getUniqueId() + ".last-location.yaw", 0.0);
 			cfg.set(player.getUniqueId() + ".last-location.pitch", 0.0);
 			cfg.set(player.getUniqueId() + ".last-location.world", "");
-			cfg.set(player.getUniqueId() + ".tpa-recived", new ArrayList<String>());
+
+			cfg.set(player.getUniqueId() + ".place-location-first.x", 0.0);
+			cfg.set(player.getUniqueId() + ".place-location-first.y", 0.0);
+			cfg.set(player.getUniqueId() + ".place-location-first.z", 0.0);
+			cfg.set(player.getUniqueId() + ".place-location-first.yaw", 0.0);
+			cfg.set(player.getUniqueId() + ".place-location-first.pitch", 0.0);
+			cfg.set(player.getUniqueId() + ".place-location-first.world", "");
+			cfg.set(player.getUniqueId() + ".place-location-second.x", 0.0);
+			cfg.set(player.getUniqueId() + ".place-location-second.y", 0.0);
+			cfg.set(player.getUniqueId() + ".place-location-second.z", 0.0);
+			cfg.set(player.getUniqueId() + ".place-location-second.yaw", 0.0);
+			cfg.set(player.getUniqueId() + ".place-location-second.pitch", 0.0);
+			cfg.set(player.getUniqueId() + ".place-location-second.world", "");
+
 			cfg.save(file);
 		} catch (IOException e) {
 			if (plugin.getConfig().getBoolean("settings.debug-mode")) {

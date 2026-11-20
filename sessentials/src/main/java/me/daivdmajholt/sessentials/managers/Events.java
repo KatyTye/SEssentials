@@ -10,29 +10,32 @@ import me.daivdmajholt.sessentials.events.GodModeDamage;
 import me.daivdmajholt.sessentials.events.JoiningBanned;
 import me.daivdmajholt.sessentials.other.EnablesHandler;
 import me.daivdmajholt.sessentials.events.CommandHandler;
+import me.daivdmajholt.sessentials.events.InteractHandler;
 import me.daivdmajholt.sessentials.events.MovementListener;
 
 public class Events {
 
-    private final Main plugin = Main.plugin;
+	private final Main plugin = Main.plugin;
 
-    public void reqiesterEvents() {
+	public void reqiesterEvents() {
 
-        plugin.getServer().getPluginManager().registerEvents(new JoiningBanned(), plugin);
+		plugin.getServer().getPluginManager().registerEvents(new JoiningBanned(), plugin);
 
-        if (plugin.getConfig().getBoolean("features.events")) {
-            plugin.getServer().getPluginManager().registerEvents(new JoinHandler(), plugin);
-            plugin.getServer().getPluginManager().registerEvents(new QuitHandler(), plugin);
-            plugin.getServer().getPluginManager().registerEvents(new ChatManager(), plugin);
-            plugin.getServer().getPluginManager().registerEvents(new SpawnPlayer(), plugin);
-            plugin.getServer().getPluginManager().registerEvents(new ForceRespawn(), plugin);
-            plugin.getServer().getPluginManager().registerEvents(new GodModeDamage(), plugin);
-            plugin.getServer().getPluginManager().registerEvents(new MovementListener(), plugin);
-            if (!EnablesHandler.isLifecycleRegistrationAvailable()) {
-                plugin.getServer().getPluginManager().registerEvents(new CommandHandler(), plugin);
-            }
-        } else {
-            plugin.getLogger().info("Events are disabled!");
-        }
-    }
+		if (plugin.getConfig().getBoolean("features.events")) {
+			plugin.getServer().getPluginManager().registerEvents(new JoinHandler(), plugin);
+			plugin.getServer().getPluginManager().registerEvents(new QuitHandler(), plugin);
+			plugin.getServer().getPluginManager().registerEvents(new ChatManager(), plugin);
+			plugin.getServer().getPluginManager().registerEvents(new SpawnPlayer(), plugin);
+			plugin.getServer().getPluginManager().registerEvents(new ForceRespawn(), plugin);
+			plugin.getServer().getPluginManager().registerEvents(new GodModeDamage(), plugin);
+			plugin.getServer().getPluginManager().registerEvents(new InteractHandler(), plugin);
+			plugin.getServer().getPluginManager().registerEvents(new MovementListener(), plugin);
+			
+			if (!EnablesHandler.isLifecycleRegistrationAvailable()) {
+				plugin.getServer().getPluginManager().registerEvents(new CommandHandler(), plugin);
+			}
+		} else {
+			plugin.getLogger().info("Events are disabled!");
+		}
+	}
 }
